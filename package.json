@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "temp-build": "ng build --prod --base-href 'https://masterhand83.github.io/vangular/' --output-path docs",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
