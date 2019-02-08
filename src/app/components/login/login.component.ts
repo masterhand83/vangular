@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(private renderer: Renderer2) {
     this.renderer.addClass(document.body,'bg-gradient-primary');
-   }
+  }
 
   ngOnInit() {
   }
