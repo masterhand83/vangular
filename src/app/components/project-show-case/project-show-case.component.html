@@ -1,0 +1,56 @@
+<!-- Topbar -->
+<nav class="navbar navbar-expand-md navbar-light bg-white topar mb-4 static-top shadow">
+
+    <!-- Sidebar Toggle (Topbar) -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#accionesbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <!-- Topbar Navbar -->
+    <div class="collapse navbar-collapse" id="accionesbar">
+      <ul class="navbar-nav mx-auto">
+          <li>
+              <div class="dropdown">
+                <button class="btn btn-success">
+                  <i class="fas fa-plus"></i>
+                  Crear nuevo proyecto
+                </button>
+        
+              </div>
+            </li>
+        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+        <!-- Nav Item - Alerts -->
+        <!-- Nav Item - Messages -->
+        <!-- Nav Item - User Information -->
+
+
+      </ul>
+    </div>
+
+  </nav>
+
+<!-- End of Topbar -->
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- ** Aqui se ve lo de los usuarios-->
+    <div *ngFor="let user of users"  class="col-sm-12 col-md-6 col-lg-4">
+      <div class="card m-2 shadow clickable" onclick="location.href = 'project.html'">
+        <div class="card-header bg-info text-white"> <i class="fas fa-building mr-2"></i>Nombre del proyecto 1</div>
+        <div class="card-body">
+          <p><strong>Residente encargado: </strong> {{user.nombre}}</p>
+          <hr>
+          <h6>progreso del proyecto:</h6>
+          <div class="progress progress-sm">
+            <div class="progress-bar bg-info" role="progressbar" [style.width]="user.progreso + '%'" aria-valuenow="75" aria-valuemin="0"
+              aria-valuemax="100"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- /.container-fluid -->

@@ -90,64 +90,7 @@
 
 			<!-- Main Content -->
 			<div id="content">
-
-				<!-- Topbar -->
-				<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-					<!-- Sidebar Toggle (Topbar) -->
-					<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-						<i class="fa fa-bars"></i>
-					</button>
-
-					<!-- Topbar Search -->
-					<!-- Topbar Navbar -->
-					<ul class="navbar-nav m-auto ">
-						<li>
-							<div class="dropdown">
-								<button class="btn btn-success">
-									<i class="fas fa-plus"></i>
-									Crear nuevo proyecto
-								</button>
-
-							</div>
-						</li>
-						<li>
-
-						</li>
-
-						<!-- Nav Item - Search Dropdown (Visible Only XS) -->
-						<!-- Nav Item - Alerts -->
-						<!-- Nav Item - Messages -->
-						<!-- Nav Item - User Information -->
-
-
-					</ul>
-
-				</nav>
-				<!-- End of Topbar -->
-
-				<!-- Begin Page Content -->
-				<div class="container-fluid">
-					<div class="row">
-
-						<div class="col-sm-6 col-md-4">
-							<div class="card m-3 shadow clickable" onclick="location.href = 'project.html'">
-								<div class="card-header bg-info text-white"> <i class="fas fa-building mr-2"></i>Nombre del proyecto 1</div>
-								<div class="card-body">
-									<p><strong>Residente encargado: </strong> (Nombre)</p>
-									<hr>
-									<h6>progreso del proyecto:</h6>
-									<div class="progress progress-sm">
-										<div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				<!-- /.container-fluid -->
-
+        <router-outlet></router-outlet>
 			</div>
 			<!-- End of Main Content -->
 
