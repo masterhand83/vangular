@@ -25,14 +25,19 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/stylesheets/mastercss.css"
+              "src/stylesheets/mastercss.css",
+              "src/stylesheets/dataTables.bootstrap5.css"
             ],
             "scripts": [
               "src/vendor/jquery/jquery.min.js",
               "src/vendor/jquery-easing/jquery.easing.min.js",
               "src/vendor/bootstrap/js/bootstrap.bundle.min.js",
+              "src/scripts/jquery.dataTables.min.js",
+              "src/scripts/dataTables.bootstrap4.min.js",
               "src/scripts/sb-admin-2.min.js",
+              "src/scripts/masterfront.js",
               "src/scripts/rgantt.js"
+              
             ]
           },
           "configurations": {

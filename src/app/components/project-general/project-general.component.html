@@ -1,3 +1,88 @@
-<p>
-  project-general works!
-</p>
+<!-- Topbar -->
+<nav class="navbar navbar-expand-md navbar-light bg-white topar mb-4 static-top shadow">
+  <!-- Sidebar Toggle (Topbar) -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#accionesbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Topbar Navbar -->
+  <div class="collapse navbar-collapse" id="accionesbar">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item mr-1">
+      
+        <!--tab de informacion-->
+        <div class="btn-group">
+          <button type="button" class="btn btn-info" onclick="location.href = 'project.html';">
+            <i class="fas fa-clipboard fa-fw"></i> Informacion
+          </button>
+          <button id="info-drop" type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <div class="dropdown-menu">
+            <a href="#!" class="dropdown-item" data-toggle="modal" data-target="#info-modal"><i class="fas fa-pen text-info"></i> Editar informacion</a>
+            <a href="#!" class="dropdown-item" data-toggle="modal" data-target="#config-modal"><i class="fas fa-cogs text-info"></i> Configuracion</a>
+          </div>
+        </div>
+        
+      </li>
+      <!--Tab de actividades-->
+      <li class="nav-item mr-1">
+       
+        <div class="btn-group">
+          <button type="button" class="btn btn-success" onclick="location.href = 'project_activity.html'">
+            <i class="fas fa-calendar-week fa-fw"></i> Actividades
+          </button>
+          <button id="activities-drop" type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <div class="dropdown-menu">
+            <a href="#!" class="dropdown-item" data-toggle="modal" data-target="#activity-modal">
+              <i class="fas fa-plus-circle text-success"></i> Crear actividad
+            </a>
+            
+          </div>
+        </div>
+      </li>
+      <!--Tab de archivos-->
+      <li class="nav-item mr-1">
+        <div class="btn-group">
+          <button type="button" class="btn btn-warning" onclick="location.href = 'files.html';">
+            <i class="fas fa-file-alt fa-fw"></i> Archivos
+          </button>
+          <button id="file-drop" type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <div class="dropdown-menu">
+            <a href="#!" class="dropdown-item" data-toggle="modal" data-target="#upload-modal">
+            <i class="fas fa-upload text-warning"></i> Subir Archivo
+            </a>
+            <a href="#!" class="dropdown-item">
+              <i class="fas fa-download text-warning"></i> Descargar proyecto
+            </a>
+          </div>
+        </div>
+      </li>
+      
+      <li class="nav-item">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#messages">
+            <i class="fa fa-comments fa-fw"></i> Mensajes
+          </button>
+      </li>
+      <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+      <!-- Nav Item - Alerts -->
+      <!-- Nav Item - Messages -->
+      <!-- Nav Item - User Information -->
+
+
+    </ul>
+  </div>
+
+</nav>
+
+<!-- End of Topbar -->
+
+<!-- **Contenido principal -->
+<router-outlet></router-outlet>
+<!-- /.container-fluid -->

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from "@angular/router";
 declare var $: any;
 @Component({
   selector: 'app-project-show-case',
@@ -20,7 +21,7 @@ export class ProjectShowCaseComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
   }
@@ -30,13 +31,13 @@ export class ProjectShowCaseComponent implements OnInit {
     this.users.push({
       nombre: ' ...Sin Residente... ',
       proyecto: data.nombre,
-      progreso: 0
+      progreso: 6.9
     });
     $('#create-project').modal('hide');
     return false;
   }
-  goToProjects(){
-    
+  goToProject(projectID: string){
+    this.router.navigateByUrl(`/dashboard/project/${projectID}`);
   }
 
 }

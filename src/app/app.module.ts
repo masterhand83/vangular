@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProjectShowCaseComponent } from './components/project-show-case/project-show-case.component';
 import { ProjectGeneralComponent } from './components/project-general/project-general.component';
+import { GeneralInfoComponent } from './components/general-info/general-info.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { ProjectGeneralComponent } from './components/project-general/project-ge
     LoginComponent,
     DashboardComponent,
     ProjectShowCaseComponent,
-    ProjectGeneralComponent
+    ProjectGeneralComponent,
+    GeneralInfoComponent
   ],
   imports: [
     BrowserModule,

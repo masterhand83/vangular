@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProjectShowCaseComponent } from './components/project-show-case/project-show-case.component';
 import { ProjectGeneralComponent } from './components/project-general/project-general.component';
+import { GeneralInfoComponent } from './components/general-info/general-info.component';
 
 const routes: Routes = [
   {
@@ -23,11 +24,11 @@ const routes: Routes = [
         path: '', redirectTo: 'projects',pathMatch: 'full'
       },{
         path: 'projects',component: ProjectShowCaseComponent,
+      },{
+        path: 'project/:id', component: ProjectGeneralComponent,
         children: [
-          {
-            path: 'project/:id',
-            component: ProjectGeneralComponent
-          }
+          {path: '', redirectTo: 'general', pathMatch: 'full'},
+          {path: 'general', component: GeneralInfoComponent}
         ]
       }
     ]

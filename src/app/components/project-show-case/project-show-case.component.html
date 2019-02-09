@@ -1,27 +1,27 @@
 <!-- Topbar -->
 <nav class="navbar navbar-expand-md navbar-light bg-white topar mb-4 static-top shadow">
 
-    <!-- Sidebar Toggle (Topbar) -->
-    <button  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#accionesbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
-    <!-- Topbar Navbar -->
-    <div class="collapse navbar-collapse" id="accionesbar">
-      <ul class="navbar-nav mx-auto">
-          <li>
-              <div class="dropdown">
-                <button  data-toggle="modal" data-target="#create-project" class="btn btn-success">
-                  <i class="fas fa-plus"></i>
-                  Crear nuevo proyecto
-                </button>
-        
-              </div>
-            </li>
-      </ul>
-    </div>
+  <!-- Sidebar Toggle (Topbar) -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#accionesbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-  </nav>
+  <!-- Topbar Navbar -->
+  <div class="collapse navbar-collapse" id="accionesbar">
+    <ul class="navbar-nav mx-auto">
+      <li>
+        <div class="dropdown">
+          <button data-toggle="modal" data-target="#create-project" class="btn btn-success">
+            <i class="fas fa-plus"></i>
+            Crear nuevo proyecto
+          </button>
+
+        </div>
+      </li>
+    </ul>
+  </div>
+
+</nav>
 
 <!-- End of Topbar -->
 
@@ -29,10 +29,10 @@
 <div class="container-fluid">
   <div class="row">
 
-    <!-- ** Aqui se ve proyectos de usuarios-->
-    <div *ngFor="let user of users"  class="col-sm-12 col-md-6 col-lg-4">
+    <!-- ** VISTA DE PROYECTOS-->
+    <div *ngFor="let user of users" class="col-sm-12 col-md-6 col-lg-4">
 
-      <div class="card m-2 shadow clickable" >
+      <div (click)="goToProject(user.nombre)" class="card m-2 shadow clickable">
         <div class="card-header bg-info text-white"> <i class="fas fa-building mr-2"></i> {{user.proyecto}}</div>
         <div class="card-body">
           <p><strong>Residente encargado: </strong> {{user.nombre}}</p>
@@ -43,35 +43,37 @@
           </div>
         </div>
       </div>
-
+      <!-- ** /VISTA DE PROYECTOS-->
     </div>
 
   </div>
 </div>
 
+
 <!--**Modal de Creacion-->
-<div class="modal fade" id="create-project" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="create-project" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
 
     <!--**Formulario para subir datos-->
-  <form (ngSubmit)="createProject(formula)"  #formula="ngForm">
-    <div class="modal-content">
+    <form (ngSubmit)="createProject(formula)" #formula="ngForm">
+      <div class="modal-content">
 
-      <div class="modal-header bg-success text-white">
-        <h5 class="modal-title" id="exampleModalLabel">
-          <strong>Crear Proyecto</strong>
-        </h5>
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true" class="text-white">×</span>
-        </button>
-      </div>
-      
-      <div class="modal-body">
-        
-        <div class="container-fluid">
-          <div class="form-row">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title" id="exampleModalLabel">
+            <strong>Crear Proyecto</strong>
+          </h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" class="text-white">×</span>
+          </button>
+        </div>
 
-            <div class="col-lg-12">
+        <div class="modal-body">
+
+          <div class="container-fluid">
+            <div class="form-row">
+
+              <div class="col-lg-12">
 
                 <!--**ENTRADAS DE TEXTO-->
                 <div class="form-group">
@@ -80,25 +82,29 @@
                 </div>
                 <div class="form-group">
                   <label for="descripcion">Descripcion del proyecto</label>
-                  <textarea  class="form-control" name="descripcion" id="" cols="30" rows="10" ngModel>
+                  <textarea class="form-control" name="descripcion" id="" cols="30" rows="10" ngModel>
                   </textarea>
                 </div>
-              
+                <!--**/ENTRADAS DE TEXTO-->
+              </div>
+
+
             </div>
-
-
           </div>
         </div>
-      </div>
 
-      <div class="modal-footer">
-        <button  class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
-        <input type="submit" value="Crear" class="btn btn-success" >
-        
+        <div class="modal-footer">
+          <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+          <input type="submit" value="Crear" class="btn btn-success">
+
+        </div>
+
       </div>
-      
-    </div>
-  </form>
+    </form>
+    <!--**/Formulario para subir datos-->
+
   </div>
+
+
 </div>
 <!-- /.container-fluid -->
