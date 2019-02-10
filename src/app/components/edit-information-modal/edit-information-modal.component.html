@@ -1,0 +1,109 @@
+<!--modal de informacion-->
+<div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header bg-info text-white">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <strong>Editar informacion</strong>
+        </h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="text-white">×</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="form-row">
+
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label for="nombre_tienda">Nombre de la tienda:</label>
+                <input name="nombre_tienda" class="form-control" type="text" placeholder="Nombre">
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="numero_tienda">No. De la tienda:</label>
+                <input name="numero_tienda" class="form-control" type="number" placeholder="Numero" min="0">
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="metraje_tienda">Metraje ( m<sup>2</sup> ):</label>
+                <input name="metraje_tienda" class="form-control" type="number" placeholder="Numero" min="100">
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label for="recepcion_local">Recepcion local</label>
+                <input type="date" name="recepcion_local" class="form-control">
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label for="recepcion_local">Pedido de mueble</label>
+                <input type="date" name="recepcion_local" class="form-control">
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label for="recepcion_local">Fecha de apertura</label>
+                <input type="date" name="recepcion_local" class="form-control">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+        <a class="btn btn-success" href="login.html">Crear</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--modal de configuracion-->
+<div class="modal fade" id="config-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header bg-info text-white">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <strong>Configuracion</strong>
+        </h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="text-white">×</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="form-row">
+
+            <div class="col-lg-12">
+
+              <div class="form-group">
+                <label for="nombre_tienda">Residente encargado: </label>
+                <select name="resident" id="resigod" class="form-control">
+                  <option value="paco">Paquito</option>
+                  <option value="FE">Perengano</option>
+                </select>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+        <a class="btn btn-info" href="login.html">Configurar</a>
+      </div>
+    </div>
+  </div>
+</div>

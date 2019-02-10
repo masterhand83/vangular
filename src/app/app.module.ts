@@ -8,6 +8,15 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProjectShowCaseComponent } from './components/project-show-case/project-show-case.component';
 import { ProjectGeneralComponent } from './components/project-general/project-general.component';
 import { GeneralInfoComponent } from './components/general-info/general-info.component';
+import { GanttComponent } from './components/gantt/gantt.component';
+import { FilesComponent } from './components/files/files.component';
+import { EditInformationModalComponent } from './components/edit-information-modal/edit-information-modal.component';
+import { CreateActivityModalComponent } from './components/create-activity-modal/create-activity-modal.component';
+import { FilesModalComponent } from './components/files-modal/files-modal.component';
+import { MessagesModalComponent } from './components/messages-modal/messages-modal.component';
+import { AlertsShowCaseComponent } from './components/alerts-show-case/alerts-show-case.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +25,16 @@ import { GeneralInfoComponent } from './components/general-info/general-info.com
     DashboardComponent,
     ProjectShowCaseComponent,
     ProjectGeneralComponent,
-    GeneralInfoComponent
+    GeneralInfoComponent,
+    GanttComponent,
+    FilesComponent,
+    EditInformationModalComponent,
+    CreateActivityModalComponent,
+    FilesModalComponent,
+    MessagesModalComponent,
+    AlertsShowCaseComponent,
+    NotFoundComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

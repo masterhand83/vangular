@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 declare var $: any;
 @Component({
   selector: 'app-project-show-case',
@@ -21,7 +21,7 @@ export class ProjectShowCaseComponent implements OnInit {
     }
   ];
 
-  constructor(private router:Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
@@ -36,7 +36,7 @@ export class ProjectShowCaseComponent implements OnInit {
     $('#create-project').modal('hide');
     return false;
   }
-  goToProject(projectID: string){
+  goToProject(projectID: string) {
     this.router.navigateByUrl(`/dashboard/project/${projectID}`);
   }
 

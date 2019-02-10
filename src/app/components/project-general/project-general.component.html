@@ -12,7 +12,7 @@
       
         <!--tab de informacion-->
         <div class="btn-group">
-          <button type="button" class="btn btn-info" onclick="location.href = 'project.html';">
+          <button type="button" class="btn btn-info" (click)="goTo('general')">
             <i class="fas fa-clipboard fa-fw"></i> Informacion
           </button>
           <button id="info-drop" type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -29,7 +29,7 @@
       <li class="nav-item mr-1">
        
         <div class="btn-group">
-          <button type="button" class="btn btn-success" onclick="location.href = 'project_activity.html'">
+          <button type="button" class="btn btn-success" (click)="goTo('gantt')" >
             <i class="fas fa-calendar-week fa-fw"></i> Actividades
           </button>
           <button id="activities-drop" type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -47,7 +47,7 @@
       <!--Tab de archivos-->
       <li class="nav-item mr-1">
         <div class="btn-group">
-          <button type="button" class="btn btn-warning" onclick="location.href = 'files.html';">
+          <button type="button" (click)="goTo('files')" class="btn btn-warning" >
             <i class="fas fa-file-alt fa-fw"></i> Archivos
           </button>
           <button id="file-drop" type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -86,3 +86,8 @@
 <!-- **Contenido principal -->
 <router-outlet></router-outlet>
 <!-- /.container-fluid -->
+
+<app-create-activity-modal></app-create-activity-modal>
+<app-edit-information-modal></app-edit-information-modal>
+<app-files-modal></app-files-modal>
+<app-messages-modal></app-messages-modal>
