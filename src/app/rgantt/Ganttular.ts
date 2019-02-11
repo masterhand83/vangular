@@ -1,3 +1,2 @@
-export class Ganttular{
-    
+export class Ganttular {
 }

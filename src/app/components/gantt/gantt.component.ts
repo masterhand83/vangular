@@ -10,21 +10,28 @@ import { GanttManager } from 'src/app/rgantt/GanttManager';
 export class GanttComponent implements OnInit {
   activs: IActivity[] = [
     {
-      start: new Date(2019,1,20),
-      end: new Date(2019,2,20),
+      start: new Date(2019, 1, 20),
+      end: new Date(2019, 2, 20),
       color: '#ffffff',
       id: 1,
       name: 'activ',
       realid: 'felkfjeñlj'
+    },
+    {
+      start: new Date(2019, 1, 20),
+      end: new Date(2019, 3, 20),
+      color: '#ffffff',
+      id: 2,
+      name: 'activ',
+      realid: 'felkfjeñlj'
     }
-  ]
+  ];
   constructor() { }
 
   ngOnInit() {
 
-    let gantt = new GanttManager(this.activs);
+    const gantt = new GanttManager(this.activs);
     gantt.initialize();
-  
   }
 
 }

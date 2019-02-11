@@ -1,0 +1,62 @@
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { SecurityService } from './security.service';
+import { constants} from './constants.data';
+import { Key } from 'protractor';
+@Injectable({
+  providedIn: 'root'
+})
+export class SessionService {
+  IP: string = constants.IP;
+  constructor(private router: Router, private cookieService: CookieService, private helmet: SecurityService) { }
+
+  /**
+   *
+   * @param res los parametros para crear
+   */
+  createSession(res: any) {
+    // console.log('Respuesta de sesion: ', res);
+    const id = this.helmet.encrypt(res._id);
+    // const usrType = this.helmet.encrypt(res.userType);
+    // const name = this.helmet.encrypt(res.name);
+    this.cookieService.set('UserID', id);
+    // this.cookieService.set('UserType', usrType); // TODO: Activarlo cuando Quintero termine de inicializarlo
+    // this.cookieService.set('Name', name); // !  Despreciado, ya no se necesita el nombre
+
+  }
+  createProjectSession(projectid: string) {
+    const pro = this.helmet.encrypt(projectid);
+    this.cookieService.set('ActualProject', pro);
+    // localStorage.setItem('ActualProject',projectid);
+    console.log('SESION CREADA PARA PROYECTO ', projectid);
+  }
+  deleteProjectSession() {
+    this.cookieService.delete('ActualProject');
+  }
+
+  validateSession() {
+    const usrID = this.cookieService.get('UserID');
+    if (usrID == null || usrID === '') {
+      this.router.navigate(['']);
+    } else {
+      this.router.navigate(['/dashboard']);
+    }
+  }
+
+  validateProject() {
+    const actProject = this.cookieService.get('ActualProject');
+    if (actProject == null || actProject === '') {
+      this.router.navigate(['/projects']);
+    }
+  }
+  deleteSession() {
+    this.cookieService.deleteAll();
+    this.router.navigate(['']);
+  }
+  getFromSession(key: string) {
+    const value = this.cookieService.get(key);
+    const decipher = this.helmet.decrypt(value);
+    return decipher;
+  }
+}

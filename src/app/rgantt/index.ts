@@ -1,35 +1,35 @@
-import { Activity } from "./Activity";
-import { Ganttchart } from "./Ganttchart";
-import { Drawer } from "./Drawer";
-import { GanttManager } from "./GanttManager";
-import { IActivity } from "./IActivity";
-import { IRGantt } from "./IRGantt"; 
-let ergantt:IRGantt = {
+import { Activity } from './Activity';
+import { Ganttchart } from './Ganttchart';
+import { Drawer } from './Drawer';
+import { GanttManager } from './GanttManager';
+import { IActivity } from './IActivity';
+import { IRGantt } from './IRGantt';
+const ergantt: IRGantt = {
     acts: [],
     gantt: null,
-    setActivities: (actis:IActivity[]) =>{
+    setActivities: (actis: IActivity[]) => {
         for (const act of actis) {
             ergantt.acts.push(new Activity(act));
         }
     },
-    createGantt: ()=>{
+    createGantt: () => {
         if (ergantt.acts.length > 0) {
-            //ergantt.gantt = new GanttManager(ergantt.acts);
+            // ergantt.gantt = new GanttManager(ergantt.acts);
             ergantt.gantt.initialize();
         } else {
-            console.warn('asegurese de ingresar las actividades necesarias')
+            console.warn('asegurese de ingresar las actividades necesarias');
         }
     },
-    onclick: (custom: (e:MouseEvent,data?:any) => void)=>{
+    onclick: (custom: (e: MouseEvent, data?: any) => void) => {
         if (ergantt.gantt) {
             ergantt.gantt.onclick(custom);
-        }else{
-            console.error('genere el gantt antes de asignar acciones')
+        } else {
+            console.error('genere el gantt antes de asignar acciones');
         }
     }
 };
-declare global{
-    interface Window{rgantt:any}
+declare global {
+    interface Window { rgantt: any; }
 }
 window.rgantt = ergantt;
 
@@ -39,12 +39,12 @@ window.rgantt = ergantt;
 let gantt:GanttManager;
 function setacts(actis:Activity[]) {
     let i = 0;
-    
+
 }
 function createGanttChart() {
     gantt = new GanttManager(acts);
     gantt.initialize();
-    
+
 }
 function setOnclick(args:any,custom: (e:MouseEvent,args:any,realid:string) => void) {
     gantt.onclick(args,custom);

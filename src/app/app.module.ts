@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -17,7 +17,9 @@ import { MessagesModalComponent } from './components/messages-modal/messages-mod
 import { AlertsShowCaseComponent } from './components/alerts-show-case/alerts-show-case.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UsersComponent } from './components/users/users.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+import { CookieService } from 'ngx-cookie-service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,9 +41,12 @@ import { UsersComponent } from './components/users/users.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    SweetAlert2Module.forRoot(),
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
