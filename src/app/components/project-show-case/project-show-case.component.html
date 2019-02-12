@@ -68,7 +68,7 @@
             <span aria-hidden="true" class="text-white">×</span>
           </button>
         </div>
-
+       
         <div class="modal-body">
 
           <div class="container-fluid">
@@ -77,27 +77,29 @@
               <div class="col-lg-12">
 
                 <!--**ENTRADAS DE TEXTO-->
-                <div class="form-group">
-                  <label for="nombre">Nombre del proyecto</label>
-                  <input class="form-control" type="text" name="nombre" id="proyectonom" ngModel>
-                </div>
-                <div class="form-group">
-                  <label for="descripcion">Descripcion del proyecto</label>
-                  <textarea class="form-control" name="descripcion" id="" cols="30" rows="10" ngModel>
-                  </textarea>
-                </div>
-                <div class="form-group">
-                  <label for="resident">Residente Encargado</label>
-                  <select name="resident" id="resident" class="form-control" ngModel>
-                    
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="designer">Proyectista Encargado</label>
-                  <select name="designer" id="designer" class="form-control" ngModel>
-                    
-                  </select>
-                </div>
+                
+                  <div class="form-group">
+                    <label for="nombre">Nombre del proyecto</label>
+                    <input class="form-control" type="text" name="nombre" id="proyectonom" ngModel>
+                  </div>
+                  <div class="form-group">
+                    <label for="descripcion">Descripcion del proyecto</label>
+                    <textarea class="form-control" name="descripcion" id="" cols="30" rows="10" ngModel>
+                    </textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="resident">Residente Encargado</label>
+                    <select name="resident" id="resident" class="form-control" ngModel>
+                      <option *ngFor="let residente of residentes" [value]="residente._id" >{{residente.name}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="designer">Proyectista Encargado</label>
+                    <select name="designer" id="designer" class="form-control" ngModel>
+                      <option *ngFor="let proyectista of proyectistas" [value]="proyectista._id" >{{proyectista.name}}</option>
+                    </select>
+                  </div>
+                
                 <!--**/ENTRADAS DE TEXTO-->
               </div>
 
@@ -120,4 +122,5 @@
 
 
 </div>
+
 <!-- /.container-fluid -->

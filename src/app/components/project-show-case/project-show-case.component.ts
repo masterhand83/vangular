@@ -5,6 +5,7 @@ import { SessionService } from 'src/app/services/session.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { UsersService } from 'src/app/services/users.service.1';
 import { IUser } from 'src/app/models/IUser';
+import { SecurityService } from 'src/app/services/security.service';
 declare var $: any;
 @Component({
   selector: 'app-project-show-case',
@@ -26,23 +27,39 @@ export class ProjectShowCaseComponent implements OnInit {
     private router: Router,
     private sess: SessionService,
     private project: ProjectService,
-    private user: UsersService) {
+    private user: UsersService,
+    private crypto: SecurityService) {
       this.user_id = this.sess.getFromSession('UserID');
       this.user_type = Number.parseInt(this.sess.getFromSession('UserType'), 10);
       this.getProjects();
       this.getResidents();
+      this.getDesigners();
     }
 
   ngOnInit() {
 
   }
 
-  // TODO: arreglar los desvarios de quintero de las id's
+  // obtiene los residentes
   getResidents() {
-    this.user.getResidents().subscribe(response => {
-      this.residentes.push();
+    this.user.getResidents().subscribe((response: IUser[]) => {
+      // console.log(response);
+      for (const element of response){
+        const res = this.crypto.decrypt(element);
+        this.residentes.push(res);
+      }
     });
   }
+
+  getDesigners(){
+    this.user.getDesigners().subscribe((response: IUser[]) =>{
+      for (const element of response) {
+        const res = this.crypto.decrypt(element);
+        this.proyectistas.push(res);
+      }
+    })
+  }
+
   // TODO: comentarle a quintero que solo el primer proyecto creado tiene actividades
   getProjects() {
     this.project.getUserProjects(this.user_id).subscribe((response: any[]) => {
@@ -60,17 +77,16 @@ export class ProjectShowCaseComponent implements OnInit {
     });
   }
 
-  // TODO: implementar la creacion de proyectos
+  
+
+  // Crea los proyectos
   createProject(f: NgForm) {
     const data = f.value;
-
-    this.projects.push({
-      nombre: ' ...Sin Residente... ',
-      proyecto: data.nombre,
-      progreso: 6.9
+    this.project.createProject(data.nombre, data.descripcion, this.user_id, data.resident, data.designer).subscribe(response => {
+      this.projects = [];
+      this.getProjects();
+      $('#create-project').modal('hide');
     });
-    $('#create-project').modal('hide');
-    return false;
   }
 
   goToProject(projectID: string) {

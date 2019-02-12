@@ -56,9 +56,9 @@ export class UsersService {
 
   }
 
-  getUser() {
+  getUser(id: string) {
 
-    return this.http.get(this.URL_API);
+    return this.http.get(this.URL_API + '/' + id);
   }
 
   getResidents() {

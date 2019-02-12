@@ -7,8 +7,10 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./project-general.component.css']
 })
 export class ProjectGeneralComponent implements OnInit {
-
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  current_id: string;
+  constructor(private router: Router, private route: ActivatedRoute) { 
+    this.current_id = this.route.snapshot.paramMap.get('id');
+  }
 
   ngOnInit() {
   }
