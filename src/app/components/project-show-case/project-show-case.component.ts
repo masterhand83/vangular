@@ -29,10 +29,10 @@ export class ProjectShowCaseComponent implements OnInit {
   }
 
   // TODO: arreglar los desvarios de quintero de las id's
-  getResidents(){
-    this.user.getResidents().subscribe(response =>{
+  getResidents() {
+    this.user.getResidents().subscribe(response => {
       this.residents.push();
-    })
+    });
   }
   getProjects() {
     // console.log(this.sess.getFromSession('UserID'));
