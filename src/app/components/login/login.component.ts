@@ -39,9 +39,12 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.session.createSession(user);
         this.router.navigateByUrl('/dashboard');
       } else {
-        console.log('error');
+
         this.nonUser.show();
       }
     });
+  }
+  loginErrorClose(event: any, form: NgForm) {
+    form.reset();
   }
 }

@@ -16,12 +16,11 @@ export class SessionService {
    * @param res los parametros para crear
    */
   createSession(res: any) {
-    // console.log('Respuesta de sesion: ', res);
     const id = this.helmet.encrypt(res._id);
-    // const usrType = this.helmet.encrypt(res.userType);
-    // const name = this.helmet.encrypt(res.name);
+    const usrType = this.helmet.encrypt(res.userType);
+    // const name = this.helmet.encrypt(res.name); // !  Despreciado, ya no se necesita el nombre
     this.cookieService.set('UserID', id);
-    // this.cookieService.set('UserType', usrType); // TODO: Activarlo cuando Quintero termine de inicializarlo
+    this.cookieService.set('UserType', usrType); // TODO: Activarlo cuando Quintero termine de inicializarlo
     // this.cookieService.set('Name', name); // !  Despreciado, ya no se necesita el nombre
 
   }
@@ -52,9 +51,18 @@ export class SessionService {
   }
   deleteSession() {
     this.cookieService.deleteAll();
-    this.router.navigate(['']);
+    this.router.navigate(['../login']);
   }
-  getFromSession(key: string) {
+  /**
+   * Retorna la cookie seleccionada
+   * Argumentos validos actualmente:
+   * - UserType
+   * - UserID
+   * TODO: adaptar a proyectos en caso de usarlo
+   * @param key El identificador de la cooki
+   * @returns Un string
+   */
+  getFromSession(key: string): string {
     const value = this.cookieService.get(key);
     const decipher = this.helmet.decrypt(value);
     return decipher;

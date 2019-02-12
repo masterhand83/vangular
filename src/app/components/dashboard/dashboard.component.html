@@ -38,22 +38,39 @@
 			Gerente
 		</div>
 		<li class="nav-item">
-			<a  [routerLink]="['./users']" routerLinkActive="router-link-active"  class="nav-link">
+			<span   class="nav-link">
 				<i class="fas fa-users fa-fw"></i>
 				<span>Usuarios</span>
-			</a>
+			</span>
 
 		</li>
+		<hr class="sidebar-divider">
+		<li class="nav-item">
+			<span (click)="askLogout()" class="nav-link clickable">
+				<i class="fas fa-power-off fa-fw"></i>
+				<span>Cerrar Sesión</span>
+			</span>
 
-		<!-- Divider -->
+		</li>
+		<swal
+		#logoutModal
+		title="¿Seguro que quieres irte?"
+		text="vas a tener que volver a iniciar sesión la proxima vez"
+		(confirm)="logout()"
+		type="warning"
+		[showCancelButton]="true"
+		[focusCancel]="true">
+
+		</swal>
+		<!-- Divider >
 		<hr class="sidebar-divider">
 
-		<!-- Heading -->
+		< Heading >
 		<div class="sidebar-heading">
 			Addons
 		</div>
 
-		<!-- Nav Item - Pages Collapse Menu -->
+		< Nav Item - Pages Collapse Menu>
 		<li class="nav-item">
 			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
 				aria-expanded="true" aria-controls="collapsePages">
@@ -71,9 +88,8 @@
 					<a class="collapse-item" href="blank.html">Blank Page</a>
 				</div>
 			</div>
-		</li>
+		</li-->
 
-		<!-- Nav Item - Charts -->
 
 		<!-- Divider -->
 		<hr class="sidebar-divider d-none d-md-block">

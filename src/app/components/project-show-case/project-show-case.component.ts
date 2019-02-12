@@ -12,14 +12,23 @@ declare var $: any;
   styleUrls: ['./project-show-case.component.css']
 })
 export class ProjectShowCaseComponent implements OnInit {
-  // el array de proyectos siempre empieza vacio
+  // Aqui se guarda el id del usuario y sus tipos
+  user_id: string;
+  user_type: number;
+  /**Aqui se guardan todos los proyectos para ser mostrados. Tambien se guardan los residente y proyectistas
+   * en caso de crear un proyecto.
+   */
+
   projects: any[] = [];
-  residents: IUser[] = [];
+  residentes: IUser[] = [];
+  proyectistas: IUser[] = [];
   constructor(
     private router: Router,
     private sess: SessionService,
     private project: ProjectService,
     private user: UsersService) {
+      this.user_id = this.sess.getFromSession('UserID');
+      this.user_type = Number.parseInt(this.sess.getFromSession('UserType'), 10);
       this.getProjects();
       this.getResidents();
     }
@@ -31,14 +40,13 @@ export class ProjectShowCaseComponent implements OnInit {
   // TODO: arreglar los desvarios de quintero de las id's
   getResidents() {
     this.user.getResidents().subscribe(response => {
-      this.residents.push();
+      this.residentes.push();
     });
   }
+  // TODO: comentarle a quintero que solo el primer proyecto creado tiene actividades
   getProjects() {
-    // console.log(this.sess.getFromSession('UserID'));
-    this.project.getUserProjects(this.sess.getFromSession('UserID')).subscribe((response: any[]) => {
+    this.project.getUserProjects(this.user_id).subscribe((response: any[]) => {
       // Aqui se obtiene un arreglo de proyectos que permite iterar sobre los demas
-      console.log(response);
       for (const project of response) {
         // insertamos al array de proyectos cada uno de los proyectos que se reciben
         this.projects.push({
@@ -64,6 +72,7 @@ export class ProjectShowCaseComponent implements OnInit {
     $('#create-project').modal('hide');
     return false;
   }
+
   goToProject(projectID: string) {
     this.router.navigateByUrl(`/dashboard/project/${projectID}`);
   }

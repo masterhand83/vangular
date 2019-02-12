@@ -39,6 +39,7 @@
                     title="Usuario inexistente"
                     text="al parecer este usuario no existe, revisa que la contraseña o el correo sean correctos"
                     type="error"
+                    (close)="loginErrorClose($event,formulario)"
                     >
                   </swal>
                 </form>
