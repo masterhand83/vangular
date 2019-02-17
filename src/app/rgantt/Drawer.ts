@@ -4,6 +4,8 @@ export class Drawer{
     static readonly scale:number = 20;
     set ctx(ctx:CanvasRenderingContext2D){
         this.ctx = <CanvasRenderingContext2D> ctx;
+        this.ctx.lineJoin = "round";
+        this.ctx.lineCap = "round";
     }
     static drawpin(index:number,y:number,y2:number,label:string,color:string,fontcolor?:string){
         let context = <CanvasRenderingContext2D> this.ctx;

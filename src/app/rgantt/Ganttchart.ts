@@ -100,7 +100,7 @@ export class Ganttchart {
      */
     public draw(canvas:HTMLCanvasElement) {
         
-        let today = moment(new Date());
+        let today = moment();
         if (this.acts.length != 0) {
             canvas.setAttribute('height',String((this.acts.length*55)+55))
             let canHeight = Number(canvas.getAttribute('height'))
@@ -113,7 +113,7 @@ export class Ganttchart {
             }
             let started = this.fullstart.clone();
             let current = today.diff(started,'days');
-            Drawer.drawpin(current+1,30,canHeight,'Today','#068400','#068400');
+            Drawer.drawpin(current+2,30,canHeight,'Today','#068400','#068400');
             //this.acts[0].draw(this.fullstart,this.fullend,Drawer.ctx);
             //this.acts[1].draw(this.fullstart,this.fullend,Drawer.ctx);
             //this.acts[2].draw(this.fullstart,this.fullend,Drawer.ctx);

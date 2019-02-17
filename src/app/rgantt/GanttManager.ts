@@ -8,6 +8,7 @@ export class GanttManager {
     private gantt: Ganttchart;
     private canvas: HTMLCanvasElement;
     constructor(acts: IActivity[], ctx?: CanvasRenderingContext2D, canva?: HTMLCanvasElement) {
+
         if (canva) {
             this.canvas = canva;
         } else {
@@ -16,6 +17,7 @@ export class GanttManager {
         for (const act of acts) {
             this.acts.push(new Activity(act));
         }
+        
         this.gantt = new Ganttchart(this.acts, this.canvas);
         if (canva) {
             Drawer.ctx = ctx;

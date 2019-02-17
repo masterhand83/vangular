@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { SecurityService } from './security.service';
 import { constants} from './constants.data';
@@ -9,7 +9,10 @@ import { Key } from 'protractor';
 })
 export class SessionService {
   IP: string = constants.IP;
-  constructor(private router: Router, private cookieService: CookieService, private helmet: SecurityService) { }
+  constructor(
+    private router: Router,
+    private cookieService: CookieService,
+    private helmet: SecurityService) { }
 
   /**
    *
@@ -28,10 +31,11 @@ export class SessionService {
     const pro = this.helmet.encrypt(projectid);
     this.cookieService.set('ActualProject', pro);
     // localStorage.setItem('ActualProject',projectid);
-    console.log('SESION CREADA PARA PROYECTO ', projectid);
+
   }
   deleteProjectSession() {
-    this.cookieService.delete('ActualProject');
+    this.cookieService.delete('ActualProject', '/', this.IP);
+    // console.log(this.cookieService.get('ActualProject'));
   }
 
   validateSession() {
@@ -39,14 +43,16 @@ export class SessionService {
     if (usrID == null || usrID === '') {
       this.router.navigate(['']);
     } else {
-      this.router.navigate(['/dashboard']);
+      if (this.router.url.indexOf('') > 0 ) {
+        this.router.navigate(['/dashboard']);
+      }
     }
   }
 
   validateProject() {
     const actProject = this.cookieService.get('ActualProject');
-    if (actProject == null || actProject === '') {
-      this.router.navigate(['/projects']);
+    if (actProject.length > 0) {
+      this.router.navigate(['/dashboard']);
     }
   }
   deleteSession() {

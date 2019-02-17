@@ -29,7 +29,8 @@ const routes: Routes = [
         path: '', redirectTo: 'projects', pathMatch: 'full'
       }, {
         path: 'projects', component: ProjectShowCaseComponent,
-      }, {
+      }, 
+      {
         path: 'project/:id', component: ProjectGeneralComponent,
         children: [
           { path: '', redirectTo: 'general', pathMatch: 'full' },

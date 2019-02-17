@@ -6,6 +6,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { UsersService } from 'src/app/services/users.service.1';
 import { IUser } from 'src/app/models/IUser';
 import { SecurityService } from 'src/app/services/security.service';
+import { Observable } from 'rxjs';
 declare var $: any;
 @Component({
   selector: 'app-project-show-case',
@@ -20,23 +21,24 @@ export class ProjectShowCaseComponent implements OnInit {
    * en caso de crear un proyecto.
    */
 
-  projects: any[] = [];
+  projects: any[];
   residentes: IUser[] = [];
   proyectistas: IUser[] = [];
   constructor(
     private router: Router,
     private sess: SessionService,
-    private project: ProjectService,
+    private projectService: ProjectService,
     private user: UsersService,
     private crypto: SecurityService) {
-      this.user_id = this.sess.getFromSession('UserID');
-      this.user_type = Number.parseInt(this.sess.getFromSession('UserType'), 10);
-      this.getProjects();
-      this.getResidents();
-      this.getDesigners();
     }
 
   ngOnInit() {
+    this.user_id = this.sess.getFromSession('UserID');
+    this.user_type = Number.parseInt(this.sess.getFromSession('UserType'), 10);
+    this.getProjects();
+    this.getResidents();
+    this.getDesigners();
+    this.projects = [];
 
   }
 
@@ -44,25 +46,25 @@ export class ProjectShowCaseComponent implements OnInit {
   getResidents() {
     this.user.getResidents().subscribe((response: IUser[]) => {
       // console.log(response);
-      for (const element of response){
+      for (const element of response) {
         const res = this.crypto.decrypt(element);
         this.residentes.push(res);
       }
     });
   }
 
-  getDesigners(){
-    this.user.getDesigners().subscribe((response: IUser[]) =>{
+  getDesigners() {
+    this.user.getDesigners().subscribe((response: IUser[]) => {
       for (const element of response) {
         const res = this.crypto.decrypt(element);
         this.proyectistas.push(res);
       }
-    })
+    });
   }
 
   // TODO: comentarle a quintero que solo el primer proyecto creado tiene actividades
   getProjects() {
-    this.project.getUserProjects(this.user_id).subscribe((response: any[]) => {
+    this.projectService.getUserProjects(this.user_id).subscribe((response: any[]) => {
       // Aqui se obtiene un arreglo de proyectos que permite iterar sobre los demas
       for (const project of response) {
         // insertamos al array de proyectos cada uno de los proyectos que se reciben
@@ -77,12 +79,12 @@ export class ProjectShowCaseComponent implements OnInit {
     });
   }
 
-  
+
 
   // Crea los proyectos
   createProject(f: NgForm) {
     const data = f.value;
-    this.project.createProject(data.nombre, data.descripcion, this.user_id, data.resident, data.designer).subscribe(response => {
+    this.projectService.createProject(data.nombre, data.descripcion, this.user_id, data.resident, data.designer).subscribe(response => {
       this.projects = [];
       this.getProjects();
       $('#create-project').modal('hide');
@@ -90,6 +92,7 @@ export class ProjectShowCaseComponent implements OnInit {
   }
 
   goToProject(projectID: string) {
+    this.sess.createProjectSession(projectID);
     this.router.navigateByUrl(`/dashboard/project/${projectID}`);
   }
 
