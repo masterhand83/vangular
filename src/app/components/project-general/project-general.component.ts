@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
 import { SessionService } from 'src/app/services/session.service';
@@ -8,7 +8,10 @@ import { SessionService } from 'src/app/services/session.service';
   templateUrl: './project-general.component.html',
   styleUrls: ['./project-general.component.css']
 })
-export class ProjectGeneralComponent implements OnInit {
+export class ProjectGeneralComponent implements OnInit, OnDestroy {
+  ngOnDestroy(): void {
+    this.sess.deleteProjectSession();
+  }
   current_id: string;
   project_info: any;
   constructor(

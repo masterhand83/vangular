@@ -15,35 +15,45 @@ export class SessionService {
     private helmet: SecurityService) { }
 
   /**
-   *
+   * crea la sesion del proyecto utilizando la id del usuario y su tipo
    * @param res los parametros para crear
    */
   createSession(res: any) {
     const id = this.helmet.encrypt(res._id);
     const usrType = this.helmet.encrypt(res.userType);
-    // const name = this.helmet.encrypt(res.name); // !  Despreciado, ya no se necesita el nombre
+
     this.cookieService.set('UserID', id);
-    this.cookieService.set('UserType', usrType); // TODO: Activarlo cuando Quintero termine de inicializarlo
-    // this.cookieService.set('Name', name); // !  Despreciado, ya no se necesita el nombre
+    this.cookieService.set('UserType', usrType); 
 
   }
+  /**
+   * crea la sesiond el proyecto
+   * @param projectid id del proyecto
+   */
   createProjectSession(projectid: string) {
     const pro = this.helmet.encrypt(projectid);
     this.cookieService.set('ActualProject', pro);
-    // localStorage.setItem('ActualProject',projectid);
 
   }
+
+  /**
+   * elimina la sesion del proyecto 
+   * @deprecated debido a problemas tecnicos, se incluye una funcionalidad de "proyecto mas reciente",asi que la sesion persiste
+   */
   deleteProjectSession() {
     this.cookieService.delete('ActualProject', '/', this.IP);
     // console.log(this.cookieService.get('ActualProject'));
   }
 
+  /**
+   * valida la sesion del usuario para evitar escalabilidad mediante el buscador
+   */
   validateSession() {
     const usrID = this.cookieService.get('UserID');
     if (usrID == null || usrID === '') {
       this.router.navigate(['']);
     } else {
-      if (this.router.url.indexOf('') > 0 ) {
+      if (this.router.url.indexOf('login') > 0 ) {
         this.router.navigate(['/dashboard']);
       }
     }
@@ -65,7 +75,7 @@ export class SessionService {
    * - UserType
    * - UserID
    * TODO: adaptar a proyectos en caso de usarlo
-   * @param key El identificador de la cooki
+   * @param key El identificador de la cookie
    * @returns Un string
    */
   getFromSession(key: string): string {

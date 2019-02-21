@@ -7,3 +7,158 @@
     </div>
   </div>
 </div>
+
+
+<!--Edicion de actividad-->
+<form #form="ngForm" (submit)="EditActivity(form.value)">
+  <div *ngIf="($activity |async) as act" class="modal fade" id="activity-info-modal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header bg-warning text-white">
+          <h5 class="modal-title" id="modal">
+            <strong>Editar Actividad</strong>
+          </h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" class="text-white">×</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="form-row">
+
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <label for="inicio">Nombre de la actividad</label>
+                  <input [(ngModel)]="act.name" name="nombre" type="text" class="form-control" placeholder="Nombre"
+                    ngModel>
+              </div>
+
+
+
+              </div>
+              <div class="col-lg-12">
+                <h4>¿Termino la actividad?</h4>
+                <div class="form-check">
+
+                  <input type="radio" class="form-check-input" name="actividad_terminada" value="true" ngModel>
+                  <label for="actividad_terminada">aun no termina la actividad</label>
+                </div>
+                <div class="form-check">
+
+                  <input type="radio" class="form-check-input" name="actividad_terminada" value="false" ngModel>
+                  <label for="actividad_terminada">Se termino la actividad</label>
+                </div>
+                <hr>
+              </div>
+              
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="inicio">Fecha de inicio: {{act.start | date: 'dd/MM/yyyy'}}</label>
+                  <input name="inicio" type="date" class="form-control" placeholder="Fecha" ngModel>
+                </div>
+
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="final">Fecha de termino: {{act.end | date: 'dd/MM/yyyy'}}</label>
+                  <input name="final" type="date" class="form-control" placeholder="Fecha" ngModel>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <label for="prioridad">Prioridad de la actividad: {{parsePriority(act.priority)}} </label>
+                  <select class="form-control" name="prioridad" id="prioridad" ngModel>
+                    <option value="0">Alta</option>
+                    <option value="1">media</option>
+                    <option value="2">baja</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="card">
+                  <div class="card-header bg-warning text-white">
+                    <!--para activar el modal de objetivos-->
+                    <strong>Objetivos</strong> 
+                    <button type="button" class="btn btn-warning float-right"
+                    data-toggle="collapse"
+                    data-target="#objetivo-collapse"
+                    >
+                        <i class="fa fa-plus float-right align-middle"></i>
+                    </button>
+                    <br>
+                    <div class="input-group collapse mt-3" id="objetivo-collapse">
+                        <div class="input-group-prepend">
+                          <div (click)="pushObjective(objetivo)" class="input-group-text clickable">></div>
+                        </div>
+                        <input type="text"  name="objetivo"  class=" form-control" #objetivo>
+                    </div>
+                  </div>
+                  <div class="card-body" style="overflow-y: scroll; max-height: 250px">
+                    <ul>
+                      <li *ngFor="let obj of objectives" class="">{{obj}}</li>
+                      <input *ngFor="let obj of act.objective" type="hidden" class="objetivo" [value]="obj">
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="card">
+                  <div class="card-header bg-warning text-white">
+                    <!--para activar el modal de objetivos-->
+                    <strong>Entregables</strong> 
+                    <button type="button" class="btn btn-warning float-right"
+                    data-toggle="collapse"
+                    data-target="#entregable-collapse">
+
+                        <i class="fa fa-plus float-right align-middle clickable "></i>
+                    </button>
+                    <br>
+                    <div class="input-group collapse mt-3" id="entregable-collapse">
+                        <div class="input-group-prepend">
+                          <div (click)="pushDeliverables(entregable)" class="input-group-text clickable">></div>
+                        </div>
+                        <input type="text"  name="entregable"  class=" form-control " #entregable>
+                    </div>
+                  </div>
+                  <div class="card-body" style="overflow-y: scroll; max-height: 250px">
+                    <ul>
+                       <li *ngFor="let ent of deliverables" class="">{{ent}}</li>
+                      <input *ngFor="let ent of act.deliverable" type="hidden" class="entregable" [value]="ent">
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-12 mt-3">
+                <div class="card ">
+                  <div class="card-header bg-warning text-white">
+                    <!--para activar el modal de objetivos-->
+                    <strong>comentarios</strong> <i class="fa fa-plus float-right align-middle clickable"></i>
+                  </div>
+                  <div class="card-body" style="overflow-y: scroll; max-height: 200px">
+                    <ul class="list-group-flush">
+                      <li *ngFor="let comment of act.comments" class="list-group-item">
+                        <strong>{{comment.authorName}}: </strong>{{comment.comment}}
+                      </li>
+
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+          <input type="submit" class="btn btn-warning" value="Editar">
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

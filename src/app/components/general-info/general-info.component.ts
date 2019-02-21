@@ -22,7 +22,7 @@ export class GeneralInfoComponent implements OnInit, OnDestroy {
 
   }
   ngOnDestroy(): void {
-    this.sess.deleteProjectSession();
+    
   }
 
   getProject() {

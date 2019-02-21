@@ -118,7 +118,7 @@ export class Ganttchart {
             //this.acts[1].draw(this.fullstart,this.fullend,Drawer.ctx);
             //this.acts[2].draw(this.fullstart,this.fullend,Drawer.ctx);
         } else {
-            console.log('nothing');
+            console.log('no hay actividades o son nulas');
         }
     }
     public mouseover(event: MouseEvent){
