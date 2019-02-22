@@ -1,0 +1,1408 @@
+{
+	"info": {
+		"_postman_id": "5ef4f09c-29bc-4631-a1eb-f6d8f679dae8",
+		"name": "postmanActions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Project Actions",
+			"item": [
+				{
+					"name": "Get Projects",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/project",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"project"
+							]
+						},
+						"description": "Develepment Tool"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Project 1\",\n\t\"description\": \"First Project\",\n\t\"idUser1\": \"idUser1\",\n\t\"idUser2\": \"idUser2\",\n\t\"idUser3\": \"idUser3\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/project",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"project"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Project",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"storeName\": \"Starbucks\",\n\t\"storeNumber\": 7,\n\t\"m2\": 200,\n\t\"location\": \"Plaza Santa Fe\",\n\t\"localReception\": \"2018-10-01\",\n\t\"openingDate\": \"2018-10-08\",\n\t\"furnitureDate\": \"2018-10-16\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/project/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"project",
+								"idProject"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Project",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/project/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"project",
+								"idProject"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Activity",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Activity\",\n\t\"description\": \"This is optional\",\n\t\"start\": \"2018-11-04\",\n\t\"end\": \"2018-11-04\",\n\t\"priority\": 1,\n\t\"deliverable\": [\"FirstDeliverable\", \"SecondDeliverable\", \"ThirdDeliverable\"],\n\t\"objective\": [\"FirstObjective\", \"SecondObjective\"]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/activity/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"activity",
+								"idProject"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Activites Project",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/activity/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"activity",
+								"idProject"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Change Designer in Charge",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"idNewDesigner\": \"id\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/designer/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"designer",
+								"idProject"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Change Resident in Charge",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"idNewResident\": \"id\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/resident/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"resident",
+								"idProject"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Messages of the project",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/message/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"message",
+								"idProject"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Send Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"authorName\": \"User 1\",\n\t\"message\": \"My message\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/message/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"message",
+								"idProject"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Alert to Project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"link\": \"link\",\n\t\"description\": \"First Alert\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/alert/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"alert",
+								"idProject"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Information of the Project",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/info/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"info",
+								"idProject"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Add File to Project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "author",
+									"value": "Resident",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": ""
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/file/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"file",
+								"idProject"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Files Project",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/file/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"file",
+								"idProject"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Actions",
+			"item": [
+				{
+					"name": "Get User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/user/idUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"user",
+								"idUser"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"user"
+							]
+						},
+						"description": "Development Tool"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Projects of the User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/project/idUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"project",
+								"idUser"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Add User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "aca705c7-96be-4004-9988-8041818cc93f",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userData\": \"U2FsdGVkX186k5Mkw5vqPj3Xps6/z4xCakq9vbc8dh+ruHFmsVnem2Ds1JEW4jAdKCU20uLs+k0j5Up6XFvVm0g7cqpxNMOa/F1Ido9OrwSrGsmmzo6J1K0Noo7crEZ1k4XTZRn7z0XVkRN+8ltjDQFg5K6/UrrH5gNB4Ua80UM=\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"user"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": [
+						{
+							"name": "Add User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"General Manager\",\n    \"email\": \"email@email.com\",\n    \"password\": \"123\",\n    \"mobile\": 5530318080,\n    \"userType\": 0\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/users/user",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"users",
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:4200"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "39"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"27-M2HO2cIYHySwjlx9vkznL3EXjr0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Nov 2018 01:32:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"User General Manager saved\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userData\": \"U2FsdGVkX18ss+vaozMJ1W4MpTIBUutFie3Rj7BCciHxEVQHSHxQskvH7nR3UWOSBPLKRLNfRfmVO6gIDh9YdCAUWLedUGBl75bvjZYVkS+74D44Z/zSxwKvJPI0O565\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/user/idUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"user",
+								"idUser"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": [
+						{
+							"name": "Edit User",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"ManagerChanged\",\n\t\"email\": \"email2@email.com\",\n\t\"password\": \"1234\",\n\t\"mobile\": 5530318080\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/users/user/5be787eca8699908edae159b",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"users",
+										"user",
+										"5be787eca8699908edae159b"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:4200"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29-X1hG9OZrz+7/AXmCxhACDh/OPM8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Nov 2018 02:50:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"User General Manager Updated\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/api/users/user/idUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"user",
+								"idUser"
+							]
+						},
+						"description": "Delete the user, you need the '_id' of the user"
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userData\": \"U2FsdGVkX1+bCrmbYt1N9km//5UUD/dtGdFG7QJ/YgOWTHY4h/K7bTrU3AhG9e6/CQ6pHHtdeRuWl7xJ9lCjDw==\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": [
+						{
+							"name": "Login User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"email@email.com\",\n\t\"password\": \"123\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/users/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"users",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:4200"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "159"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9f-Ss+tayTuwelP5z5Y33u5YhKpj0M\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Nov 2018 01:55:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"projects\": [],\n        \"_id\": \"5be787eca8699908edae159b\",\n        \"name\": \"General Manager\",\n        \"email\": \"email@email.com\",\n        \"password\": \"123\",\n        \"mobile\": 5530318080,\n        \"userType\": 0,\n        \"__v\": 0\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Residents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/residents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"residents"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Designers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/designers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"designers"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Alert",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/alert/idAlert",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"alert",
+								"idAlert"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Alerts of User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/alert/idUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"alert",
+								"idUser"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "View Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"users"
+							]
+						},
+						"description": "Checked (Change to /user)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Activity Actions",
+			"item": [
+				{
+					"name": "Get Activity",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/activity/idActivity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"activity",
+								"idActivity"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Activity",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"ActivityEdited\",\n\t\"description\": \"This is optional edited\",\n\t\"start\": \"2018-09-29T19:25:24.293Z\",\n\t\"end\": \"2018-10-06T19:25:24.293Z\",\n\t\"priority\": 2,\n\t\"objective\": [\"FirstObjectiveEdited\", \"SecondObjectiveEdited\"],\n\t\"deliverable\": [\"FirstDelivarableEdited\", \"SecondDeliverableEdited\"]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/activity/idActivity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"activity",
+								"idActivity"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Activity",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/activity/idActivity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"activity",
+								"idActivity"
+							]
+						},
+						"description": "Delete the activity with that id"
+					},
+					"response": []
+				},
+				{
+					"name": "Add a comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"authorName\": \"Username\",\n\t\"comment\": \"Comment\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/comment/idActivity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"comment",
+								"idActivity"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Start Activity",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"started\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/start/idActivity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"start",
+								"idActivity"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Finish Activity",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/finish/idActivity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"finish",
+								"idActivity"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Objectives of the Activity",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/verifyObjectives/idActivity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"verifyObjectives",
+								"idActivity"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Deliverables of Activity",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/verifyDeliverables/idActivity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"verifyDeliverables",
+								"idActivity"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "File Actions",
+			"item": [
+				{
+					"name": "Download File",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/files/file/idFile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"files",
+								"file",
+								"idFile"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete File",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/files/file/idFile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"files",
+								"file",
+								"idFile"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Download Report",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/pdfs/pdf/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"pdfs",
+								"pdf",
+								"idProject"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Crypto Actions",
+			"item": [
+				{
+					"name": "Decrypt",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cryptedData\": \"String of a crypted data\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/crypto/decrypt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"crypto",
+								"decrypt"
+							]
+						},
+						"description": "Development Tool"
+					},
+					"response": []
+				},
+				{
+					"name": "Encrypt",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"objectField1\": \"This is an example\",\n\t\"objectField2\": \"of JSON. It could be as\",\n\t\"objectField3\": \"big possible\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/crypto/encrypt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"crypto",
+								"encrypt"
+							]
+						},
+						"description": "Development Tool"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

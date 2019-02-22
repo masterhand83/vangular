@@ -1,0 +1,339 @@
+<div id="content-wrapper" class="d-flex flex-column">
+
+  <!-- Main Content -->
+  <div id="content">
+
+    <!-- Topbar -->
+    <nav class="navbar navbar-expand-md navbar-light bg-white topar mb-4 static-top shadow">
+
+      <!-- Sidebar Toggle (Topbar) -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#accionesbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Topbar Search -->
+      <!-- Topbar Navbar -->
+      <div class="collapse navbar-collapse" id="accionesbar">
+        <ul class="navbar-nav mx-auto">
+
+          <li class="nav-item">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#reg-user">
+              <i class="fa fa-plus fa-fw"></i> Registrar usuario
+            </button>
+          </li>
+          <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+          <!-- Nav Item - Alerts -->
+          <!-- Nav Item - Messages -->
+          <!-- Nav Item - User Information -->
+
+
+        </ul>
+      </div>
+
+    </nav>
+    <!-- End of Topbar -->
+
+
+    <div class="container-fluid mb-3">
+
+      <div class="row">
+
+        <div class="col-lg-2"></div>
+
+        <div class="col-lg-8">
+          <div class="card shadow-sm">
+            <div class="card-body">
+
+
+              <table class="table display responsive" id="usuarios">
+                <thead>
+                  <tr>
+                      <th>Nombre</th>
+                      <th>Puesto</th>
+                      <th>Acciones</th>
+                  </tr>
+                  
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Jesus Armando</td>
+                    <td>Residente</td>
+                    <td>
+                      <div class="btn-group float-right">
+                        <button class="btn  btn-secondary">
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-warning" data-toggle="modal" data-target="#edit-user">
+                          <i class="fas fa-pen"></i>
+                        </button>
+                        <button class="btn btn-danger">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </div>
+
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Jesus Ramno</td>
+                    <td>Residente</td>
+                    <td>
+                      <div class="btn-group float-right">
+                        <button class="btn  btn-secondary">
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-warning">
+                          <i class="fas fa-pen"></i>
+                        </button>
+                        <button class="btn btn-danger">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </div>
+
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Jesus Ramno</td>
+                    <td>Proyectista</td>
+                    <td>
+                      <div class="btn-group float-right">
+                        <button class="btn  btn-secondary">
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-warning">
+                          <i class="fas fa-pen"></i>
+                        </button>
+                        <button class="btn btn-danger">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </div>
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!--Aqui va el contenido-->
+    </div>
+    <!-- /.container-fluid -->
+
+  </div>
+  <!-- End of Main Content -->
+
+
+</div>
+<!-- End of Content Wrapper -->
+
+<!--Modal de creacion-->
+<div class="modal fade" id="reg-user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title" id="exampleModalLabel">Registro de usuario</h5>
+        <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-lg-1">
+              <i class="fas fa-user text-success fa-2x float-right"></i>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <input type="text" placeholder="Nombre" class="form-control">
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="form-group">
+                <input type="text" placeholder="Apellido" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-1">
+              <i class="fas fa-envelope text-success fa-2x float-right"></i>
+            </div>
+            <div class="col-lg-11">
+              <div class="form-group">
+                <input type="text" placeholder="Correo Electronico" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-1">
+              <i class="fas fa-phone text-success fa-2x float-right"></i>
+            </div>
+            <div class="col-lg-11">
+              <div class="form-group">
+                <input type="text" placeholder="movil" class="form-control">
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row mb-3">
+            <div class="col-lg-1">
+              <i class="fas fa-key text-success fa-2x float-right"></i>
+            </div>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-5">
+              <div class="form-group">
+                <input type="text" placeholder="Contraseña" class="form-control">
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="form-group">
+                <input type="text" placeholder="Repetir contraseña" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-1">
+              <i class="fas fa-users text-success fa-2x float-right"></i>
+            </div>
+            <div class="col-lg-11 mt-2">
+              <div class="form-group">
+                <h6>Tipo de usuario: </h6>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-5 my-2">
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" name="us-opt" value="residente">
+                <label class="form-check-label" for="res-opt">Residente</label>
+              </div>
+            </div>
+            <div class="col-lg-5 my-2">
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" name="us-opt" value="proyectista">
+                <label class="form-check-label" for="res-opt">Proyectista</label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+        <a class="btn btn-success" href="login.html">Registrar</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modal de editado-->
+<div class="modal fade" id="edit-user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-warning text-white">
+        <h5 class="modal-title" id="exampleModalLabel">Editando usuario...</h5>
+        <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-lg-1">
+              <i class="fas fa-user text-warning fa-2x float-right"></i>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <input type="text" placeholder="Nombre" class="form-control">
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="form-group">
+                <input type="text" placeholder="Apellido" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-1">
+              <i class="fas fa-envelope text-warning fa-2x float-right"></i>
+            </div>
+            <div class="col-lg-11">
+              <div class="form-group">
+                <input type="text" placeholder="Correo Electronico" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-1">
+              <i class="fas fa-phone text-warning fa-2x float-right"></i>
+            </div>
+            <div class="col-lg-11">
+              <div class="form-group">
+                <input type="text" placeholder="movil" class="form-control">
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row mb-3">
+            <div class="col-lg-1">
+              <i class="fas fa-key text-warning fa-2x float-right"></i>
+            </div>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-5">
+              <div class="form-group">
+                <input type="text" placeholder="Contraseña" class="form-control">
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="form-group">
+                <input type="text" placeholder="Repetir contraseña" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-1">
+              <i class="fas fa-users text-warning fa-2x float-right"></i>
+            </div>
+            <div class="col-lg-11 mt-2">
+              <div class="form-group">
+                <h6>Tipo de usuario: </h6>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-5 my-2">
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" name="us-opt" value="residente">
+                <label class="form-check-label" for="res-opt">Residente</label>
+              </div>
+            </div>
+            <div class="col-lg-5 my-2">
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" name="us-opt" value="proyectista">
+                <label class="form-check-label" for="res-opt">Proyectista</label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+        <a class="btn btn-warning" href="login.html">Editar</a>
+      </div>
+    </div>
+  </div>
+</div>

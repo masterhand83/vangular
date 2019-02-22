@@ -1,0 +1,133 @@
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+	<!-- Sidebar -->
+	<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+		<!-- Sidebar - Brand -->
+		<a class="sidebar-brand d-flex align-items-center justify-content-center" [routerLink]="['/dashboard']" routerLinkActive="router-link-active" >
+			<div class="sidebar-brand-icon rotate-n-15">
+				<i class="fas fa-user-astronaut"></i>
+			</div>
+			<div class="sidebar-brand-text mx-1">Virtual Assistant <sup>2.0</sup></div>
+		</a>
+
+		<!-- Divider -->
+		<hr class="sidebar-divider my-0">
+		<div class="sidebar-heading">
+			Proyectos
+		</div>
+		<!-- Nav Item - Dashboard -->
+		<li class="nav-item active">
+			<a class="nav-link" [routerLink]="['/dashboard']" routerLinkActive="router-link-active" >
+				<i class="fas fa-fw fa-folder-open"></i>
+				<span>Proyectos</span>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a [routerLink]="['./alerts']" routerLinkActive="router-link-active"  class="nav-link">
+				<i class="fa fa-bell fa-notch"></i>
+				<span>Alertas</span>
+			</a>
+		</li>
+		<!-- Divider -->
+		<hr class="sidebar-divider">
+
+		<!-- Heading -->
+		<div class="sidebar-heading">
+			Gerente
+		</div>
+		<li class="nav-item">
+			<a [routerLink]="['./users']" routerLinkActive="router-link-active"  class="nav-link">
+				<i class="fas fa-users fa-fw"></i>
+				<span>Usuarios</span>
+			</a>
+
+		</li>
+		<hr class="sidebar-divider">
+		<li class="nav-item">
+			<span (click)="askLogout()" class="nav-link clickable">
+				<i class="fas fa-power-off fa-fw"></i>
+				<span>Cerrar Sesión</span>
+			</span>
+
+		</li>
+		<swal
+		#logoutModal
+		title="¿Seguro que quieres irte?"
+		text="vas a tener que volver a iniciar sesión la proxima vez"
+		(confirm)="logout()"
+		type="warning"
+		[showCancelButton]="true"
+		[focusCancel]="true">
+
+		</swal>
+		<!-- Divider >
+		<hr class="sidebar-divider">
+
+		< Heading >
+		<div class="sidebar-heading">
+			Addons
+		</div>
+
+		< Nav Item - Pages Collapse Menu>
+		<li class="nav-item">
+			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+				aria-expanded="true" aria-controls="collapsePages">
+				<i class="fas fa-fw fa-folder"></i>
+				<span>Dev</span>
+			</a>
+			<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+				<div class="bg-white py-2 collapse-inner rounded">
+					<h6 class="collapse-header">Login Screens:</h6>
+					<a class="collapse-item" href="login.html">Login</a>
+					<a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+					<div class="collapse-divider"></div>
+					<h6 class="collapse-header">Other Pages:</h6>
+					<a class="collapse-item" href="404.html">404 Page</a>
+					<a class="collapse-item" href="blank.html">Blank Page</a>
+				</div>
+			</div>
+		</li-->
+
+
+		<!-- Divider -->
+		<hr class="sidebar-divider d-none d-md-block">
+
+		<!-- Sidebar Toggler (Sidebar) -->
+		<div class="text-center d-none d-md-inline">
+			<button class="rounded-circle border-0" id="sidebarToggle"></button>
+		</div>
+
+	</ul>
+	<!-- End of Sidebar -->
+
+	<!-- Content Wrapper -->
+	<div id="content-wrapper" class="d-flex flex-column">
+
+		<!-- ! Cuidado al manejar el Router Outlet -->
+		<div id="content">
+			<router-outlet></router-outlet>
+		</div>
+		<!-- End of Main Content -->
+
+		<!-- ? Se conserva? -->
+		<footer class="sticky-footer bg-white">
+			<div class="container my-auto">
+				<div class="copyright text-center my-auto">
+					<span>Copyright &copy; Grupo Punto 2019</span>
+				</div>
+			</div>
+		</footer>
+		<!-- End of Footer -->
+
+	</div>
+	<!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+	<i class="fas fa-angle-up"></i>
+</a>

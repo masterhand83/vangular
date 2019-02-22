@@ -1,0 +1,125 @@
+<!--modal de informacion-->
+<form (ngSubmit)="editInformation(form.value)"  #form="ngForm">
+
+
+<div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div *ngIf="$project_info | async as info" class="modal-content">
+
+      <div class="modal-header  text-white">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <strong >{{info.storeName? 'Editar informacion': 'Insertar informacion'}}</strong>
+          <ng-template #creating>
+            Ingresando informacion
+          </ng-template>
+        </h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="text-white">×</span>
+        </button>
+      </div>
+      
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="form-row">
+
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <label for="nombre_tienda">Nombre de la tienda:</label>
+                  <input [(ngModel)]="info.storeName" name="nombre_tienda" class="form-control" placeholder="Nombre de la tienda" type="text" required  ngModel>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="numero_tienda">No. De la tienda:</label>
+                  <input [(ngModel)]="info.storeNumber" name="numero_tienda" class="form-control" type="number" placeholder="Numero" min="0" required ngModel>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="metraje_tienda">Metraje ( m<sup>2</sup> ):</label>
+                  <input [(ngModel)]="info.m2" step="100" name="metraje_tienda" class="form-control" type="number" placeholder="Numero" min="100" required ngModel>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="fecha_recepcion">Recepcion local: {{info.localReception | date: 'dd/MM/yyyy'}}</label>
+                  <input  type="date" name="fecha_recepcion" class="form-control" required ngModel>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="fecha_pedido">Pedido de mueble: {{info.furnitureDate | date: 'dd/MM/yyyy'}}</label>
+                  <input  type="date" name="fecha_pedido" class="form-control" required ngModel>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="fecha_apertura">Fecha de apertura: {{info.openingDate | date: 'dd/MM/yyyy'}}</label>
+                  <input type="date" name="fecha_apertura" class="form-control" required ngModel>
+                </div>
+              </div>
+
+              <div class="col-lg-12">
+                  <div class="form-group">
+                    <label for="posicion_tienda">Lugar de la tienda:</label>
+                    <input [(ngModel)]="info.location"  name="posicion_tienda" class="form-control" type="text" placeholder="Lugar" required ngModel>
+                  </div>
+                </div>
+
+            </div>
+          </div>
+        </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+        <button  class="btn" [disabled]="form.invalid" type="submit">{{info.storeName? 'Editar': 'Insertar'}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</form>
+<!--modal de configuracion-->
+<div class="modal fade" id="config-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header bg-info text-white">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <strong>Configuracion</strong>
+        </h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="text-white">×</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="form-row">
+
+            <div class="col-lg-12">
+
+              <div class="form-group">
+                <label for="nombre_tienda">Residente encargado: </label>
+                <select name="resident" id="resigod" class="form-control">
+                  <option value="paco">Paquito</option>
+                  <option value="FE">Perengano</option>
+                </select>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+        <a class="btn btn-info" href="login.html">Configurar</a>
+      </div>
+    </div>
+  </div>
+</div>
