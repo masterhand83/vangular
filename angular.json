@@ -32,11 +32,13 @@
               "src/vendor/jquery/jquery.min.js",
               "src/vendor/jquery-easing/jquery.easing.min.js",
               "src/vendor/bootstrap/js/bootstrap.bundle.min.js",
-              "src/scripts/jquery.dataTables.min.js",
-              "src/scripts/dataTables.bootstrap4.min.js",
+              "src/vendor/datatables/jquery.dataTables.min.js",
+              "src/vendor/datatables/dataTables.bootstrap4.min.js",
+              "src/vendor/jquery-easing/jquery.easing.min.js",
               "src/scripts/sb-admin-2.min.js",
               "src/scripts/masterfront.js",
               "src/scripts/rgantt.js"
+              
               
             ]
           },
