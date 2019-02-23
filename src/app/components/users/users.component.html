@@ -55,56 +55,28 @@
 
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Jesus Armando</td>
-                    <td>Residente</td>
+                  <tr *ngFor="let user of this.usersService.user">
+                    <td>{{user.name}}</td>
                     <td>
-                      <div class="btn-group float-right">
-                        <button class="btn  btn-secondary">
-                          <i class="fas fa-eye"></i>
-                        </button>
-                        <button class="btn btn-warning" data-toggle="modal" data-target="#edit-user">
-                          <i class="fas fa-pen"></i>
-                        </button>
-                        <button class="btn btn-danger">
-                          <i class="fas fa-trash"></i>
-                        </button>
-                      </div>
-
+                      <label *ngIf="user.userType==1">Gerente</label>
+                      <label *ngIf="user.userType==2">Residente</label>
+                      <label *ngIf="user.userType==3">Proyectista</label>
                     </td>
-                  </tr>
-                  <tr>
-                    <td>Jesus Ramno</td>
-                    <td>Residente</td>
                     <td>
                       <div class="btn-group float-right">
-                        <button class="btn  btn-secondary">
+                        <!--button class="btn  btn-secondary">
                           <i class="fas fa-eye"></i>
-                        </button>
-                        <button class="btn btn-warning">
+                        </button-->
+                        <button (click)="SelectedUser(user.name,user._id,user.email,user.mobile,user.password)" class="btn btn-warning" data-toggle="modal"
+                          data-target="#edit-user">
                           <i class="fas fa-pen"></i>
                         </button>
-                        <button class="btn btn-danger">
-                          <i class="fas fa-trash"></i>
-                        </button>
-                      </div>
 
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Jesus Ramno</td>
-                    <td>Proyectista</td>
-                    <td>
-                      <div class="btn-group float-right">
-                        <button class="btn  btn-secondary">
-                          <i class="fas fa-eye"></i>
+                        <button *ngIf="user.projects.length==0"class="btn btn-danger" type="button" (click)="deleteUser(user._id)">
+                            <i class="fas fa-trash"></i>
                         </button>
-                        <button class="btn btn-warning">
-                          <i class="fas fa-pen"></i>
-                        </button>
-                        <button class="btn btn-danger">
-                          <i class="fas fa-trash"></i>
-                        </button>
+
+                       
                       </div>
 
                     </td>
@@ -147,12 +119,14 @@
               </div>
               <div class="col-lg-6">
                 <div class="form-group">
-                  <input type="text" placeholder="Nombre" class="form-control" name="name" [(ngModel)]="name">
+                  <input type="text" placeholder="Nombre" class="form-control" name="name" [(ngModel)]="name" #nameref="ngModel" maxlength="100"
+                    required pattern="[A-Za-záéíóúÁÉÍÓÚ ]{0,100}">
                 </div>
               </div>
               <div class="col-lg-5">
                 <div class="form-group">
-                  <input type="text" placeholder="Apellido" class="form-control" [(ngModel)]="lastname" name="lastname">
+                  <input type="text" placeholder="Apellido" class="form-control" [(ngModel)]="lastname" name="lastname" #lastnameref="ngModel"
+                    maxlength="100" required pattern="[A-Za-záéíóúÁÉÍÓÚ ]{0,100}">
                 </div>
               </div>
             </div>
@@ -163,7 +137,8 @@
               </div>
               <div class="col-lg-11">
                 <div class="form-group">
-                  <input type="text" placeholder="Correo Electronico" class="form-control" [(ngModel)]="email" name="email">
+                  <input type="text" placeholder="Correo Electronico" class="form-control" [(ngModel)]="email" name="email" #emailref="ngModel"
+                    maxlength="100" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$">
                 </div>
               </div>
             </div>
@@ -174,7 +149,8 @@
               </div>
               <div class="col-lg-11">
                 <div class="form-group">
-                  <input type="text" placeholder="movil" class="form-control" [(ngModel)]="mobile" name="mobile">
+                  <input type="text" placeholder="movil" class="form-control" [(ngModel)]="mobile" name="mobile" #mobileref="ngModel" maxlength="100"
+                    required pattern="[0-9]{10,14}$">
                 </div>
               </div>
             </div>
@@ -184,15 +160,17 @@
               <div class="col-lg-1">
                 <i class="fas fa-key text-success fa-2x float-right"></i>
               </div>
-              <div class="col-lg-1"></div>
-              <div class="col-lg-5">
+              <!--div class="col-lg-1"></div-->
+              <div class="col-lg-6">
                 <div class="form-group">
-                  <input type="text" placeholder="Contraseña" class="form-control" [(ngModel)]="password" name="password">
+                  <input type="text" placeholder="Contraseña" class="form-control" [(ngModel)]="password" name="password" #passwordref="ngModel"
+                    required (keyup)="checkPasses()" pattern="[A-Za-z0-9|°¬!'#$%&/()=?\¡¿´¨+*~`^,;.:-_@áéíóúÁÉÍÓÚ]{8,30}">
                 </div>
               </div>
               <div class="col-lg-5">
                 <div class="form-group">
-                  <input type="text" placeholder="Repetir contraseña" class="form-control" [(ngModel)]="reppassword" name="reppassword">
+                  <input type="text" placeholder="Repetir contraseña" class="form-control" [(ngModel)]="reppassword" name="reppassword" #reppaswordref="ngModel"
+                    required (keyup)="checkPasses()" pattern="[A-Za-z0-9|°¬!'#$%&/()=?\¡¿´¨+*~`^,;.:-_@áéíóúÁÉÍÓÚ]{8,30}">
                 </div>
               </div>
             </div>
@@ -212,29 +190,56 @@
               <div class="col-lg-1"></div>
               <div class="col-lg-5 my-2">
                 <div class="form-check form-check-inline">
-                  <input type="radio" class="form-check-input"  value="2" [(ngModel)]="userType" name="userType">
+                  <input type="radio" class="form-check-input" value="2" [(ngModel)]="userType" name="userType">
                   <label class="form-check-label" for="res-opt">Residente</label>
                 </div>
               </div>
               <div class="col-lg-5 my-2">
                 <div class="form-check form-check-inline">
-                  <input type="radio" class="form-check-input"  value="3" [(ngModel)]="userType" name="userType">
+                  <input type="radio" class="form-check-input" value="3" [(ngModel)]="userType" name="userType">
                   <label class="form-check-label" for="res-opt">Proyectista</label>
                 </div>
               </div>
             </div>
 
+
+
           </div>
         </div>
 
+
+
         <div class="modal-footer">
+          <div [hidden]="!nameref.errors?.pattern">
+            En el nombre solo puede haber letras.
+          </div>
+          <div [hidden]="!lastnameref.errors?.pattern">
+            En los apellidos solo pueden haber letras.
+          </div>
+          <div [hidden]="!emailref.errors?.pattern">
+            Correo Invalido.
+          </div>
+          <div [hidden]="!mobileref.errors?.pattern">
+            El numero debe de tener minimo 10 y maximo 14 caracteres.
+          </div>
+          <div [hidden]="!passwordref.errors?.pattern">
+            La contraseña debe de tener minimo 8 y maximo 30 caracteres, sin espacios.
+          </div>
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <input type="submit" class="btn btn-success" value="Registrar">
+          <input [hidden]="emailref.errors?.pattern || mobileref.errors?.pattern || nameref.errors?.pattern || passwordref.errors?.pattern || lastnameref.errors?.pattern"
+            type="submit" class="btn btn-success" value="Registrar" [disabled]="boton">
         </div>
       </form>
     </div>
   </div>
 </div>
+<swal #usercorrect title="Usuario guardado exitosamente" type="success" [focusCancel]="true">
+
+</swal>
+<swal #userincorrect title="Favor de completar todos los campos" type="warning" [focusCancel]="true">
+
+</swal>
+
 <!--Modal de editado-->
 <div class="modal fade" id="edit-user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -245,14 +250,17 @@
           <span aria-hidden="true">×</span>
         </button>
       </div>
-      <div class="modal-body">
-        <div class="container-fluid">
-
-          <div class="row">
-            <div class="col-lg-1">
+      <form #updateForm="ngForm" (ngSubmit)="updateUser(updateForm)" (keydown.enter)="$event.preventDefault()">
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="form-group">
+              <input type="hidden" name="id2" [(ngModel)]="id2">
+            </div>
+            <div class="row">
+              <!--div class="col-lg-1">
               <i class="fas fa-user text-warning fa-2x float-right"></i>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-11">
               <div class="form-group">
                 <input type="text" placeholder="Nombre" class="form-control">
               </div>
@@ -261,50 +269,53 @@
               <div class="form-group">
                 <input type="text" placeholder="Apellido" class="form-control">
               </div>
+            </div-->
             </div>
-          </div>
 
-          <div class="row">
-            <div class="col-lg-1">
-              <i class="fas fa-envelope text-warning fa-2x float-right"></i>
-            </div>
-            <div class="col-lg-11">
-              <div class="form-group">
-                <input type="text" placeholder="Correo Electronico" class="form-control">
+            <div class="row">
+              <div class="col-lg-1">
+                <i class="fas fa-envelope text-warning fa-2x float-right"></i>
+              </div>
+              <div class="col-lg-11">
+                <div class="form-group">
+                  <input type="text" placeholder="Correo Electronico" class="form-control" name="email2" [(ngModel)]="email2" maxlength="100"
+                    #emailref="ngModel" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$">
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="row">
-            <div class="col-lg-1">
-              <i class="fas fa-phone text-warning fa-2x float-right"></i>
-            </div>
-            <div class="col-lg-11">
-              <div class="form-group">
-                <input type="text" placeholder="movil" class="form-control">
+            <div class="row">
+              <div class="col-lg-1">
+                <i class="fas fa-phone text-warning fa-2x float-right"></i>
+              </div>
+              <div class="col-lg-11">
+                <div class="form-group">
+                  <input type="text" placeholder="movil" class="form-control" name="mobile2" [(ngModel)]="mobile2" maxlength="100" #mobileref="ngModel"
+                    pattern="[0-9]{10,14}$">
+                </div>
               </div>
             </div>
-          </div>
 
 
-          <div class="row mb-3">
-            <div class="col-lg-1">
-              <i class="fas fa-key text-warning fa-2x float-right"></i>
-            </div>
-            <div class="col-lg-1"></div>
-            <div class="col-lg-5">
-              <div class="form-group">
-                <input type="text" placeholder="Contraseña" class="form-control">
+            <div class="row mb-3">
+              <div class="col-lg-1">
+                <i class="fas fa-key text-warning fa-2x float-right"></i>
               </div>
-            </div>
-            <div class="col-lg-5">
+
+              <div class="col-lg-11">
+                <div class="form-group">
+                  <input type="text" placeholder="Contraseña" class="form-control" name="password2" [(ngModel)]="password2" maxlength="100"
+                    #passwordref="ngModel" pattern="[A-Za-z0-9|°¬!'#$%&/()=?\¡¿´¨+*~`^,;.:-_@áéíóúÁÉÍÓÚ]{8,30}">
+                </div>
+              </div>
+              <!--div class="col-lg-5">
               <div class="form-group">
                 <input type="text" placeholder="Repetir contraseña" class="form-control">
               </div>
+            </div-->
             </div>
-          </div>
 
-          <div class="row">
+            <!--div class="row">
             <div class="col-lg-1">
               <i class="fas fa-users text-warning fa-2x float-right"></i>
             </div>
@@ -329,14 +340,31 @@
                 <label class="form-check-label" for="res-opt">Proyectista</label>
               </div>
             </div>
-          </div>
+          </div-->
 
+          </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-        <a class="btn btn-warning" href="login.html">Editar</a>
-      </div>
+        <div class="modal-footer">
+          <div [hidden]="!emailref.errors?.pattern">
+            Correo Invalido.
+          </div>
+          <div [hidden]="!mobileref.errors?.pattern">
+            El numero debe de tener minimo 10 y maximo 14 caracteres.
+          </div>
+          <div [hidden]="!passwordref.errors?.pattern">
+            La contraseña debe de tener minimo 8 y maximo 30 caracteres, sin espacios.
+          </div>
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <input [hidden]="emailref.errors?.pattern || mobileref.errors?.pattern ||  passwordref.errors?.pattern" type="submit" value="Editar" class="btn btn-warning">
+          
+        </div>
+
+      </form>
     </div>
   </div>
 </div>
+
+<swal #updatecorrect title="Actualizado exitosamente" type="success" [focusCancel]="true"></swal>
+<swal #updateincorrect title="Favor de completar todos los campos" type="warning" [focusCancel]="true"></swal>
+<swal #delete title="Eliminado exitosamente" type="success" [focusCancel]="true"></swal>
+

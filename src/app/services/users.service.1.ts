@@ -67,6 +67,9 @@ export class UsersService {
   getDesigners() {
     return this.http.get('http://' + this.IP + ':3000/api/users/designers');
   }
+  getUsers(){
+    return this.http.get('http://' + this.IP + ':3000/api/users/user');
+  }
 
   deleteUser(_id: string) {
     return this.http.delete(this.URL_API + `/${_id}`);

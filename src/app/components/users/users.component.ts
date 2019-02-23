@@ -1,50 +1,127 @@
-import { Component, OnInit } from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {UsersService} from '../../services/users.service.1';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { UsersService } from '../../services/users.service.1';
+import { SwalComponent } from '@toverux/ngx-sweetalert2';
+import { IUser } from '../../models/IUser';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
+  @ViewChild('usercorrect') private usercorrect: SwalComponent;
+  @ViewChild('userincorrect') private userincorrect: SwalComponent; 
+  @ViewChild('updatecorrect') private updatecorrect: SwalComponent;
+  @ViewChild('updateincorrect') private updateincorrect: SwalComponent;
+  @ViewChild('delete') private delete: SwalComponent;
+  constructor(private usersService: UsersService) {
 
-  constructor(private usersService:UsersService) { }
-  name:string;
-  lastname:string;
-  email:string;
-  mobile:string;
-  password:string;
-  userType:string
-
-  ngOnInit() {
   }
 
-  addUser(form: NgForm){
-    
-    
+  name: string;
+  lastname: string;
+  email: string;
+  mobile: string;
+  password: string;
+  userType: string
 
-    if(form.value.name!="" && form.value.lastname!="" && form.value.email!="" && form.value.mobile!=""
-      && form.value.password!="" && form.value.userType!=null &&
-      form.value.name!=undefined && form.value.lastname!=undefined && form.value.email!=undefined && form.value.mobile!=undefined
-      && form.value.password!=undefined && form.value.userType!=undefined 
+
+  ngOnInit() {
     
-    ){
-      
+    this.getUsers();
+  }
+
+  addUser(form: NgForm) {
+
+
+
+    if (form.value.name != "" && form.value.lastname != "" && form.value.email != "" && form.value.mobile != ""
+      && form.value.password != "" && form.value.userType != null &&
+      form.value.name != undefined && form.value.lastname != undefined && form.value.email != undefined && form.value.mobile != undefined
+      && form.value.password != undefined && form.value.userType != undefined
+
+    ) {
+
       this.usersService.postUser(form.value)
-        .subscribe(res=>{
-          console.log(res); 
-            
+        .subscribe(res => {
+          this.getUsers();
+
           form.reset();
-          alert("Usuario guardado exitosamente");
-          
+          this.usercorrect.show();
+
         });
- 
-      
+
+
+    }
+    else {
+      this.userincorrect.show();
+    }
+
+  }
+  getUsers() {
+    
+    this.usersService.getUsers()
+      .subscribe(res => {
+        this.usersService.user=res as IUser[];
+        console.log(res);
+      });
+
+  }
+  updateUser(form: NgForm) {
+
+    if(form.value.email2!="" && form.value.mobile2!="" && form.value.password2!="" &&
+    form.value.email2!=undefined && form.value.mobile2!=undefined && form.value.password2!=undefined ){
+      if (confirm('¿Estas seguro de actualizar?')) {
+        this.usersService.putUser(form.value.id2, form.value.email2, form.value.mobile2, form.value.password2)
+          .subscribe(res => {
+            this.getUsers();
+            this.updatecorrect.show();
+          });
+      }
     }
     else{
-      alert('Favor de completar todos los campos');
-    } 
+      this.updateincorrect.show();
+    }
+    
+  }
+  deleteUser(_id: string) {
+    if (confirm('¿Estas seguro de eliminarlo?')) {
+      this.usersService.deleteUser(_id)
+        .subscribe(res => {
+          this.getUsers();
+          this.delete.show();
+        });
+    }
 
+  }
+
+  name2: string = "";
+  id2: string = "";
+  email2: string = "";
+  mobile2: number;
+  password2: string = "";
+  SelectedUser(name2: string, id2: string, email2: string, mobile2: number, password2: string) {
+
+    this.id2 = id2;
+    this.name2 = name2;
+    this.email2 = email2;
+    this.mobile2 = mobile2;
+    this.password2 = password2;
+
+  }
+
+  reppassword: string = '';
+  boton: boolean = true;
+  checkPasses() {
+
+
+    if (this.password !== this.reppassword) {
+
+      this.boton = true;
+    } else {
+
+      this.boton = false;
+    }
   }
 
 }
