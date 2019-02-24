@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IUser } from '../models/IUser';
+import { IAlerts } from '../models/IAlerts';
 import { SecurityService } from './security.service';
 import { constants } from './constants.data';
 
@@ -11,9 +12,11 @@ export class UsersService {
   readonly IP = constants.IP;
   readonly URL_API = 'http://' + this.IP + ':3000/api/users/user';
   readonly URL_API2 = 'http://' + this.IP + ':3000/api/users/project';
+  readonly URL_API3 = 'http://' + this.IP + ':3000/api/users/alert';
 
   user: IUser[];
   user2: IUser[];
+  alerts: IAlerts[];
   // projects:Project[];
 
   expreg = /^[^<>(){};,]*$/;
@@ -100,6 +103,13 @@ export class UsersService {
     return this.http.get(this.URL_API2 + `/${_id}`);
   }
 
+  getAlertUser(_id:string){
+    return this.http.get(this.URL_API3 + `/${_id}`)
+  }
+
+  deleteAlertUser(_id:string){
+    return this.http.delete(this.URL_API3 + `/${_id}`)
+  }
 
 
 
