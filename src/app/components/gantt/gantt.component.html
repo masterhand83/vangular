@@ -1,8 +1,8 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-12  shadow-m">
-      <div class="container-canvas" style="overflow: scroll; max-height: 750px">
-        <canvas id="gantt-interface" width="500" height="500"></canvas>
+      <div class="container-canvas" style="overflow: scroll; max-height: 550px">
+        <canvas id="gantt-interface" width="500" height="350"></canvas>
       </div>
     </div>
   </div>
@@ -56,14 +56,14 @@
               
               <div class="col-lg-6">
                 <div class="form-group">
-                  <label for="inicio">Fecha de inicio: {{act.start | date: 'dd/MM/yyyy'}}</label>
+                  <label for="inicio">Fecha de inicio: {{parseDate(act.start) | date: 'dd/MM/yyyy'}}</label>
                   <input name="inicio" type="date" class="form-control" placeholder="Fecha" ngModel>
                 </div>
 
               </div>
               <div class="col-lg-6">
                 <div class="form-group">
-                  <label for="final">Fecha de termino: {{act.end | date: 'dd/MM/yyyy'}}</label>
+                  <label for="final">Fecha de termino: {{parseDate(act.end) | date: 'dd/MM/yyyy'}}</label>
                   <input name="final" type="date" class="form-control" placeholder="Fecha" ngModel>
                 </div>
               </div>

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { IActivity } from 'src/app/rgantt/IActivity';
-import { GanttManager } from 'src/app/rgantt/GanttManager';
+import { IActivityConfig } from 'src/app/Rgantt/src/interfaces/IActivity.config';
+import { GanttManager } from 'src/app/Rgantt/src/gantt/ganttManager';
 import { SessionService } from 'src/app/services/session.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { Observable } from 'rxjs';
 import { element } from '@angular/core/src/render3';
+import  * as moment from "moment";
 declare var $: any;
 @Component({
   selector: 'app-gantt',
@@ -15,7 +16,7 @@ declare var $: any;
 export class GanttComponent implements OnInit {ç
   objectives: any[];
   deliverables: any[];
-  activs: IActivity[] = [];
+  activs: IActivityConfig[] = [];
   current_project: string;
   selected_activity: string;
   $activity: Observable<any>;
@@ -53,26 +54,31 @@ export class GanttComponent implements OnInit {ç
     });
     console.log(this.objectives);
   }
+
   getActivities() {
     this.projectService.getActivities(this.current_project).subscribe((response:any[])=>{
       const activs = [];
+     
       for (const act of response){
+        this.parseDate(act.start);
         activs.push({
           name: act.name,
-          start: act.start,
-          info: act.id,
-          id: act.index,
-          end: act.end,
-          color: act.color,
-          realid: act.id
+          start: this.parseDate(act.start),
+          data: act.id,
+          index: act.index,
+          end: this.parseDate(act.end),
+          color: act.color
         });
       }
-      const gantt = new GanttManager(activs);
-      gantt.initialize();
-      gantt.onclick((e,data) => {
+      
+      const gantt = new GanttManager();
+      gantt.init(activs);
+      /*gantt.initialize();*/
+      gantt.onActivityClick((data) => {
+        console.log(data);
         this.selected_activity = data;
         this.$activity = this.projectService.getActivity(data);
-        console.log(data);
+        
         setTimeout(() => {
           $('#activity-info-modal').modal('show');
           this.getObjectives();
@@ -88,6 +94,7 @@ export class GanttComponent implements OnInit {ç
 
   EditActivity(form: any) {
     //console.log(f);
+    console.log(form);
     this.projectService.putActivity(this.selected_activity,form,this.objectives, this.deliverables).subscribe((response: any)=>{
       console.log(response);
     });
@@ -109,5 +116,9 @@ export class GanttComponent implements OnInit {ç
       default:
         break;
     }
+  }
+
+  parseDate(input: string){
+    return moment(input).add(1,'day').toDate();
   }
 }

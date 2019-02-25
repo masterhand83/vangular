@@ -1,0 +1,20 @@
+{
+  "name": "r-gantt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "watchify src/index.ts -p [tsify --noImplicitAny] -o lib/rgantt.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/moment": "^2.13.0",
+    "moment": "^2.23.0",
+    "tsify": "^4.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^3.2.2",
+    "watchify": "^3.11.0"
+  }
+}

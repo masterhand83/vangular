@@ -31,6 +31,7 @@ export class ProjectService {
    * @param idUser3 id de algun usuario (cualquiera)
    */
   createProject(name: string, description: string, idUser1: string, idUser2: string, idUser3: string) {
+    //console.log(idUser1,idUser2,idUser3);
       return this.http.post(`http://${this.IP}:3000/api/projects/project`, {
         name: name,
         description: description,
