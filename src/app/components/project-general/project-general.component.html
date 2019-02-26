@@ -18,7 +18,7 @@
           <button id="info-drop" type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="sr-only">Toggle Dropdown</span>
           </button>
-          <div  class="dropdown-menu">
+          <div *ngIf="userType==1 || userType==3 " class="dropdown-menu">
             <a *ngIf="userType==1 || userType==3 " href="#!" class="dropdown-item" data-toggle="modal" data-target="#info-modal"><i class="fas fa-pen text-info"></i> Editar informacion</a>
            
             <a *ngIf="userType==1" href="#!" class="dropdown-item" data-toggle="modal" data-target="#config-modal"><i class="fas fa-cogs text-info"></i> Configuracion</a>

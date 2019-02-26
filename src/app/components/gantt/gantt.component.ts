@@ -92,7 +92,7 @@ export class GanttComponent implements OnInit {ç
   }
   ngOnInit() {
     this.getUserType();
-    if(this.userType!='1'){
+    if(this.userType=='3'){
       this.router.navigateByUrl(`/dashboard/projects`);
     }
     this.getActivities();

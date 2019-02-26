@@ -139,8 +139,8 @@ export class UsersComponent implements OnInit {
   userType2: string;
   getUserType() {
     this.key = "UserType";
-    this.userType = this.sess.getFromSession(this.key);
-    console.log(this.userType);
+    this.userType2 = this.sess.getFromSession(this.key);
+    console.log(this.userType2);
 
   }
 }

@@ -70,12 +70,21 @@
         </div>
       </ng-template>
       <br>
-      <button *ngIf="userType==1" class="btn btn-danger btn-block">Eliminar proyecto</button>
+      <button *ngIf="userType==1" (click)="askDelete()" class="btn btn-danger btn-block">Eliminar proyecto</button>
     </div>
     <div class="col-lg-3"></div>
 
   </div>
 </div>
+<swal #deleteok title="Eliminado exitosamente" type="success" [focusCancel]="true"></swal>
+<swal
+		#askdelete
+		title="¿Estas seguro de eliminarlo?"
+		text="Esta accion no se puede deshacer"
+		(confirm)="deleteProject()"
+		type="warning"
+		[showCancelButton]="true"
+		[focusCancel]="true">
 
-
+		</swal>
 <!-- /.container-fluid -->
