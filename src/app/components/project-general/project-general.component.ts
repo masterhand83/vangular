@@ -24,7 +24,7 @@ export class ProjectGeneralComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    
+    this.getUserType();
   }
   /**
    * Optiente 
@@ -32,5 +32,14 @@ export class ProjectGeneralComponent implements OnInit, OnDestroy {
   
   goTo(dir: string) {
     this.router.navigate([`./${dir}`], { relativeTo: this.route });
+  }
+  key: string;
+
+  userType: string;
+  getUserType() {
+    this.key = "UserType";
+    this.userType = this.sess.getFromSession(this.key);
+    console.log(this.userType);
+
   }
 }

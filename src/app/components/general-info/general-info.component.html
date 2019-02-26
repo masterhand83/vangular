@@ -70,7 +70,7 @@
         </div>
       </ng-template>
       <br>
-      <button class="btn btn-danger btn-block">Eliminar proyecto</button>
+      <button *ngIf="userType==1" class="btn btn-danger btn-block">Eliminar proyecto</button>
     </div>
     <div class="col-lg-3"></div>
 

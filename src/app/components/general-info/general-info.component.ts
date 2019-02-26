@@ -34,6 +34,17 @@ export class GeneralInfoComponent implements OnInit, OnDestroy {
       this.getProject();
       this.$project = this.getProject();
       console.log(this.$project);
+
+    this.getUserType();
   }
 
+  key: string;
+
+  userType: string;
+  getUserType() {
+    this.key = "UserType";
+    this.userType = this.sess.getFromSession(this.key);
+    console.log(this.userType);
+
+  }
 }

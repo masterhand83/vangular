@@ -31,20 +31,25 @@
 			</a>
 		</li>
 		<!-- Divider -->
+		<div *ngIf="userType==1">
 		<hr class="sidebar-divider">
 
 		<!-- Heading -->
-		<div class="sidebar-heading">
-			Gerente
-		</div>
-		<li class="nav-item">
-			<a [routerLink]="['./users']" routerLinkActive="router-link-active"  class="nav-link">
-				<i class="fas fa-users fa-fw"></i>
-				<span>Usuarios</span>
-			</a>
-
-		</li>
+		
+			<div class="sidebar-heading">
+				Gerente
+			</div>
+			<li class="nav-item">
+				<a [routerLink]="['./users']" routerLinkActive="router-link-active"  class="nav-link">
+					<i class="fas fa-users fa-fw"></i>
+					<span>Usuarios</span>
+				</a>
+	
+			</li>
+		
+		
 		<hr class="sidebar-divider">
+		</div>
 		<li class="nav-item">
 			<span (click)="askLogout()" class="nav-link clickable">
 				<i class="fas fa-power-off fa-fw"></i>
