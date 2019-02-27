@@ -4,6 +4,7 @@ import { GanttManager } from 'src/app/Rgantt/src/gantt/ganttManager';
 import { SessionService } from 'src/app/services/session.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import { element } from '@angular/core/src/render3';
 import  * as moment from "moment";
 declare var $: any;
@@ -22,7 +23,8 @@ export class GanttComponent implements OnInit {ç
   $activity: Observable<any>;
   constructor(
     private sess: SessionService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private router:Router
   ) {
     this.current_project = this.sess.getFromSession('ActualProject');
     this.objectives = [];
@@ -89,7 +91,12 @@ export class GanttComponent implements OnInit {ç
 
   }
   ngOnInit() {
+    this.getUserType();
+    if(this.userType=='3'){
+      this.router.navigateByUrl(`/dashboard/projects`);
+    }
     this.getActivities();
+    
   }
 
   EditActivity(form: any) {
@@ -120,5 +127,15 @@ export class GanttComponent implements OnInit {ç
 
   parseDate(input: string){
     return moment(input).add(1,'day').toDate();
+  }
+
+  key: string;
+
+  userType: string;
+  getUserType() {
+    this.key = "UserType";
+    this.userType = this.sess.getFromSession(this.key);
+    console.log(this.userType);
+
   }
 }

@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
 import { SessionService } from 'src/app/services/session.service';
+import { SwalComponent } from '@toverux/ngx-sweetalert2';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -13,7 +14,8 @@ export class GeneralInfoComponent implements OnInit, OnDestroy {
   $project: Observable<any>;
   current_id: any = 'id';
   project_info: any = {info: null};
-
+  @ViewChild('deleteok') private deleteok: SwalComponent;
+  @ViewChild('askdelete') private askdelete: SwalComponent;
   constructor(private router: Router,
     private route: ActivatedRoute,
     private projects: ProjectService,
@@ -34,6 +36,35 @@ export class GeneralInfoComponent implements OnInit, OnDestroy {
       this.getProject();
       this.$project = this.getProject();
       console.log(this.$project);
+
+    this.getUserType();
+    
   }
 
+  askDelete() {
+    this.askdelete.show();
+  }
+
+  deleteProject() {
+    
+      this.projects.deleteProject(this.current_id)
+        .subscribe(res => {
+          this.sess.deleteProjectSession();
+          this.router.navigate([('dashboard/projects')]);
+          this.deleteok.show();
+        });
+    
+
+  }
+
+  key: string;
+  userType: string;
+  getUserType() {
+    this.key = "UserType";
+    this.userType = this.sess.getFromSession(this.key);
+    console.log(this.userType);
+
+  }
+
+  
 }

@@ -39,7 +39,7 @@
 
 
               </div>
-              <div class="col-lg-12">
+              <div *ngIf="userType==2" class="col-lg-12">
                 <h4>¿Termino la actividad?</h4>
                 <div class="form-check">
 
@@ -67,7 +67,7 @@
                   <input name="final" type="date" class="form-control" placeholder="Fecha" ngModel>
                 </div>
               </div>
-              <div class="col-lg-12">
+              <div *ngIf="userType==1" class="col-lg-12">
                 <div class="form-group">
                   <label for="prioridad">Prioridad de la actividad: {{parsePriority(act.priority)}} </label>
                   <select class="form-control" name="prioridad" id="prioridad" ngModel>
@@ -83,11 +83,11 @@
                   <div class="card-header bg-warning text-white">
                     <!--para activar el modal de objetivos-->
                     <strong>Objetivos</strong> 
-                    <button type="button" class="btn btn-warning float-right"
+                    <button *ngIf="userType==1" type="button" class="btn btn-warning float-right"
                     data-toggle="collapse"
                     data-target="#objetivo-collapse"
                     >
-                        <i class="fa fa-plus float-right align-middle"></i>
+                        <i  class="fa fa-plus float-right align-middle"></i>
                     </button>
                     <br>
                     <div class="input-group collapse mt-3" id="objetivo-collapse">
@@ -111,7 +111,7 @@
                   <div class="card-header bg-warning text-white">
                     <!--para activar el modal de objetivos-->
                     <strong>Entregables</strong> 
-                    <button type="button" class="btn btn-warning float-right"
+                    <button *ngIf="userType==1" type="button" class="btn btn-warning float-right"
                     data-toggle="collapse"
                     data-target="#entregable-collapse">
 

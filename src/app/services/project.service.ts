@@ -88,4 +88,19 @@ export class ProjectService {
       deliverable: deliverables
     });
   }
+
+  deleteProject(_id:string){
+    return this.http.delete(`http://${this.IP}:3000/api/projects/project/${_id}`);
+  }
+
+  changeResident(_id:string,idNewUser:string){
+
+    return this.http.put(`http://${this.IP}:3000/api/projects/resident/${_id}`,{
+      _id:_id,
+      idNewResident:idNewUser,
+
+    });
+    
+  }
+  
 }

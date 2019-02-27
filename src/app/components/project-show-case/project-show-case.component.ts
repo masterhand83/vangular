@@ -33,6 +33,7 @@ export class ProjectShowCaseComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.getUserType();
     this.user_id = this.sess.getFromSession('UserID');
     this.user_type = Number.parseInt(this.sess.getFromSession('UserType'), 10);
     this.getProjects();
@@ -94,6 +95,16 @@ export class ProjectShowCaseComponent implements OnInit {
   goToProject(projectID: string) {
     this.sess.createProjectSession(projectID);
     this.router.navigateByUrl(`/dashboard/project/${projectID}`);
+  }
+
+  key: string;
+
+  userType: string;
+  getUserType() {
+    this.key = "UserType";
+    this.userType = this.sess.getFromSession(this.key);
+    console.log(this.userType);
+
   }
 
 }

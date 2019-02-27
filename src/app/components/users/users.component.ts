@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UsersService } from '../../services/users.service.1';
 import { SwalComponent } from '@toverux/ngx-sweetalert2';
+import { SessionService } from 'src/app/services/session.service';
+import { Router } from '@angular/router';
 import { IUser } from '../../models/IUser';
 @Component({
   selector: 'app-users',
@@ -14,7 +16,7 @@ export class UsersComponent implements OnInit {
   @ViewChild('updatecorrect') private updatecorrect: SwalComponent;
   @ViewChild('updateincorrect') private updateincorrect: SwalComponent;
   @ViewChild('delete') private delete: SwalComponent;
-  constructor(private usersService: UsersService) {
+  constructor(private usersService: UsersService,private sess:SessionService, private router:Router) {
 
   }
 
@@ -25,10 +27,18 @@ export class UsersComponent implements OnInit {
   password: string;
   userType: string
 
+  prueba:boolean=true;
 
   ngOnInit() {
+    this.getUserType();
+    if(this.userType2!='1'){
+      this.router.navigateByUrl(`/dashboard/projects`);
+    }
+    else{
+      this.getUsers();
+    }
     
-    this.getUsers();
+    
   }
 
   addUser(form: NgForm) {
@@ -124,4 +134,13 @@ export class UsersComponent implements OnInit {
     }
   }
 
+  key: string;
+
+  userType2: string;
+  getUserType() {
+    this.key = "UserType";
+    this.userType2 = this.sess.getFromSession(this.key);
+    console.log(this.userType2);
+
+  }
 }

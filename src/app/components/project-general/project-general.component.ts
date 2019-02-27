@@ -17,13 +17,14 @@ export class ProjectGeneralComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private projects: ProjectService,
+    private projectService: ProjectService,
     private sess: SessionService
     ) {
     this.current_id = this.sess.getFromSession('ActualProject');
   }
 
   ngOnInit() {
+    this.getUserType();
     
   }
   /**
@@ -33,4 +34,17 @@ export class ProjectGeneralComponent implements OnInit, OnDestroy {
   goTo(dir: string) {
     this.router.navigate([`./${dir}`], { relativeTo: this.route });
   }
+
+ 
+
+  key: string;
+  userType: string;
+  getUserType() {
+    this.key = "UserType";
+    this.userType = this.sess.getFromSession(this.key);
+    console.log(this.userType);
+
+  }
+
+ 
 }

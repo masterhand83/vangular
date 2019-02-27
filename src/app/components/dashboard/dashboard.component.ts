@@ -21,12 +21,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
+    this.getUserType();
   }
   askLogout() {
     this.logout_modal.show();
   }
   logout() {
     this.sess.deleteSession();
+  }
+
+  key: string;
+
+  userType: string;
+  getUserType() {
+    this.key = "UserType";
+    this.userType = this.sess.getFromSession(this.key);
+    console.log(this.userType);
+
   }
 }
