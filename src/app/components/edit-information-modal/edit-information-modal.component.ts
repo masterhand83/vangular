@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild} from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { SwalComponent } from '@toverux/ngx-sweetalert2';
 import { ProjectService } from 'src/app/services/project.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Route } from '@angular/compiler/src/core';
@@ -14,6 +15,8 @@ declare var $: any;
   styleUrls: ['./edit-information-modal.component.css']
 })
 export class EditInformationModalComponent implements OnInit {
+  @ViewChild('updatecorrect') private updatecorrect: SwalComponent;
+  @ViewChild('updateincorrect') private updateincorrect: SwalComponent;
   @Input() actualProject: any;
   actual_project: string;
   $project_info: Observable<any>;
@@ -65,12 +68,30 @@ export class EditInformationModalComponent implements OnInit {
   }
 
   updateResident(form:NgForm) {
-    
+    if(form.value.resident!=null){
     this.projectService.changeResident(this.actual_project,form.value.resident)
       .subscribe(res => {
-        
+        console.log(res);
+        this.updatecorrect.show();
+      });
+    }
+    else{
+      this.updateincorrect.show();
+    }
+  }
+
+  updateDesigner(form:NgForm) {
+    if(form.value.designer!=null){
+    this.projectService.changeDesigner(this.actual_project,form.value.designer)
+      .subscribe(res => {
+        console.log(res);
+        this.updatecorrect.show();
       
       });
+    }
+    else{
+      this.updateincorrect.show();
+    }
   }
 
 
