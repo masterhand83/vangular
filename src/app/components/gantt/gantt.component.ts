@@ -58,7 +58,7 @@ export class GanttComponent implements OnInit {ç
   getActivities() {
     this.projectService.getActivities(this.current_project).subscribe((response:any[])=>{
       const activs = [];
-     
+      console.log(response);
       for (const act of response){
         this.parseDate(act.start);
         activs.push({
