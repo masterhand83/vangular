@@ -102,5 +102,14 @@ export class ProjectService {
     });
     
   }
+  changeDesigner(_id:string,idNewUser:string){
+
+    return this.http.put(`http://${this.IP}:3000/api/projects/designer/${_id}`,{
+      _id:_id,
+      idNewDesigner:idNewUser,
+
+    });
+    
+  }
   
 }
