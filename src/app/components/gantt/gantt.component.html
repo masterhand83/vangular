@@ -1,3 +1,4 @@
+<!--*Gantt-->
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-12  shadow-m">
@@ -9,7 +10,8 @@
 </div>
 
 
-<!--Edicion de actividad-->
+<!-- * Edicion de actividad-->
+
 <form #form="ngForm" (submit)="EditActivity(form.value)">
   <div *ngIf="($activity |async) as act" class="modal fade" id="activity-info-modal" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -39,7 +41,7 @@
 
 
               </div>
-              <div *ngIf="userType==2" class="col-lg-12">
+              <div *ngIf="userType == 2 " class="col-lg-12">
                 <h4>¿Termino la actividad?</h4>
                 <div class="form-check">
 
@@ -57,20 +59,32 @@
               <div class="col-lg-6">
                 <div class="form-group">
                   <label for="inicio">Fecha de inicio: {{parseDate(act.start) | date: 'dd/MM/yyyy'}}</label>
-                  <input name="inicio" type="date" class="form-control" placeholder="Fecha" ngModel>
+                  <input 
+                  name="inicio" 
+                  type="date" 
+                  class="form-control" 
+                  placeholder="Fecha"
+                  [ngModel] = "parseDate(act.start) | date: 'yyyy-MM-dd'"
+                  ngModel>
                 </div>
 
               </div>
               <div class="col-lg-6">
                 <div class="form-group">
                   <label for="final">Fecha de termino: {{parseDate(act.end) | date: 'dd/MM/yyyy'}}</label>
-                  <input name="final" type="date" class="form-control" placeholder="Fecha" ngModel>
+                  <input 
+                  name="final" 
+                  type="date" 
+                  class="form-control" 
+                  [ngModel] = "parseDate(act.end) | date: 'yyyy-MM-dd'"
+                  placeholder="Fecha" 
+                  ngModel>
                 </div>
               </div>
-              <div *ngIf="userType==1" class="col-lg-12">
+              <div *ngIf="userType! ==1" class="col-lg-12">
                 <div class="form-group">
                   <label for="prioridad">Prioridad de la actividad: {{parsePriority(act.priority)}} </label>
-                  <select class="form-control" name="prioridad" id="prioridad" ngModel>
+                  <select class="form-control" [ngModel]="act.priority" name="prioridad" id="prioridad" ngModel>
                     <option value="0">Alta</option>
                     <option value="1">media</option>
                     <option value="2">baja</option>
@@ -78,10 +92,11 @@
                 </div>
               </div>
 
+              <!--OBJETIVOS-->
               <div class="col-lg-6">
                 <div class="card">
                   <div class="card-header bg-warning text-white">
-                    <!--para activar el modal de objetivos-->
+                    <!-- para activar el modal de objetivos-->
                     <strong>Objetivos</strong> 
                     <button *ngIf="userType==1" type="button" class="btn btn-warning float-right"
                     data-toggle="collapse"
@@ -98,14 +113,15 @@
                     </div>
                   </div>
                   <div class="card-body" style="overflow-y: scroll; max-height: 250px">
-                    <ul>
-                      <li *ngFor="let obj of objectives" class="">{{obj}}</li>
+                    
+                      <div *ngFor="let obj of objectives" class="alert alert-warning">{{obj}}</div>
                       <input *ngFor="let obj of act.objective" type="hidden" class="objetivo" [value]="obj">
-                    </ul>
+                    
                   </div>
                 </div>
               </div>
 
+              <!--ENTREGABLES-->
               <div class="col-lg-6">
                 <div class="card">
                   <div class="card-header bg-warning text-white">
@@ -126,10 +142,10 @@
                     </div>
                   </div>
                   <div class="card-body" style="overflow-y: scroll; max-height: 250px">
-                    <ul>
-                       <li *ngFor="let ent of deliverables" class="">{{ent}}</li>
+                    
+                       <div *ngFor="let ent of deliverables" class="alert alert-warning">{{ent}}</div>
                       <input *ngFor="let ent of act.deliverable" type="hidden" class="entregable" [value]="ent">
-                    </ul>
+                    
                   </div>
                 </div>
               </div>

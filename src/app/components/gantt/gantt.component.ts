@@ -14,13 +14,15 @@ declare var $: any;
   styleUrls: ['./gantt.component.css']
 })
 
-export class GanttComponent implements OnInit {ç
+export class GanttComponent implements OnInit {
   objectives: any[];
   deliverables: any[];
   activs: IActivityConfig[] = [];
   current_project: string;
   selected_activity: string;
   $activity: Observable<any>;
+  key: string;
+  userType: any;
   constructor(
     private sess: SessionService,
     private projectService: ProjectService,
@@ -60,18 +62,20 @@ export class GanttComponent implements OnInit {ç
   getActivities() {
     this.projectService.getActivities(this.current_project).subscribe((response:any[])=>{
       const activs = [];
-      console.log(response);
+      
       for (const act of response){
+
         this.parseDate(act.start);
         activs.push({
           name: act.name,
-          start: this.parseDate(act.start),
+          start: act.start,
           data: act.id,
           index: act.index,
-          end: this.parseDate(act.end),
+          end: act.end,
           color: act.color
         });
       }
+      
       
       const gantt = new GanttManager();
       gantt.init(activs);
@@ -85,7 +89,7 @@ export class GanttComponent implements OnInit {ç
           $('#activity-info-modal').modal('show');
           this.getObjectives();
           this.getDeliverables();
-        }, 500);
+        }, 400);
       });
     });
 
@@ -126,12 +130,10 @@ export class GanttComponent implements OnInit {ç
   }
 
   parseDate(input: string){
-    return moment(input).add(1,'day').toDate();
+    return input;
   }
 
-  key: string;
-
-  userType: string;
+  
   getUserType() {
     this.key = "UserType";
     this.userType = this.sess.getFromSession(this.key);
