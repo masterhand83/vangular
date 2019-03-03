@@ -6,7 +6,7 @@ import { constants } from './constants.data';
 })
 export class ProjectService {
   readonly IP = constants.IP;
-  
+
   information: any;
 
 
@@ -31,7 +31,7 @@ export class ProjectService {
    * @param idUser3 id de algun usuario (cualquiera)
    */
   createProject(name: string, description: string, idUser1: string, idUser2: string, idUser3: string) {
-    //console.log(idUser1,idUser2,idUser3);
+    // console.log(idUser1,idUser2,idUser3);
       return this.http.post(`http://${this.IP}:3000/api/projects/project`, {
         name: name,
         description: description,
@@ -77,7 +77,7 @@ export class ProjectService {
     return this.http.get(`http://${this.IP}:3000/api/activities/activity/${id}`);
   }
 
-  putActivity(id:string, data:any, objectives: any[],deliverables: any[]){
+  putActivity(id: string, data: any, objectives: any[], deliverables: any[]) {
     return this.http.put(`http://${this.IP}:3000/api/activities/activity/${id}`, {
       name: data.nombre,
       description: 'falta descripcion',
@@ -89,27 +89,48 @@ export class ProjectService {
     });
   }
 
-  deleteProject(_id:string){
+  deleteProject(_id: string) {
     return this.http.delete(`http://${this.IP}:3000/api/projects/project/${_id}`);
   }
 
-  changeResident(_id:string,idNewUser:string){
+  changeResident(_id: string, idNewUser: string) {
 
-    return this.http.put(`http://${this.IP}:3000/api/projects/resident/${_id}`,{
-      _id:_id,
-      idNewResident:idNewUser,
-
-    });
-    
-  }
-  changeDesigner(_id:string,idNewUser:string){
-
-    return this.http.put(`http://${this.IP}:3000/api/projects/designer/${_id}`,{
-      _id:_id,
-      idNewDesigner:idNewUser,
+    return this.http.put(`http://${this.IP}:3000/api/projects/resident/${_id}`, {
+      _id: _id,
+      idNewResident: idNewUser,
 
     });
-    
   }
-  
+  changeDesigner(_id: string, idNewUser: string) {
+    return this.http.put(`http://${this.IP}:3000/api/projects/designer/${_id}`, {
+      _id: _id,
+      idNewDesigner: idNewUser,
+
+    });
+  }
+
+
+  verifyObjectives(_id: string) {
+    return this.http.put(`http://${this.IP}:3000/api/activities/verifyObjectives/${_id}`, {});
+  }
+  verifyDeliverables(_id: string) {
+    return this.http.put(`http://${this.IP}:3000/api/activities/verifyDeliverables/${_id}`, {});
+  }
+
+  commentActivity(body: {authorName: string, comment: string}, _id: string) {
+    return this.http.post(`http://${this.IP}:3000/api/activities/comment/${_id}`, body);
+  }
+
+  setActivityStatus(status: number, _id: string,data:boolean) {
+    switch (status) {
+      case 0:
+        return this.http.put(`http://${this.IP}:3000/api/activities/start/${_id}`, {started: data});
+        break;
+      case 1:
+        return this.http.put(`http://${this.IP}:3000/api/activities/finish/${_id}`, { });
+        break;
+      default:
+        break;
+    }
+  }
 }
