@@ -1,110 +1,118 @@
 <!--modal de actividad-->
-<div class="modal fade" id="activity-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-
-      <div class="modal-header bg-success text-white">
-        <h5 class="modal-title" id="exampleModalLabel">
-          <strong>Nueva Actividad</strong>
-        </h5>
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true" class="text-white">×</span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <div class="container-fluid">
-          <div class="form-row">
-
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label for="inicio">Fecha de inicio</label>
-                <input name="inicio" type="date" class="form-control" placeholder="Fecha">
-              </div>
-
+<form (submit)="createActivity(form)" #form="ngForm">
+    <div class="modal fade" id="activity-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+      
+            <div class="modal-header bg-success text-white">
+              <h5 class="modal-title" id="exampleModalLabel">
+                <strong>Nueva Actividad</strong>
+              </h5>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" class="text-white">×</span>
+              </button>
             </div>
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label for="final">Fecha de termino</label>
-                <input name="final" type="date" class="form-control" placeholder="Fecha">
-              </div>
-            </div>
-            <div class="col-lg-12">
-              <div class="form-group">
-                <label for="prioridad">Prioridad de la actividad</label>
-                <select class="form-control" name="prioridad" id="prioridad">
-                  <option value="alta">Alta</option>
-                  <option value="media">media</option>
-                  <option value="baja">baja</option>
-                </select>
-              </div>
-            </div>
+      
+            <div class="modal-body">
+              <div class="container-fluid">
+                <div class="form-row">
+      
+                  <div class="col-lg-12">
+                      <div class="form-group">
+                          <label for="inicio">Nombre de la actividad</label>
+                          <input name="name" type="text" class="form-control" placeholder="Nombre" required ngModel>
+                        </div>
+                  </div>
+                  <div class="col-lg-12">
+                      <div class="form-group">
+                          <label for="description">Descripcion de la actividad</label>
+                          <textarea  name="description" class="form-control" required ngModel>
+                          </textarea>
+                        </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label for="inicio">Fecha de inicio</label>
+                      <input [ngModel]="getToday() | date: 'yyyy-MM-dd'" name="start" type="date" class="form-control" placeholder="Fecha" ngModel>
+                    </div>
+      
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label for="final">Fecha de termino</label>
+                      <input [ngModel]="getAhead() | date: 'yyyy-MM-dd'" name="end" type="date" class="form-control" placeholder="Fecha" ngModel>
+                    </div>
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="form-group">
+                      <label for="prioridad">Prioridad de la actividad</label>
+                      <select  class="form-control" name="priority" required id="prioridad" ngModel>
+                        <option selected value="0">Alta</option>
+                        <option value="1">Media</option>
+                        <option value="2">Baja</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <!--OBJETIVOS-->
+                  <div class="col-lg-6">
+                    <div class="card">
+                      <div class="card-header bg-success text-white">
+                        <!--para activar el modal de objetivos-->
+                        <strong>Objetivos</strong> 
+                        <button type="button" class="btn btn-success float-right" data-toggle="collapse"
+                          data-target="#objetivo-collapse">
+                          <i class="fa fa-plus float-right align-middle"></i>
+                        </button>
+                        <br>
+                          <div class="input-group collapse mt-3" id="objetivo-collapse">
+                            <div class="input-group-prepend">
+                              <div (click)="pushNewObjective(objetivo.value)" class="input-group-text clickable">></div>
+                            </div>
+                            <input type="text" name="objetivo" class=" form-control" #objetivo>
+                          </div>
+                      </div>
+                      <div class="card-body" style="overflow-y: scroll; max-height: 100px">
+                        
+                         <div class="alert alert-success" *ngFor="let obj of current_objectives">{{obj}}</div>
+                        
+                      </div>
+                    </div>
+                  </div>
 
-            <div class="col-lg-6">
-              <div class="card">
-                <div class="card-header bg-info text-white">
-                  <!--para activar el modal de objetivos-->
-                  <strong>Objetivos</strong> <i class="fa fa-plus float-right align-middle clickable"></i>
-                </div>
-                <div class="card-body" style="overflow-y: scroll; max-height: 100px">
-                  <ul>
-                    <li>Destruir el mundo</li>
-                    <li>Copiarle a Quintero en Proba.</li>
-                    <li>Estudiar par la superior</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6">
-              <div class="card">
-                <div class="card-header bg-info text-white">
-                  <!--para activar el modal de objetivos-->
-                  <strong>Entregables</strong> <i class="fa fa-plus float-right align-middle clickable"></i>
-                </div>
-                <div class="card-body" style="overflow-y: scroll; max-height: 100px">
-                  <ul>
-                    <li>Destruir el mundo</li>
-                    <li>Copiarle a Quintero en Proba.</li>
-                    <li>Estudiar par la superior</li>
-                  </ul>
+                  <!--ENTREGABLES-->
+                  <div class="col-lg-6">
+                    <div class="card">
+                      <div class="card-header bg-success text-white">
+                        <!--para activar el modal de objetivos-->
+                        <strong>Entregables</strong> 
+                        <button type="button" class="btn btn-success float-right" data-toggle="collapse"
+                          data-target="#entregable-collapse">
+                          <i class="fa fa-plus float-right align-middle"></i>
+                        </button>
+                        <br>
+                          <div class="input-group collapse mt-3" id="entregable-collapse">
+                            <div class="input-group-prepend">
+                              <div (click)="pushNewEntregable(entregable.value)" class="input-group-text clickable">></div>
+                            </div>
+                            <input type="text" name="entregable" class=" form-control" #entregable>
+                          </div>
+                      </div>
+                      <div class="card-body" style="overflow-y: scroll; max-height: 100px">
+                        <div *ngFor="let ent of current_entregable" class="alert alert-success">{{ent}}</div>
+                      </div>
+                    </div>
+                  </div>
+      
                 </div>
               </div>
             </div>
-
-            <div class="col-lg-12 mt-3">
-              <div class="card ">
-                <div class="card-header bg-info text-white">
-                  <!--para activar el modal de objetivos-->
-                  <strong>comentarios</strong> <i class="fa fa-plus float-right align-middle clickable"></i>
-                </div>
-                <div class="card-body" style="overflow-y: scroll; max-height: 200px">
-                  <ul class="list-group-flush">
-                    <li class="list-group-item">
-                      <strong>Usuario: </strong>Este mensaje se escribio el domigo 4:00 am
-                    </li>
-                    <li class="list-group-item">
-                      <strong>Usuario 2: </strong>Me tarde aproximadamente 3 dias...
-                    </li>
-                    <li class="list-group-item">
-                      <strong>Usuario 3: </strong>No se como paso, pero logre que el gantt funcionara
-                    </li>
-                    <li class="list-group-item">
-                      <strong>Usuario 3: </strong>¿Algun samaritano que guste ayudarme?
-                    </li>
-                  </ul>
-                </div>
-              </div>
+      
+            <div class="modal-footer">
+              <button  class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+              <button [disabled]="form.invalid" class="btn btn-success" type="submit">Crear</button>
             </div>
-
           </div>
         </div>
       </div>
-
-      <div class="modal-footer">
-        <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
-        <a class="btn btn-success" href="login.html">Crear</a>
-      </div>
-    </div>
-  </div>
-</div>
+</form>

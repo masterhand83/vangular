@@ -133,4 +133,17 @@ export class ProjectService {
         break;
     }
   }
+
+  addActivity(data: {
+    name:string,
+    description: string,
+    start: string,
+    end:string,
+    priority:number,
+    deliverable:string[],
+    objective: string[]
+  }, _id:string){
+    
+    return this.http.put(`http://${this.IP}:3000/api/projects/activity/${_id}`,data);
+  }
 }

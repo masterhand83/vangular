@@ -100,7 +100,6 @@ export class GanttComponent implements OnInit {
       this.router.navigateByUrl(`/dashboard/projects`);
     }
     this.getActivities();
-    $('[data-toggle="tooltip"]').tooltip();
 
   }
 
@@ -176,6 +175,13 @@ export class GanttComponent implements OnInit {
     this.projectService.setActivityStatus(type,id,value).subscribe(response =>{
       console.log(response);
     })
+    location.reload();
+  }
+
+  endActivity(id:string){
+    this.projectService.setActivityStatus(1,id,true).subscribe(response =>{
+      console.log(response);
+    });
     location.reload();
   }
 }

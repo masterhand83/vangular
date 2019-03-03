@@ -8,16 +8,20 @@ import { SwalComponent } from '@toverux/ngx-sweetalert2';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-  @ViewChild('logoutModal') private logout_modal: SwalComponent;
-  ngOnDestroy(): void {
-    this.renderer.removeAttribute(document.body, 'id', 'page-top');
-  }
 
   constructor(
     private renderer: Renderer2,
     private sess: SessionService) {
     this.sess.validateSession();
     this.renderer.setAttribute(document.body, 'id', 'page-top');
+  }
+  @ViewChild('logoutModal') private logout_modal: SwalComponent;
+
+  key: string;
+
+  userType: any;
+  ngOnDestroy(): void {
+    this.renderer.removeAttribute(document.body, 'id', 'page-top');
   }
 
   ngOnInit() {
@@ -29,10 +33,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   logout() {
     this.sess.deleteSession();
   }
-
-  key: string;
-
-  userType: string;
   getUserType() {
     this.key = "UserType";
     this.userType = this.sess.getFromSession(this.key);
