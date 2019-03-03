@@ -30,9 +30,11 @@ export class SessionService {
    * crea la sesiond el proyecto
    * @param projectid id del proyecto
    */
-  createProjectSession(projectid: string) {
+  createProjectSession(projectid: string,projectname:string) {
     const pro = this.helmet.encrypt(projectid);
     this.cookieService.set('ActualProject', pro);
+    const name = this.helmet.encrypt(projectname);
+    this.cookieService.set('NameProject',name);
 
   }
 

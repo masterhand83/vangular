@@ -146,4 +146,11 @@ export class ProjectService {
     
     return this.http.put(`http://${this.IP}:3000/api/projects/activity/${_id}`,data);
   }
+
+  addAlert(_id:string,description:string){
+    return this.http.post(`http://${this.IP}:3000/api/projects/alert/${_id}`,  {
+      link:"link",
+      description: description,
+    });
+  }
 }

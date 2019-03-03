@@ -43,8 +43,8 @@ export class AlertsShowCaseComponent implements OnInit {
 
 
   }
-  goToProject(projectID: string) {
-    this.sess.createProjectSession(projectID);
+  goToProject(projectID: string,nameproject:string) {
+    this.sess.createProjectSession(projectID,nameproject);
     this.router.navigateByUrl(`/dashboard/project/${projectID}`);
   }
 

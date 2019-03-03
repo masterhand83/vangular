@@ -27,6 +27,8 @@ export class GanttComponent implements OnInit {
   $activity: Observable<any>;
   key: string;
   userType: any;
+  key2: string;
+  nameproject: any;
   constructor(
     private sess: SessionService,
     private projectService: ProjectService,
@@ -99,6 +101,7 @@ export class GanttComponent implements OnInit {
   }
   ngOnInit() {
     this.getUserType();
+    this.getNameProject();
     if (this.userType == '3') {
       this.router.navigateByUrl(`/dashboard/projects`);
     }
@@ -160,14 +163,27 @@ export class GanttComponent implements OnInit {
 
   }
 
-  verifyElements(type: string, id: string) {
+  getNameProject() {
+    this.key2 = 'NameProject';
+    this.nameproject = this.sess.getFromSession(this.key2);
+    
+
+  }
+
+  verifyElements(type: string, id: string,name:string) {
     switch (type) {
       case 'objectives':
+        var description='Se han verificado los objetivos en la actividad: '+name+' del proyecto: '+this.nameproject;
+        this.projectService.addAlert(this.current_project,description).subscribe(res=>{
+        })
         this.projectService.verifyObjectives(id).subscribe(res => {
           console.log(res);
         });
         break;
       case 'deliverables':
+        var description='Se han verificado los objetivos en la actividad: '+name+' del proyecto: '+this.nameproject;
+        this.projectService.addAlert(this.current_project,description).subscribe(res=>{
+        })
         this.projectService.verifyDeliverables(id).subscribe(res => {
           console.log(res);
         });
@@ -178,7 +194,11 @@ export class GanttComponent implements OnInit {
   }
 
   // TODO: Mencionarle a quintero que se necesita el nombre del usuario que se logueó...
-  commentActivity(comment: string, id: string) {
+  commentActivity(comment: string, id: string, name:string) {
+    var description='Se comento: '+comment+' en la actividad: '+name+ ' del proyecto: '+this.nameproject;
+    this.projectService.addAlert(this.current_project,description).subscribe(res=>{
+    })
+
     this.projectService.commentActivity({ authorName: 'Anonimo', comment }, id).subscribe(res => {
       console.log(res);
     })
@@ -187,14 +207,20 @@ export class GanttComponent implements OnInit {
     }, 400);
   }
 
-  setStarted(type:number, id:string, value:boolean){
+  setStarted(type:number, id:string, value:boolean,name:string){
+    var description='Se inicio actividad: '+name+' del proyecto: '+this.nameproject;
+    this.projectService.addAlert(this.current_project,description).subscribe(res=>{
+    })
     this.projectService.setActivityStatus(type,id,value).subscribe(response =>{
       console.log(response);
     })
     location.reload();
   }
 
-  endActivity(id:string){
+  endActivity(id:string,name:string){
+    var description='Se finalizo actividad: '+name+' del proyecto: '+this.nameproject;
+    this.projectService.addAlert(this.current_project,description).subscribe(res=>{
+    })
     this.projectService.setActivityStatus(1,id,true).subscribe(response =>{
       console.log(response);
     });

@@ -92,8 +92,8 @@ export class ProjectShowCaseComponent implements OnInit {
     });
   }
 
-  goToProject(projectID: string) {
-    this.sess.createProjectSession(projectID);
+  goToProject(projectID: string,projectname:string) {
+    this.sess.createProjectSession(projectID,projectname);
     this.router.navigateByUrl(`/dashboard/project/${projectID}`);
   }
 
