@@ -8,6 +8,8 @@ import { IUser } from 'src/app/models/IUser';
 import { UsersService } from 'src/app/services/users.service.1';
 import { SecurityService } from 'src/app/services/security.service';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
+import { InternalFormsSharedModule } from '../../../../node_modules/@angular/forms/src/directives';
 declare var $: any;
 @Component({
   selector: 'app-edit-information-modal',
@@ -17,6 +19,7 @@ declare var $: any;
 export class EditInformationModalComponent implements OnInit {
   @ViewChild('updatecorrect') private updatecorrect: SwalComponent;
   @ViewChild('updateincorrect') private updateincorrect: SwalComponent;
+  @ViewChild('dateincorrect') private dateincorrect: SwalComponent;
   @Input() actualProject: any;
   actual_project: string;
   $project_info: Observable<any>;
@@ -25,7 +28,8 @@ export class EditInformationModalComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private user: UsersService,
-    private crypto: SecurityService
+    private crypto: SecurityService,
+    
   ) { }
   residentes: IUser[] = [];
   proyectistas: IUser[] = [];
@@ -39,12 +43,26 @@ export class EditInformationModalComponent implements OnInit {
   }
   editInformation(values: any) {
     console.log(values);
-    this.projectService.setInformation(this.actual_project, values).subscribe((result) => {
-      $('#edit-info-modal').modal('hide');
-      setInterval(() => {
-        location.reload();
-      }, 500);
-    });
+
+    var localReception=moment(values.fecha_recepcion).format('YYYY-MM-DD');
+    var furnitureDate=moment(values.fecha_pedido).format('YYYY-MM-DD');
+    var openingDate=moment(values.fecha_apertura).format('YYYY-MM-DD');
+    var actualDay=moment().format('YYYY-MM-DD');
+    console.log(localReception);
+    console.log(actualDay);
+
+    if(localReception<actualDay || furnitureDate<actualDay || openingDate<actualDay){
+      this.dateincorrect.show();
+    }
+    else{
+      this.projectService.setInformation(this.actual_project, values).subscribe((result) => {
+        $('#edit-info-modal').modal('hide');
+        setInterval(() => {
+          location.reload();
+        }, 500);
+      });
+    }
+  
   }
 
   // obtiene los residentes
@@ -92,6 +110,9 @@ export class EditInformationModalComponent implements OnInit {
     else{
       this.updateincorrect.show();
     }
+  }
+  parseDate(input: string) {
+    return input;
   }
 
 

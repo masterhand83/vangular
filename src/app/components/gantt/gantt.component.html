@@ -16,12 +16,12 @@
   <div *ngIf="($activity |async) as act; else loading" class="modal fade" id="activity-info-modal" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-    <swal #verifyObjectives title="Cuidado" text="¿Seguro que deseas verificar todos los objetivos para {{act.name}} ?"
-      type="warning" footer="Nota: esto no se puede deshacer" [showCancelButton]="true" [focusCancel]="true" (confirm)="verifyElements('objectives',act._id)"
+    <swal #verifyObjectives title="Cuidado" text="¿Seguro que deseas verificar todos los objetivos para {{act.name}} ?" type="warning"
+      footer="Nota: esto no se puede deshacer" [showCancelButton]="true" [focusCancel]="true" (confirm)="verifyElements('objectives',act._id)"
       [cancelButtonColor]="'red'" [confirmButtonText]="'Verificar'" [cancelButtonText]="'Cancelar'">
     </swal>
-    <swal #verifyDeliverables title="Cuidado" text="¿Seguro que deseas verificar todos los entregables para {{act.name}}?"
-      type="warning" footer="Nota: esto no se puede deshacer" [showCancelButton]="true" [focusCancel]="true" (confirm)="verifyElements('deliverables',act._id)"
+    <swal #verifyDeliverables title="Cuidado" text="¿Seguro que deseas verificar todos los entregables para {{act.name}}?" type="warning"
+      footer="Nota: esto no se puede deshacer" [showCancelButton]="true" [focusCancel]="true" (confirm)="verifyElements('deliverables',act._id)"
       [cancelButtonColor]="'red'" [confirmButtonText]="'Verificar'" [cancelButtonText]="'Cancelar'">
     </swal>
     <div class="modal-dialog modal-lg" role="document">
@@ -40,25 +40,23 @@
           <div class="container-fluid">
             <div class="form-row">
               <div *ngIf="userType == 2 || true " class="col-lg-12">
-                <h4>Estado de la actividad:
-                  {{act.finished? 'terminada':act.started? 'en progreso': 'sin iniciar'}}
+                <h4>Estado de la actividad: {{act.finished? 'terminada':act.started? 'en progreso': 'sin iniciar'}}
                 </h4>
 
-                <swal #startActivity title="¿Listo?" text="¿Todo listo para iniciar la actividad?" type="question"
-                  footer="Nota: esto no se puede deshacer" [showCancelButton]="true" [focusCancel]="true" (confirm)="setStarted(0,act._id,true)"
-                  [cancelButtonColor]="'red'" [confirmButtonText]="'¡Listo!'" [cancelButtonText]="'Aun no estoy listo'">
+                <swal #startActivity title="¿Listo?" text="¿Todo listo para iniciar la actividad?" type="question" footer="Nota: esto no se puede deshacer"
+                  [showCancelButton]="true" [focusCancel]="true" (confirm)="setStarted(0,act._id,true)" [cancelButtonColor]="'red'"
+                  [confirmButtonText]="'¡Listo!'" [cancelButtonText]="'Aun no estoy listo'">
                 </swal>
-                <swal #finishActivity title="¿Listo?" text="¿Terminaste la actividad completamente?" type="question"
-                  footer="Nota: esto no se puede deshacer" [showCancelButton]="true" [focusCancel]="true" (confirm)="endActivity(act._id)"
-                  [cancelButtonColor]="'red'" [confirmButtonColor]="'green'" [confirmButtonText]="'Sí'"
-                  [cancelButtonText]="'Aún no'">
+                <swal #finishActivity title="¿Listo?" text="¿Terminaste la actividad completamente?" type="question" footer="Nota: esto no se puede deshacer"
+                  [showCancelButton]="true" [focusCancel]="true" (confirm)="endActivity(act._id)" [cancelButtonColor]="'red'"
+                  [confirmButtonColor]="'green'" [confirmButtonText]="'Sí'" [cancelButtonText]="'Aún no'">
                 </swal>
 
                 <div class="btn-toolbar" role="toolbar">
                   <div class="btn-group mr-2" role="group">
                     <!--? se puede revertir el inicio y fin de actividades ?-->
-                    <!-->button [swal]="notstartActivity" class="btn btn-success" type="button"
-                    [disabled]="!act.started">Iniciada</button-->
+                    <!-->button [swal]="notstartActivity" class="btn btn-success" type="button" [disabled]="!act.started">Iniciada
+                    </button-->
                     <button [swal]="startActivity" class="btn btn-warning" type="button" [disabled]="act.started ">
                       {{act.started? 'Iniciada':'Iniciar'}}
                     </button>
@@ -76,8 +74,8 @@
               <div class="col-lg-12">
                 <div class="form-group">
                   <label for="inicio">Nombre de la actividad</label>
-                  <input [(ngModel)]="act.name" name="nombre" type="text" class="form-control" placeholder="Nombre"
-                    ngModel>
+                  <input [(ngModel)]="act.name" name="nombre" type="text" class="form-control" placeholder="Nombre" ngModel #nameref="ngModel"
+                    maxlength="100" required pattern="[A-Za-záéíóúÁÉÍÓÚ1234567890 ]{0,100}">
                 </div>
 
 
@@ -96,10 +94,11 @@
               <div class="col-lg-6">
                 <div class="form-group">
                   <label for="final">Fecha de termino: </label>
-                  <input name="final" type="date" class="form-control" [ngModel]="parseDate(act.end) | date: 'yyyy-MM-dd'"
-                    placeholder="Fecha" ngModel>
+                  <input name="final" type="date" class="form-control" [ngModel]="parseDate(act.end) | date: 'yyyy-MM-dd'" placeholder="Fecha"
+                    ngModel>
                 </div>
               </div>
+
               <div *ngIf="userType! ==1" class="col-lg-12">
                 <div class="form-group">
                   <label for="prioridad">Prioridad de la actividad: {{parsePriority(act.priority)}} </label>
@@ -111,6 +110,8 @@
                 </div>
               </div>
 
+              <swal #dateincorrect title="Favor de checar las fechas" text="Las fechas deben de ser mayores a la fecha actual" type="warning"
+                [focusCancel]="true"></swal>
               <!--OBJETIVOS-->
               <div class="col-lg-6">
                 <div class="card">
@@ -118,13 +119,11 @@
                     <!-- para activar el modal de objetivos-->
                     <strong>Objetivos</strong>
 
-                    <button *ngIf="userType==1&& act.objective.length > 0" type="button" class="btn btn-warning float-right"
-                      [swal]="verifyObjectives">
+                    <button *ngIf="userType==1&& act.objective.length > 0" type="button" class="btn btn-warning float-right" [swal]="verifyObjectives">
                       <i class="fa fa-clipboard-check float-right align-middle"></i>
                     </button>
 
-                    <button *ngIf="userType==1" type="button" class="btn btn-warning float-right" data-toggle="collapse"
-                      data-target="#objetivo-collapse">
+                    <button *ngIf="userType==1" type="button" class="btn btn-warning float-right" data-toggle="collapse" data-target="#objetivo-collapse">
                       <i class="fa fa-plus float-right align-middle"></i>
                     </button>
 
@@ -154,13 +153,11 @@
                     <!--para activar el modal de objetivos-->
                     <strong>Entregables</strong>
 
-                    <button *ngIf="userType==1 && act.deliverable.length > 0" type="button" class="btn btn-warning float-right"
-                      [swal]="verifyDeliverables">
+                    <button *ngIf="userType==1 && act.deliverable.length > 0" type="button" class="btn btn-warning float-right" [swal]="verifyDeliverables">
                       <i class="fa fa-clipboard-check float-right align-middle"></i>
                     </button>
 
-                    <button *ngIf="userType==1" type="button" class="btn btn-warning float-right" data-toggle="collapse"
-                      data-target="#entregable-collapse">
+                    <button *ngIf="userType==1" type="button" class="btn btn-warning float-right" data-toggle="collapse" data-target="#entregable-collapse">
 
                       <i class="fa fa-plus float-right align-middle clickable "></i>
                     </button>
@@ -188,8 +185,7 @@
                   <div class="card-header bg-warning text-white">
                     <!--para activar el modal de objetivos-->
                     <strong>comentarios</strong>
-                    <button *ngIf="userType==1" type="button" class="btn btn-warning float-right" data-toggle="collapse"
-                      data-target="#comentario-collapse">
+                    <button *ngIf="userType==1" type="button" class="btn btn-warning float-right" data-toggle="collapse" data-target="#comentario-collapse">
                       <i class="fa fa-plus float-right align-middle clickable "></i>
                     </button>
                     <br>
@@ -218,8 +214,11 @@
           </div>
         </div>
         <div class="modal-footer">
+          <div [hidden]="!nameref.errors?.pattern">
+            En el nombre solo puede haber letras y numeros.
+          </div>
           <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
-          <input type="submit" class="btn btn-warning" value="Editar">
+          <input [disabled]="form.invalid" type="submit" class="btn btn-warning" value="Editar">
         </div>
       </div>
     </div>
@@ -231,5 +230,6 @@
 
 </form>
 
-
+<swal #dateincorrect title="Favor de checar las fechas" text="La fecha final debe de ser mayor a la inicial" type="warning"
+  [focusCancel]="true"></swal>
 <!--SWEETALERT-->

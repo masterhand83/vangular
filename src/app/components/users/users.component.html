@@ -226,8 +226,8 @@
             La contraseña debe de tener minimo 8 y maximo 30 caracteres, sin espacios.
           </div>
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <input [hidden]="emailref.errors?.pattern || mobileref.errors?.pattern || nameref.errors?.pattern || passwordref.errors?.pattern || lastnameref.errors?.pattern"
-            type="submit" class="btn btn-success" value="Registrar" [disabled]="boton">
+          <input [disabled]="boton || userForm.invalid"
+            type="submit" class="btn btn-success" value="Registrar" >
         </div>
       </form>
     </div>
@@ -279,7 +279,7 @@
               <div class="col-lg-11">
                 <div class="form-group">
                   <input type="text" placeholder="Correo Electronico" class="form-control" name="email2" [(ngModel)]="email2" maxlength="100"
-                    #emailref="ngModel" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$">
+                    #emailref="ngModel" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$" required>
                 </div>
               </div>
             </div>
@@ -291,7 +291,7 @@
               <div class="col-lg-11">
                 <div class="form-group">
                   <input type="text" placeholder="movil" class="form-control" name="mobile2" [(ngModel)]="mobile2" maxlength="100" #mobileref="ngModel"
-                    pattern="[0-9]{10,14}$">
+                    pattern="[0-9]{10,14}$" required>
                 </div>
               </div>
             </div>
@@ -305,7 +305,7 @@
               <div class="col-lg-11">
                 <div class="form-group">
                   <input type="text" placeholder="Contraseña" class="form-control" name="password2" [(ngModel)]="password2" maxlength="100"
-                    #passwordref="ngModel" pattern="[A-Za-z0-9|°¬!'#$%&/()=?\¡¿´¨+*~`^,;.:-_@áéíóúÁÉÍÓÚ]{8,30}">
+                    #passwordref="ngModel" pattern="[A-Za-z0-9|°¬!'#$%&/()=?\¡¿´¨+*~`^,;.:-_@áéíóúÁÉÍÓÚ]{8,30}" required>
                 </div>
               </div>
               <!--div class="col-lg-5">
@@ -355,7 +355,7 @@
             La contraseña debe de tener minimo 8 y maximo 30 caracteres, sin espacios.
           </div>
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <input [hidden]="emailref.errors?.pattern || mobileref.errors?.pattern ||  passwordref.errors?.pattern" type="submit" value="Editar" class="btn btn-warning">
+          <input [disabled]="updateForm.invalid" type="submit" value="Editar" class="btn btn-warning">
           
         </div>
 

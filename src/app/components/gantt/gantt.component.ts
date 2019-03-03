@@ -1,6 +1,7 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import { IActivityConfig } from 'src/app/Rgantt/src/interfaces/IActivity.config';
 import { GanttManager } from 'src/app/Rgantt/src/gantt/ganttManager';
+import { SwalComponent } from '@toverux/ngx-sweetalert2';
 import { SessionService } from 'src/app/services/session.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { Observable } from 'rxjs';
@@ -8,6 +9,7 @@ import { Router } from '@angular/router';
 import { element } from '@angular/core/src/render3';
 import * as moment from 'moment';
 import { NgLocalization } from '@angular/common';
+import { asTextData } from '../../../../node_modules/@angular/core/src/view';
 declare var $: any;
 @Component({
   selector: 'app-gantt',
@@ -16,6 +18,7 @@ declare var $: any;
 })
 
 export class GanttComponent implements OnInit {
+  @ViewChild('dateincorrect') private dateincorrect: SwalComponent;
   objectives: any[];
   deliverables: any[];
   activs: IActivityConfig[] = [];
@@ -104,6 +107,17 @@ export class GanttComponent implements OnInit {
   }
 
   EditActivity(form: any) {
+
+    var start=moment(form.inicio).format('YYYY-MM-DD');
+    var end=moment(form.final).format('YYYY-MM-DD');
+    var actualDay=moment().format('YYYY-MM-DD');
+
+    if(end<start){
+
+      this.dateincorrect.show();
+
+    }
+    else{
     // console.log(f);
     this.projectService.putActivity(this.selected_activity, form, this.objectives, this.deliverables).subscribe((response: any) => {
       console.log(response);
@@ -111,6 +125,8 @@ export class GanttComponent implements OnInit {
     // this.getActivities();
     $('#activity-info-modal').modal('hide');
     location.reload();
+    }
+    
     /*this.zone.runOutsideAngular(()=>{
       location.reload();
     });*/

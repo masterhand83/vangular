@@ -20,13 +20,17 @@
                   <div class="col-lg-12">
                       <div class="form-group">
                           <label for="inicio">Nombre de la actividad</label>
-                          <input name="name" type="text" class="form-control" placeholder="Nombre" required ngModel>
+                          <input name="name" type="text" class="form-control" placeholder="Nombre" ngModel 
+                          #nameref="ngModel" maxlength="100"
+                          required pattern="[A-Za-záéíóúÁÉÍÓÚ1234567890 ]{0,100}">
                         </div>
                   </div>
                   <div class="col-lg-12">
                       <div class="form-group">
                           <label for="description">Descripcion de la actividad</label>
-                          <textarea  name="description" class="form-control" required ngModel>
+                          <textarea  name="description" class="form-control" ngModel
+                          #descriptionref="ngModel" maxlength="100"
+                    required pattern="[A-Za-záéíóúÁÉÍÓÚ1234567890 ]{0,100}">
                           </textarea>
                         </div>
                   </div>
@@ -109,6 +113,12 @@
             </div>
       
             <div class="modal-footer">
+                <div [hidden]="!nameref.errors?.pattern">
+                    En el nombre solo puede haber letras y numeros.
+                  </div>
+                  <div [hidden]="!descriptionref.errors?.pattern">
+                    En la descripcion solo pueden haber letras y numeros.
+                  </div>
               <button  class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
               <button [disabled]="form.invalid" class="btn btn-success" type="submit">Crear</button>
             </div>
@@ -116,3 +126,4 @@
         </div>
       </div>
 </form>
+<swal #dateincorrect title="Favor de checar las fechas" text="Las fechas deben de ser mayores a la fecha actual y la fecha de termino no puede ser menor a la de inicio" type="warning" [focusCancel]="true"></swal>

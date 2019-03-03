@@ -27,35 +27,36 @@
 
 <!-- **Contenido principal -->
 <div class="container-fluid">
-  <div class="row" >
+  <div class="row">
 
     <!-- ** VISTA DE PROYECTOS-->
-    
-      <div  *ngFor="let project of projects" class="col-sm-12 col-md-6 col-lg-4">
 
-        <div (click)="goToProject(project.id)" class="card m-2 shadow clickable">
-          <div class="card-header bg-info text-white"> <i class="fas fa-building mr-2"></i> {{project.proyecto}}</div>
-          <div class="card-body">
-            <p><strong>Residente encargado: </strong> {{project.nombre}}</p>
-            <hr>
-            <h6>progreso del proyecto:</h6>
-            <div class="progress progress-sm">
-              <div class="progress-bar bg-info" role="progressbar" [style.width]="project.progreso + '%'"></div>
-            </div>
+    <div *ngFor="let project of projects" class="col-sm-12 col-md-6 col-lg-4">
+
+      <div (click)="goToProject(project.id)" class="card m-2 shadow clickable">
+        <div class="card-header bg-info text-white">
+          <i class="fas fa-building mr-2"></i> {{project.proyecto}}</div>
+        <div class="card-body">
+          <p>
+            <strong>Residente encargado: </strong> {{project.nombre}}</p>
+          <hr>
+          <h6>progreso del proyecto:</h6>
+          <div class="progress progress-sm">
+            <div class="progress-bar bg-info" role="progressbar" [style.width]="project.progreso + '%'"></div>
           </div>
-          <input type="hidden" [id]="project.id" [value]="project.id"> 
         </div>
-        <!-- ** /VISTA DE PROYECTOS-->
+        <input type="hidden" [id]="project.id" [value]="project.id">
       </div>
-    
+      <!-- ** /VISTA DE PROYECTOS-->
+    </div>
+
 
   </div>
 </div>
 
 
 <!--**Modal de Creacion-->
-<div class="modal fade" id="create-project" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
+<div class="modal fade" id="create-project" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
 
     <!--**Formulario para subir datos-->
@@ -70,7 +71,7 @@
             <span aria-hidden="true" class="text-white">×</span>
           </button>
         </div>
-       
+
         <div class="modal-body">
 
           <div class="container-fluid">
@@ -79,29 +80,31 @@
               <div class="col-lg-12">
 
                 <!--**ENTRADAS DE TEXTO-->
-                
-                  <div class="form-group">
-                    <label for="nombre">Nombre del proyecto</label>
-                    <input class="form-control" type="text" name="nombre" id="proyectonom" ngModel>
-                  </div>
-                  <div class="form-group">
-                    <label for="descripcion">Descripcion del proyecto</label>
-                    <textarea class="form-control" name="descripcion" id="" cols="30" rows="10" ngModel>
+
+                <div class="form-group">
+                  <label for="nombre">Nombre del proyecto</label>
+                  <input class="form-control" type="text" name="nombre" id="proyectonom" ngModel #nameref="ngModel" maxlength="100" required
+                    pattern="[A-Za-záéíóúÁÉÍÓÚ1234567890 ]{0,100}">
+                </div>
+                <div class="form-group">
+                  <label for="descripcion">Descripcion del proyecto</label>
+                  <textarea class="form-control" name="descripcion" id="" cols="30" rows="10" ngModel #descriptionref="ngModel" maxlength="100"
+                    required pattern="[A-Za-záéíóúÁÉÍÓÚ1234567890 ]{0,100}">
                     </textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="resident">Residente Encargado</label>
-                    <select name="resident" id="resident" class="form-control" ngModel>
-                      <option *ngFor="let residente of residentes" [value]="residente._id" >{{residente.name}}</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="designer">Proyectista Encargado</label>
-                    <select name="designer" id="designer" class="form-control" ngModel>
-                      <option *ngFor="let proyectista of proyectistas" [value]="proyectista._id" >{{proyectista.name}}</option>
-                    </select>
-                  </div>
-                
+                </div>
+                <div class="form-group">
+                  <label for="resident">Residente Encargado</label>
+                  <select name="resident" id="resident" class="form-control" ngModel required>
+                    <option *ngFor="let residente of residentes" [value]="residente._id">{{residente.name}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="designer">Proyectista Encargado</label>
+                  <select name="designer" id="designer" class="form-control" ngModel required>
+                    <option *ngFor="let proyectista of proyectistas" [value]="proyectista._id">{{proyectista.name}}</option>
+                  </select>
+                </div>
+
                 <!--**/ENTRADAS DE TEXTO-->
               </div>
 
@@ -111,8 +114,14 @@
         </div>
 
         <div class="modal-footer">
+          <div [hidden]="!nameref.errors?.pattern">
+            En el nombre del proyecto solo pueden haber letras y numeros.
+          </div>
+          <div [hidden]="!descriptionref.errors?.pattern">
+            En la descripcion del proyecto solo pueden haber letras y numeros. 
+          </div>
           <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
-          <input type="submit" value="Crear" class="btn btn-success">
+          <input [disabled]="formula.invalid" type="submit" value="Crear" class="btn btn-success">
 
         </div>
 

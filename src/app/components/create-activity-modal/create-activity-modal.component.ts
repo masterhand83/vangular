@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { SwalComponent } from '@toverux/ngx-sweetalert2';
 import * as moment from 'moment';
 import { ProjectService } from 'src/app/services/project.service';
 import { SessionService } from 'src/app/services/session.service';
@@ -10,6 +11,7 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./create-activity-modal.component.css']
 })
 export class CreateActivityModalComponent implements OnInit {
+  @ViewChild('dateincorrect') private dateincorrect: SwalComponent;
   userType: any;
   current_objectives: string[];
   current_entregable: string[];
@@ -38,19 +40,32 @@ export class CreateActivityModalComponent implements OnInit {
     return moment().add(1,'day').toDate();
   }
   createActivity(form: NgForm){
-    console.log(form.value);
-    let val = form.value;
-    this.projectService.addActivity({
-      name: val.name,
-      description: val.description,
-      start: val.start,
-      end: val.end,
-      priority: val.priority,
-      objective: this.current_objectives,
-      deliverable: this.current_entregable
-    },this.current_id).subscribe(res =>{
-      console.log(res);
-    })
-    location.reload();
+
+    var start=moment(form.value.start).format('YYYY-MM-DD');
+    var end=moment(form.value.end).format('YYYY-MM-DD');
+    var actualDay=moment().format('YYYY-MM-DD');
+    if(start<actualDay || end <actualDay || end<start){
+
+      this.dateincorrect.show();
+
+    }
+
+    else{
+      console.log(form.value);
+      let val = form.value;
+      this.projectService.addActivity({
+        name: val.name,
+        description: val.description,
+        start: val.start,
+        end: val.end,
+        priority: val.priority,
+        objective: this.current_objectives,
+        deliverable: this.current_entregable
+      },this.current_id).subscribe(res =>{
+        console.log(res);
+      })
+      location.reload();
+    }
+    
   }
 }
