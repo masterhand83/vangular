@@ -22,32 +22,32 @@ export class SessionService {
     const id = this.helmet.encrypt(res._id);
     const usrType = this.helmet.encrypt(res.userType);
     const name = this.helmet.encrypt(res.name);
-    //console.log(res);
-    this.cookieService.set('UserID', id,1,'/');
-    this.cookieService.set('UserType', usrType,1,'/');
-    this.cookieService.set('UserName',name,1,'/');
+    // console.log(res);
+    this.cookieService.set('UserID', id, 1, '/');
+    this.cookieService.set('UserType', usrType, 1, '/');
+    this.cookieService.set('UserName', name, 1, '/');
 
   }
   /**
    * crea la sesiond el proyecto
    * @param projectid id del proyecto
    */
-  createProjectSession(projectid: string,projectname:string) {
+  createProjectSession(projectid: string, projectname: string) {
     const pro = this.helmet.encrypt(projectid);
     this.cookieService.set('ActualProject', pro);
     const name = this.helmet.encrypt(projectname);
-    this.cookieService.set('NameProject',name);
+    this.cookieService.set('NameProject', name);
 
   }
 
   /**
-   * elimina la sesion del proyecto 
+   * elimina la sesion del proyecto
    * @deprecated debido a problemas tecnicos, se incluye una funcionalidad de "proyecto mas reciente",asi que la sesion persiste
    */
   deleteProjectSession() {
     this.cookieService.delete('ActualProject');
     this.cookieService.delete('NameProject');
-    let exist = this.cookieService.check('ActualProject') && this.cookieService.check('NameProject');
+    const exist = this.cookieService.check('ActualProject') && this.cookieService.check('NameProject');
     console.log(exist);
     // console.log(this.cookieService.get('ActualProject'));
   }
@@ -83,7 +83,7 @@ export class SessionService {
    * Argumentos validos actualmente:
    * - UserType
    * - UserID
-   * 
+   *
    * @param key El identificador de la cookie
    * @returns Un string
    */

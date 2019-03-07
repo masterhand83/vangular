@@ -4,7 +4,7 @@ export interface IUser {
     email?: string;
     password?: string;
     mobile?: string;
-    userType?: string;
+    userType?: any;
     projects?: any;
     alerts?: any[];
 }

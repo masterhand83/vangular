@@ -5,6 +5,7 @@ import { SwalComponent } from '@toverux/ngx-sweetalert2';
 import { SessionService } from 'src/app/services/session.service';
 import { Router } from '@angular/router';
 import { IUser } from '../../models/IUser';
+declare var $: any;
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -16,7 +17,7 @@ export class UsersComponent implements OnInit {
   @ViewChild('updatecorrect') private updatecorrect: SwalComponent;
   @ViewChild('updateincorrect') private updateincorrect: SwalComponent;
   @ViewChild('delete') private delete: SwalComponent;
-  constructor(private usersService: UsersService,private sess:SessionService, private router:Router) {
+  constructor(public usersService: UsersService,private sess:SessionService, private router:Router) {
 
   }
 
@@ -25,8 +26,8 @@ export class UsersComponent implements OnInit {
   email: string;
   mobile: string;
   password: string;
-  userType: string
-
+  userType: any;
+  user: any;
   prueba:boolean=true;
 
   ngOnInit() {
@@ -37,6 +38,7 @@ export class UsersComponent implements OnInit {
     else{
       this.getUsers();
     }
+    $('#usuarios').DataTable();
     
     
   }
