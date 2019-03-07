@@ -17,6 +17,8 @@ export class UsersComponent implements OnInit {
   @ViewChild('updatecorrect') private updatecorrect: SwalComponent;
   @ViewChild('updateincorrect') private updateincorrect: SwalComponent;
   @ViewChild('delete') private delete: SwalComponent;
+  @ViewChild('datatable') table;
+  dataTable: any;
   constructor(public usersService: UsersService,private sess:SessionService, private router:Router) {
 
   }
@@ -38,7 +40,9 @@ export class UsersComponent implements OnInit {
     else{
       this.getUsers();
     }
-    $('#usuarios').DataTable();
+    this.dataTable = $(this.table.nativeElement);
+    
+    
     
     
   }
@@ -76,6 +80,12 @@ export class UsersComponent implements OnInit {
       .subscribe(res => {
         this.usersService.user=res as IUser[];
         console.log(res);
+        setTimeout( ()=>{
+            this.dataTable.DataTable({
+              scrollY: 500,
+              bDestroy:true
+            });
+        },0)
       });
 
   }
