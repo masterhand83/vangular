@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   getUserType() {
     this.key = "UserType";
     this.userType = this.sess.getFromSession(this.key);
-    console.log(this.userType);
+    //console.log(this.userType);
 
   }
 }

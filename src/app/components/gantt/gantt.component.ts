@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild, OnDestroy } from '@angular/core';
 import { IActivityConfig } from 'src/app/Rgantt/src/interfaces/IActivity.config';
 import { GanttManager } from 'src/app/Rgantt/src/gantt/ganttManager';
 import { SwalComponent } from '@toverux/ngx-sweetalert2';
@@ -18,6 +18,7 @@ declare var $: any;
 })
 
 export class GanttComponent implements OnInit {
+  
   @ViewChild('dateincorrect') private dateincorrect: SwalComponent;
   objectives: any[];
   deliverables: any[];
@@ -159,21 +160,19 @@ export class GanttComponent implements OnInit {
   getUserType() {
     this.key = 'UserType';
     this.userType = this.sess.getFromSession(this.key);
-    console.log(this.userType);
+    //console.log(this.userType);
 
   }
 
   getNameProject() {
     this.key2 = 'NameProject';
     this.nameproject = this.sess.getFromSession(this.key2);
-    
-
   }
 
   verifyElements(type: string, id: string,name:string) {
     switch (type) {
       case 'objectives':
-        var description='Se han verificado los objetivos en la actividad: '+name+' del proyecto: '+this.nameproject;
+        let description='Se han verificado los objetivos en la actividad: '+name+' del proyecto: '+this.nameproject;
         this.projectService.addAlert(this.current_project,description).subscribe(res=>{
         })
         this.projectService.verifyObjectives(id).subscribe(res => {
@@ -181,8 +180,8 @@ export class GanttComponent implements OnInit {
         });
         break;
       case 'deliverables':
-        var description='Se han verificado los objetivos en la actividad: '+name+' del proyecto: '+this.nameproject;
-        this.projectService.addAlert(this.current_project,description).subscribe(res=>{
+        let description2='Se han verificado los objetivos en la actividad: '+name+' del proyecto: '+this.nameproject;
+        this.projectService.addAlert(this.current_project,description2).subscribe(res=>{
         })
         this.projectService.verifyDeliverables(id).subscribe(res => {
           console.log(res);
@@ -193,13 +192,14 @@ export class GanttComponent implements OnInit {
     }
   }
 
-  // TODO: Mencionarle a quintero que se necesita el nombre del usuario que se logueó...
+  
   commentActivity(comment: string, id: string, name:string) {
-    var description='Se comento: '+comment+' en la actividad: '+name+ ' del proyecto: '+this.nameproject;
-    this.projectService.addAlert(this.current_project,description).subscribe(res=>{
+    let alert_description=`Se comento: ${comment} en la actividad: ${name} del proyecto ${this.nameproject}`;
+    let author = this.sess.getFromSession('UserName');
+    this.projectService.addAlert(this.current_project,alert_description).subscribe(res=>{
     })
 
-    this.projectService.commentActivity({ authorName: 'Anonimo', comment }, id).subscribe(res => {
+    this.projectService.commentActivity({ authorName: author, comment }, id).subscribe(res => {
       console.log(res);
     })
     setTimeout(() => {
@@ -226,4 +226,5 @@ export class GanttComponent implements OnInit {
     });
     location.reload();
   }
+
 }

@@ -11,11 +11,6 @@ import { Observable } from 'rxjs';
   styleUrls: ['./general-info.component.css']
 })
 export class GeneralInfoComponent implements OnInit, OnDestroy {
-  $project: Observable<any>;
-  current_id: any = 'id';
-  project_info: any = {info: null};
-  @ViewChild('deleteok') private deleteok: SwalComponent;
-  @ViewChild('askdelete') private askdelete: SwalComponent;
   constructor(private router: Router,
     private route: ActivatedRoute,
     private projects: ProjectService,
@@ -23,8 +18,16 @@ export class GeneralInfoComponent implements OnInit, OnDestroy {
     ) {
 
   }
+  $project: Observable<any>;
+  current_id: any = 'id';
+  project_info: any = {info: null};
+  @ViewChild('deleteok') private deleteok: SwalComponent;
+  @ViewChild('askdelete') private askdelete: SwalComponent;
+
+  key: string;
+  userType: any;
   ngOnDestroy(): void {
-    
+
   }
 
   getProject() {
@@ -35,10 +38,10 @@ export class GeneralInfoComponent implements OnInit, OnDestroy {
     this.current_id = this.sess.getFromSession('ActualProject');
       this.getProject();
       this.$project = this.getProject();
-      console.log(this.$project);
+      // console.log(this.$project);
 
     this.getUserType();
-    
+
   }
 
   askDelete() {
@@ -46,25 +49,21 @@ export class GeneralInfoComponent implements OnInit, OnDestroy {
   }
 
   deleteProject() {
-    
+
       this.projects.deleteProject(this.current_id)
         .subscribe(res => {
           this.sess.deleteProjectSession();
           this.router.navigate([('dashboard/projects')]);
           this.deleteok.show();
         });
-    
 
   }
-
-  key: string;
-  userType: string;
   getUserType() {
-    this.key = "UserType";
+    this.key = 'UserType';
     this.userType = this.sess.getFromSession(this.key);
-    console.log(this.userType);
+    // console.log(this.userType);
 
   }
 
-  
+
 }

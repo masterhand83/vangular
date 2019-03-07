@@ -9,11 +9,6 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./project-general.component.css']
 })
 export class ProjectGeneralComponent implements OnInit, OnDestroy {
-  ngOnDestroy(): void {
-    this.sess.deleteProjectSession();
-  }
-  current_id: string;
-  project_info: any;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -21,6 +16,16 @@ export class ProjectGeneralComponent implements OnInit, OnDestroy {
     private sess: SessionService
     ) {
     this.current_id = this.sess.getFromSession('ActualProject');
+  }
+  current_id: string;
+  project_info: any;
+
+ 
+
+  key: string;
+  userType: any;
+  ngOnDestroy(): void {
+    this.sess.deleteProjectSession();
   }
 
   ngOnInit() {
@@ -34,17 +39,11 @@ export class ProjectGeneralComponent implements OnInit, OnDestroy {
   goTo(dir: string) {
     this.router.navigate([`./${dir}`], { relativeTo: this.route });
   }
-
- 
-
-  key: string;
-  userType: string;
   getUserType() {
     this.key = "UserType";
     this.userType = this.sess.getFromSession(this.key);
-    console.log(this.userType);
+    //console.log(this.userType);
 
   }
-
  
 }

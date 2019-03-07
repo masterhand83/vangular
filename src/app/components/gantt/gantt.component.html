@@ -55,7 +55,7 @@
                 <div class="btn-toolbar" role="toolbar">
                   <div class="btn-group mr-2" role="group">
                     <!--? se puede revertir el inicio y fin de actividades ?-->
-                    <!-->button [swal]="notstartActivity" class="btn btn-success" type="button" [disabled]="!act.started">Iniciada
+                    <!--button [swal]="notstartActivity" class="btn btn-success" type="button" [disabled]="!act.started">Iniciada
                     </button-->
                     <button [swal]="startActivity" class="btn btn-warning" type="button" [disabled]="act.started ">
                       {{act.started? 'Iniciada':'Iniciar'}}
@@ -63,7 +63,7 @@
 
                   </div>
                   <div class="btn-group mr-2" role="group">
-                    <!-->button class="btn btn-success" type="button" [disabled]="!act.finished">Terminada</button-->
+                    <!--button class="btn btn-success" type="button" [disabled]="!act.finished">Terminada</button-->
                     <button [swal]="finishActivity" class="btn btn-warning" type="button" [disabled]="act.finished || !act.started">
                       {{act.finished?'Terminada':'Teminar'}}
                     </button>
@@ -225,7 +225,7 @@
   </div>
 
   <ng-template #loading>
-    loading...
+    <h4>Haz click en alguna actividad para empezar a trabajar</h4>
   </ng-template>
 
 </form>

@@ -49,7 +49,7 @@ export class ProjectShowCaseComponent implements OnInit {
       // console.log(response);
       for (const element of response) {
         const res = this.crypto.decrypt(element);
-        this.residentes.push(res);
+        this.residentes.push(<IUser>res);
       }
     });
   }
@@ -58,7 +58,7 @@ export class ProjectShowCaseComponent implements OnInit {
     this.user.getDesigners().subscribe((response: IUser[]) => {
       for (const element of response) {
         const res = this.crypto.decrypt(element);
-        this.proyectistas.push(res);
+        this.proyectistas.push(<IUser>res);
       }
     });
   }

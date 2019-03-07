@@ -20,11 +20,16 @@ export class SecurityService {
    * @param cryptedData datos encriptados
    */
   decrypt(cryptedData: any) {
-    // console.log('datos encriptados:', cryptedData);
+    let decryptedData = 'Not found';
+    //console.log('datos encriptados:', cryptedData);
     const textData: string = cryptedData.toString();
     const cryptedBytes = Crypto.AES.decrypt(textData, this.key);
-    // console.log(cryptedBytes.toString(Crypto.enc.Utf8)) ;
-    const decryptedData = JSON.parse(cryptedBytes.toString(Crypto.enc.Utf8));
+    const cryptedString: string = cryptedBytes.toString(Crypto.enc.Utf8)
+
+    //console.log(cryptedString) ;
+    if (cryptedString) {
+      decryptedData = JSON.parse(cryptedBytes.toString(Crypto.enc.Utf8));
+    }
     return decryptedData;
   }
 }

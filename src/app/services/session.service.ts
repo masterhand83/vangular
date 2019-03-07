@@ -21,9 +21,11 @@ export class SessionService {
   createSession(res: any) {
     const id = this.helmet.encrypt(res._id);
     const usrType = this.helmet.encrypt(res.userType);
-
-    this.cookieService.set('UserID', id);
-    this.cookieService.set('UserType', usrType); 
+    const name = this.helmet.encrypt(res.name);
+    //console.log(res);
+    this.cookieService.set('UserID', id,1,'/');
+    this.cookieService.set('UserType', usrType,1,'/');
+    this.cookieService.set('UserName',name,1,'/');
 
   }
   /**
@@ -43,7 +45,10 @@ export class SessionService {
    * @deprecated debido a problemas tecnicos, se incluye una funcionalidad de "proyecto mas reciente",asi que la sesion persiste
    */
   deleteProjectSession() {
-    this.cookieService.delete('ActualProject', '/', this.IP);
+    this.cookieService.delete('ActualProject');
+    this.cookieService.delete('NameProject');
+    let exist = this.cookieService.check('ActualProject') && this.cookieService.check('NameProject');
+    console.log(exist);
     // console.log(this.cookieService.get('ActualProject'));
   }
 
@@ -51,8 +56,10 @@ export class SessionService {
    * valida la sesion del usuario para evitar escalabilidad mediante el buscador
    */
   validateSession() {
+    const exists = this.cookieService.check('UserID') && this.cookieService.check('UserType') && this.cookieService.check('UserName');
+
     const usrID = this.cookieService.get('UserID');
-    if (usrID == null || usrID === '') {
+    if (!exists) {
       this.router.navigate(['']);
     } else {
       if (this.router.url.indexOf('login') > 0 ) {
@@ -68,15 +75,15 @@ export class SessionService {
     }
   }
   deleteSession() {
-    this.cookieService.deleteAll();
-    this.router.navigate(['../login']);
+    this.cookieService.deleteAll('/');
+    this.router.navigateByUrl('/login');
   }
   /**
    * Retorna la cookie seleccionada
    * Argumentos validos actualmente:
    * - UserType
    * - UserID
-   * TODO: adaptar a proyectos en caso de usarlo
+   * 
    * @param key El identificador de la cookie
    * @returns Un string
    */
