@@ -150,7 +150,7 @@
 
                 <div class="form-group">
                   <label for="nombre_tienda">Proyectista encargado: </label>
-                  <select name="designer" [(ngModel)]="designer" class="form-control">
+                  <select name="designer" class="form-control">
                     <option *ngFor="let proyectista of proyectistas" [value]="proyectista._id">{{proyectista.name}}</option>>
                   </select>
                 </div>

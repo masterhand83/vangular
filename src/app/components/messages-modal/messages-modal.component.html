@@ -1,3 +1,6 @@
+<ng-template #loading>
+
+</ng-template>
 <!--Modal de mensaje-->
 <div id="messages" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
@@ -10,16 +13,11 @@
         </button>
       </div>
       <!--cuerpo del modal-->
-      <div class="modal-body" style="overflow-y: scroll; max-height: 550px">
-        <div class="alert alert-primary">
-          <strong>(Gerente): </strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dolor nobis corporis nisi reprehenderit atque numquam officiis eos aliquid ab?
+      <div class="modal-body" style="overflow-y: scroll; max-height: 550px; overflow-x:hidden">
+        <div *ngFor="let msg of messages" class="alert alert-primary text-justify">
+          <strong> {{msg.authorName}}: </strong> <p>{{msg.message}}</p>
         </div>
-        <div class="alert alert-success">
-          <strong>(Residente): </strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam, nemo.
-        </div>
-        <div class="alert alert-warning">
-          <strong>(Proyectista): </strong> Lorem ipsum dolor sit amet.
-        </div>
+        
       </div>
       <div class="modal-footer p-1">
 
@@ -27,9 +25,9 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="input-group input-group-">
-                <input type="text" class="form-control input-lg" id="search-church" placeholder="Mensaje">
+                <input [(ngModel)]="message" type="text" class="form-control input-lg" id="search-church" placeholder="Mensaje" name="mensaje">
                 <span class="input-group-btn">
-                  <button class="btn btn-primary" type="submit">
+                  <button (click)="sendMessage()" class="btn btn-primary" type="submit">
                     <i class="fa fa-paper-plane"></i>
                   </button>
                 </span>

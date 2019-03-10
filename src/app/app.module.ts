@@ -20,6 +20,7 @@ import { UsersComponent } from './components/users/users.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { CookieService } from 'ngx-cookie-service';
+import { SocketService } from './services/socket.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,7 @@ import { CookieService } from 'ngx-cookie-service';
     SweetAlert2Module.forRoot(),
     ReactiveFormsModule
   ],
-  providers: [CookieService],
+  providers: [CookieService, SocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
