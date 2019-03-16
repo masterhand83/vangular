@@ -103,11 +103,11 @@ export class GanttChart implements IElement{
     private drawToday(fullstart: moment.Moment){
         let start = fullstart.clone();
         let today = moment(new Date()).add(1,'day');
-        //console.log(today.format('DD/MMMM/YYYY'));
+        console.log(today.format('DD/MMMM/YYYY'));
         //console.log(today.utc(true).format('DD/MMMM/YYYY'));
         
-        let from = moment.duration(today.diff(start)).days();
-        //console.log(from);
+        let from = moment.duration(today.diff(start)).asDays();
+        console.log(from);
         this.drawer.drawPin({
             x: from,
             y1: 25,

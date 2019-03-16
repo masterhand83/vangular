@@ -6,8 +6,8 @@ export interface IActivityConfig{
 
     index: number;
 
-    start: Date;
-    end: Date;
+    start: Date | Moment;
+    end: Date | Moment;
 
     data?: any | any[];
 }

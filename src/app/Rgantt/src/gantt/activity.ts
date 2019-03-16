@@ -38,8 +38,13 @@ export class Activity implements IElement {
         this.index = data.index;
         this.name = data.name;
         this.color = data.color;
-        this.start = moment(data.start);
-        this.end = moment(data.end);
+        if (moment.isMoment(data.start) && moment.isMoment(data.end)) {
+            this.start = data.start;
+            this.end = data.end;
+        }else{
+            this.start = moment(data.start);
+            this.end = moment(data.end);
+        }
 
         this.drawer = drawer;
 

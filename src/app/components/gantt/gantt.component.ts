@@ -72,14 +72,14 @@ export class GanttComponent implements OnInit {
       const activs = [];
 
       for (const act of response) {
-
+        
         //this.parseDate(act.start);
         activs.push({
           name: act.name,
-          start: act.start,
+          start: moment.utc(act.start).utc(false),
           data: act.id,
           index: act.index,
-          end: act.end,
+          end: moment.utc(act.end).utc(false),
           color: act.color
         });
       }
@@ -88,7 +88,7 @@ export class GanttComponent implements OnInit {
       gantt.init(activs);
       /*gantt.initialize();*/
       gantt.onActivityClick((data) => {
-        console.log(data);
+        //console.log(data);
         this.selected_activity = data;
         this.$activity = this.projectService.getActivity(data);
         setTimeout(() => {
@@ -153,7 +153,7 @@ export class GanttComponent implements OnInit {
   }
 
   parseDate(input: string) {
-    return input;
+    return moment.utc(input.substring(0,input.length-1)).toDate();
   }
 
 
