@@ -16,7 +16,7 @@ export class UsersService {
 
   user: IUser[];
   user2: IUser[];
-  alerts: IAlerts[];
+  public alerts: IAlerts[];
   // projects:Project[];
 
   expreg = /^[^<>(){};,]*$/;
