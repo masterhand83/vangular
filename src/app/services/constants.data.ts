@@ -3,5 +3,5 @@
  * se pueden modificar sin iterar por todos los servicios o componentes
  */
 export const constants = {
-    IP: 'localhost'
+    IP: location.hostname
 };

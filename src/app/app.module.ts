@@ -21,6 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { CookieService } from 'ngx-cookie-service';
 import { SocketService } from './services/socket.service';
+import {  FileNamePipe } from './pipes/fileimage.pipe';
+import { FileSizePipe } from './pipes/filesize.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +39,9 @@ import { SocketService } from './services/socket.service';
     MessagesModalComponent,
     AlertsShowCaseComponent,
     NotFoundComponent,
-    UsersComponent
+    UsersComponent,
+    FileNamePipe,
+    FileSizePipe
   ],
   imports: [
     BrowserModule,

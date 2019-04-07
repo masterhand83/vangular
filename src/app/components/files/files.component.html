@@ -1,3 +1,44 @@
-<p>
-  files works!
-</p>
+<div class="container-fluid mb-3" *ngIf="$files | async as files; else loading">
+  <div class="row">
+    <!--Aqui va la imagen del proyecto-->
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-5" *ngFor="let file of files; let i = index">
+      <div class="card shadow-sm" style="width: 17rem">
+        <img src="{{file.icon | fileName}}" class="card-img-top my-2" style="height: 17rem">
+
+        <div class="card-body clickable" (click)="openOptions(file._id)">
+          <h5 class="card-title text-primary">{{file.originalname}}</h5>
+          <p class="card-text text-primary">
+            <i class="fas fa-user fa-fw"></i>
+            Subido por: <span class="text-secondary">{{file.author}}</span>
+          </p>
+          <p class="card-text text-primary">
+            <i class="fas fa-box"></i> Tamaño:
+            <span class="text-secondary" [innerHTML]="file.size | fileSize"></span>
+          </p>
+          <p class="card-text text-success">
+
+            <small><i class="fas fa-clock fa-fw"></i> subido el: {{file.created_at | date: "MM/dd/yy"}}</small>
+          </p>
+        </div>
+        <div class="card-footer collapse" [id]="file._id">
+          <div class="mx-4" >
+            <div class="btn-grou">
+              <a class="btn btn-success btn-block mb-3" href="http://{{dir}}/api/files/file/{{file._id}}">Descargar</a>
+              <button class="btn btn-danger btn-block">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+  </div>
+  <ng-template #loading>
+    <div class="container-fluid">
+      <h1 class="text-primary display-4">Cargando...</h1>
+    </div>
+  </ng-template>
+  <!--Aqui va el contenido-->
+
+</div>
+<!-- /.container-fluid -->

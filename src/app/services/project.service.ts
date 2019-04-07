@@ -121,7 +121,7 @@ export class ProjectService {
     return this.http.post(`http://${this.IP}:3000/api/activities/comment/${_id}`, body);
   }
 
-  setActivityStatus(status: number, _id: string,data:boolean) {
+  setActivityStatus(status: number, _id: string, data: boolean) {
     switch (status) {
       case 0:
         return this.http.put(`http://${this.IP}:3000/api/activities/start/${_id}`, {started: data});
@@ -135,21 +135,21 @@ export class ProjectService {
   }
 
   addActivity(data: {
-    name:string,
+    name: string,
     description: string,
     start: string,
-    end:string,
-    priority:number,
-    deliverable:string[],
+    end: string,
+    priority: number,
+    deliverable: string[],
     objective: string[]
-  }, _id:string){
-    
-    return this.http.put(`http://${this.IP}:3000/api/projects/activity/${_id}`,data);
+  }, _id: string) {
+
+    return this.http.put(`http://${this.IP}:3000/api/projects/activity/${_id}`, data);
   }
 
-  addAlert(_id:string,description:string){
+  addAlert(_id: string, description: string) {
     return this.http.post(`http://${this.IP}:3000/api/projects/alert/${_id}`,  {
-      link:"link",
+      link: 'link',
       description: description,
     });
   }
