@@ -10,6 +10,7 @@ import { element } from '@angular/core/src/render3';
 import * as moment from 'moment';
 import { NgLocalization } from '@angular/common';
 import { asTextData } from '../../../../node_modules/@angular/core/src/view';
+import { DomSanitizer } from '@angular/platform-browser';
 declare var $: any;
 @Component({
   selector: 'app-gantt',
@@ -18,7 +19,7 @@ declare var $: any;
 })
 
 export class GanttComponent implements OnInit {
-  
+  gantturl: any = '';
   @ViewChild('dateincorrect') private dateincorrect: SwalComponent;
   objectives: any[];
   deliverables: any[];
@@ -34,7 +35,8 @@ export class GanttComponent implements OnInit {
     private sess: SessionService,
     private projectService: ProjectService,
     private router: Router,
-    private zone: NgZone
+    private zone: NgZone,
+    private sanit: DomSanitizer
   ) {
     this.current_project = this.sess.getFromSession('ActualProject');
     this.objectives = [];
@@ -101,13 +103,13 @@ export class GanttComponent implements OnInit {
 
   }
   ngOnInit() {
+    
     this.getUserType();
     this.getNameProject();
     if (this.userType == '3') {
       this.router.navigateByUrl(`/dashboard/projects`);
     }
     this.getActivities();
-
   }
 
   EditActivity(form: any) {
@@ -226,5 +228,15 @@ export class GanttComponent implements OnInit {
     });
     location.reload();
   }
+  screenshot(){
+    let btn = document.getElementById('download-gantt');
+    let canvas = <HTMLCanvasElement> document.getElementById('gantt-interface');
+    btn.setAttribute('href', canvas.toDataURL());
+    /*canvas.toBlob(function(blob){
+      let file = new Blob([blob],{type:"image/jpg"});
+      let blobURL = URL.createObjectURL(file);
+      
+    })*/
 
+  }
 }
