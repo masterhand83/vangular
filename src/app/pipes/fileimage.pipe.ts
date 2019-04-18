@@ -13,7 +13,10 @@ export class FileNamePipe implements PipeTransform {
             case 'docIcon':
                 return 'assets/img/doc.svg';
             break;
-            case 'pngIcon' || 'jpgIcon':
+            case 'pngIcon':
+                return 'assets/img/picture.svg';
+            break;
+            case 'jpgIcon':
                 return 'assets/img/picture.svg';
             break;
         }

@@ -5,6 +5,7 @@
       <div class="modal-header bg-warning text-white">
         <h5 class="modal-title" id="exampleModalLabel">
           <strong>Subir archivo</strong>
+          
         </h5>
         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true" class="text-white">×</span>
@@ -18,11 +19,11 @@
             <div class="col-lg-12">
 
               <div class="form-group">
-                <label for="nombre_tienda">Archivo:</label>
-                <input name="nombre_tienda" class="form-contro" type="file" placeholder="Nombre">
+                <span>Archivo: </span>
+                <br>
+                <input (change)="fileChange($event)" name="archivo" class="form-control-file" type="file">
               </div>
             </div>
-
 
           </div>
         </div>
@@ -30,7 +31,7 @@
 
       <div class="modal-footer">
         <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
-        <a class="btn btn-warning">Subir archivo</a>
+        <button class="btn btn-warning" (click)="upload()">Subir archivo</button>
       </div>
     </div>
   </div>
