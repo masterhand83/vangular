@@ -16,4 +16,7 @@ export class FileService{
     uploadFiles(data: FormData, id: string): Observable<any> {
         return this.http.post(`http://${this.IP}:3000/api/projects/file/${id}`, data);
     }
+    download_project(data: FormData, projectId: string): Observable<any>{
+        return  this.http.post(`http://${this.IP}:3000/api/pdfs/pdf/${projectId}`, data,{responseType: 'blob'});
+    }
 }

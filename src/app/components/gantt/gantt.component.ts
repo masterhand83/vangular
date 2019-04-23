@@ -11,6 +11,7 @@ import * as moment from 'moment';
 import { NgLocalization } from '@angular/common';
 import { asTextData } from '../../../../node_modules/@angular/core/src/view';
 import { DomSanitizer } from '@angular/platform-browser';
+import { FileService } from 'src/app/services/files.service';
 declare var $: any;
 @Component({
   selector: 'app-gantt',
@@ -36,7 +37,8 @@ export class GanttComponent implements OnInit {
     private projectService: ProjectService,
     private router: Router,
     private zone: NgZone,
-    private sanit: DomSanitizer
+    private sanit: DomSanitizer,
+    private fileService: FileService
   ) {
     this.current_project = this.sess.getFromSession('ActualProject');
     this.objectives = [];
@@ -74,8 +76,8 @@ export class GanttComponent implements OnInit {
       const activs = [];
 
       for (const act of response) {
-        
-        //this.parseDate(act.start);
+
+        // this.parseDate(act.start);
         activs.push({
           name: act.name,
           start: moment.utc(act.start).utc(false),
@@ -90,7 +92,7 @@ export class GanttComponent implements OnInit {
       gantt.init(activs);
       /*gantt.initialize();*/
       gantt.onActivityClick((data) => {
-        //console.log(data);
+        // console.log(data);
         this.selected_activity = data;
         this.$activity = this.projectService.getActivity(data);
         setTimeout(() => {
@@ -103,7 +105,7 @@ export class GanttComponent implements OnInit {
 
   }
   ngOnInit() {
-    
+
     this.getUserType();
     this.getNameProject();
     if (this.userType == '3') {
@@ -114,25 +116,24 @@ export class GanttComponent implements OnInit {
 
   EditActivity(form: any) {
 
-    var start=moment(form.inicio).format('YYYY-MM-DD');
-    var end=moment(form.final).format('YYYY-MM-DD');
-    var actualDay=moment().format('YYYY-MM-DD');
+    let start = moment(form.inicio).format('YYYY-MM-DD');
+    let end = moment(form.final).format('YYYY-MM-DD');
+    let actualDay = moment().format('YYYY-MM-DD');
 
-    if(end<start){
+    if (end < start) {
 
       this.dateincorrect.show();
 
+    } else {
+      // console.log(f);
+      this.projectService.putActivity(this.selected_activity, form, this.objectives, this.deliverables).subscribe((response: any) => {
+        console.log(response);
+      });
+      // this.getActivities();
+      $('#activity-info-modal').modal('hide');
+      location.reload();
     }
-    else{
-    // console.log(f);
-    this.projectService.putActivity(this.selected_activity, form, this.objectives, this.deliverables).subscribe((response: any) => {
-      console.log(response);
-    });
-    // this.getActivities();
-    $('#activity-info-modal').modal('hide');
-    location.reload();
-    }
-    
+
     /*this.zone.runOutsideAngular(()=>{
       location.reload();
     });*/
@@ -155,14 +156,14 @@ export class GanttComponent implements OnInit {
   }
 
   parseDate(input: string) {
-    return moment.utc(input.substring(0,input.length-1)).toDate();
+    return moment.utc(input.substring(0, input.length - 1)).toDate();
   }
 
 
   getUserType() {
     this.key = 'UserType';
     this.userType = this.sess.getFromSession(this.key);
-    //console.log(this.userType);
+    // console.log(this.userType);
 
   }
 
@@ -171,20 +172,20 @@ export class GanttComponent implements OnInit {
     this.nameproject = this.sess.getFromSession(this.key2);
   }
 
-  verifyElements(type: string, id: string,name:string) {
+  verifyElements(type: string, id: string, name: string) {
     switch (type) {
       case 'objectives':
-        let description='Se han verificado los objetivos en la actividad: '+name+' del proyecto: '+this.nameproject;
-        this.projectService.addAlert(this.current_project,description).subscribe(res=>{
-        })
+        const description = 'Se han verificado los objetivos en la actividad: ' + name + ' del proyecto: ' + this.nameproject;
+        this.projectService.addAlert(this.current_project, description).subscribe(res => {
+        });
         this.projectService.verifyObjectives(id).subscribe(res => {
           console.log(res);
         });
         break;
       case 'deliverables':
-        let description2='Se han verificado los objetivos en la actividad: '+name+' del proyecto: '+this.nameproject;
-        this.projectService.addAlert(this.current_project,description2).subscribe(res=>{
-        })
+        const description2 = 'Se han verificado los objetivos en la actividad: ' + name + ' del proyecto: ' + this.nameproject;
+        this.projectService.addAlert(this.current_project, description2).subscribe(res => {
+        });
         this.projectService.verifyDeliverables(id).subscribe(res => {
           console.log(res);
         });
@@ -194,49 +195,86 @@ export class GanttComponent implements OnInit {
     }
   }
 
-  
-  commentActivity(comment: string, id: string, name:string) {
-    let alert_description=`Se comento: ${comment} en la actividad: ${name} del proyecto ${this.nameproject}`;
-    let author = this.sess.getFromSession('UserName');
-    this.projectService.addAlert(this.current_project,alert_description).subscribe(res=>{
-    })
+
+  commentActivity(comment: string, id: string, name: string) {
+    const alert_description = `Se comento: ${comment} en la actividad: ${name} del proyecto ${this.nameproject}`;
+    const author = this.sess.getFromSession('UserName');
+    this.projectService.addAlert(this.current_project, alert_description).subscribe(res => {
+    });
 
     this.projectService.commentActivity({ authorName: author, comment }, id).subscribe(res => {
       console.log(res);
-    })
+    });
     setTimeout(() => {
       location.reload();
     }, 400);
   }
 
-  setStarted(type:number, id:string, value:boolean,name:string){
-    var description='Se inicio actividad: '+name+' del proyecto: '+this.nameproject;
-    this.projectService.addAlert(this.current_project,description).subscribe(res=>{
-    })
-    this.projectService.setActivityStatus(type,id,value).subscribe(response =>{
-      console.log(response);
-    })
-    location.reload();
-  }
-
-  endActivity(id:string,name:string){
-    var description='Se finalizo actividad: '+name+' del proyecto: '+this.nameproject;
-    this.projectService.addAlert(this.current_project,description).subscribe(res=>{
-    })
-    this.projectService.setActivityStatus(1,id,true).subscribe(response =>{
+  setStarted(type: number, id: string, value: boolean, name: string) {
+    let description = 'Se inicio actividad: ' + name + ' del proyecto: ' + this.nameproject;
+    this.projectService.addAlert(this.current_project, description).subscribe(res => {
+    });
+    this.projectService.setActivityStatus(type, id, value).subscribe(response => {
       console.log(response);
     });
     location.reload();
   }
-  screenshot(){
-    let btn = document.getElementById('download-gantt');
-    let canvas = <HTMLCanvasElement> document.getElementById('gantt-interface');
+
+  endActivity(id: string, name: string) {
+    let description = 'Se finalizo actividad: ' + name + ' del proyecto: ' + this.nameproject;
+    this.projectService.addAlert(this.current_project, description).subscribe(res => {
+    });
+    this.projectService.setActivityStatus(1, id, true).subscribe(response => {
+      console.log(response);
+    });
+    location.reload();
+  }
+  screenshot() {
+    const btn = document.getElementById('download-gantt');
+    const canvas = <HTMLCanvasElement>document.getElementById('gantt-interface');
     btn.setAttribute('href', canvas.toDataURL());
     /*canvas.toBlob(function(blob){
       let file = new Blob([blob],{type:"image/jpg"});
       let blobURL = URL.createObjectURL(file);
-      
+
     })*/
 
   }
+
+  async download_project() {
+    const formData = new FormData();
+    const canvas = <HTMLCanvasElement>document.getElementById('gantt-interface');
+    let file = this.dataURItoBlob(canvas.toDataURL());
+    formData.set('file', file);
+    // console.log(this.sess.getFromSession('ActualProject'))
+    await this.fileService.download_project(formData, this.sess.getFromSession('ActualProject')).subscribe(res => {
+      let link = document.createElement('a');
+        console.log(link);
+        const data = window.URL.createObjectURL(res);
+        link.href = data;
+        link.download='informe.pdf';
+        link.click();
+        setTimeout(function(){
+          window.URL.revokeObjectURL(data);
+        },100);
+    });
+  }
+
+  dataURItoBlob(dataURI) {
+    let byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0) {
+      byteString = atob(dataURI.split(',')[1]);
+    } else {
+      byteString = unescape(dataURI.split(',')[1]);
+    }
+    // separate out the mime component
+    let mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    // write the bytes of the string to a typed array
+    let ia = new Uint8Array(byteString.length);
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ia], { type: mimeString });
+  }
+
 }

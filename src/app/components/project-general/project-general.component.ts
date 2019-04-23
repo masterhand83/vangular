@@ -9,6 +9,7 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./project-general.component.css']
 })
 export class ProjectGeneralComponent implements OnInit, OnDestroy {
+  current_project;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -45,5 +46,7 @@ export class ProjectGeneralComponent implements OnInit, OnDestroy {
     //console.log(this.userType);
 
   }
- 
+  downloadProject(){
+    
+  }
 }
