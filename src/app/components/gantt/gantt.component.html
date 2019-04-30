@@ -8,12 +8,14 @@
     </div>
   </div>
   <div class="row">
-      <div class="col-lg-12">
-        <a (click)="screenshot()" id="download-gantt" class="btn btn-outline-success text-success btn-block mt-3" download>Descargar Gantt</a>
-      </div>
-      <div class="col-lg-12">
-        <button class="btn btn-block btn-warning mt-3" [swal]="downloadFile">Descargar proyecto</button>
-      </div>
+    <div class="col-lg-12">
+      <a (click)="screenshot()" id="download-gantt" class="btn btn-outline-success text-success btn-block mt-3" download>Descargar Gantt</a>
+    </div>
+    <div class="col-lg-12">
+      <button class="btn btn-block btn-warning mt-3" [swal]="downloadFile">Descargar proyecto</button>
+    </div>
+
+    
   </div>
 </div>
 
@@ -192,7 +194,7 @@
                   <div class="card-header bg-warning text-white">
                     <!--para activar el modal de objetivos-->
                     <strong>comentarios</strong>
-                    <button  type="button" class="btn btn-warning float-right" data-toggle="collapse" data-target="#comentario-collapse">
+                    <button type="button" class="btn btn-warning float-right" data-toggle="collapse" data-target="#comentario-collapse">
                       <i class="fa fa-plus float-right align-middle clickable "></i>
                     </button>
                     <br>
@@ -216,10 +218,20 @@
                   </div>
                 </div>
               </div>
+              
+              <div class="col-lg-12">
+                <br>
+                <button (click)="deleteActivity(act._id)"class="btn btn-danger btn-block" type="button">Eliminar actividad</button>
+              </div>
+
 
             </div>
+
           </div>
         </div>
+
+
+
         <div class="modal-footer">
           <div [hidden]="!nameref.errors?.pattern">
             En el nombre solo puede haber letras y numeros.
@@ -230,7 +242,7 @@
       </div>
     </div>
   </div>
-  
+
   <ng-template #loading>
     <h4>Haz click en alguna actividad para empezar a trabajar</h4>
   </ng-template>
@@ -239,12 +251,7 @@
 
 <swal #dateincorrect title="Favor de checar las fechas" text="La fecha final debe de ser mayor a la inicial" type="warning"
   [focusCancel]="true"></swal>
-  <swal #downloadFile 
-    title="¿Seguro que deseas descargar el proyecto?" 
-    text="Esta accion no se puede deshacer" 
-    type="question"
-    [showCancelButton]="true"
-    [focusCancel]="true"
-    (confirm)="download_project()"
-  ></swal>
+<swal #downloadFile title="¿Seguro que deseas descargar el proyecto?" text="Esta accion no se puede deshacer" type="question"
+  [showCancelButton]="true" [focusCancel]="true" (confirm)="download_project()"></swal>
+<swal #deleteAct title="Eliminada exitosamente" type="success" [focusCancel]="true"></swal>
 <!--SWEETALERT-->

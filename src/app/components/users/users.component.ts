@@ -57,16 +57,13 @@ export class UsersComponent implements OnInit {
       && form.value.password != undefined && form.value.userType != undefined
 
     ) {
-
+      location.reload();
       this.usersService.postUser(form.value)
         .subscribe(res => {
-          this.getUsers();
-
           form.reset();
-          this.usercorrect.show();
-
+          
         });
-
+        this.usercorrect.show();
 
     }
     else {
@@ -108,11 +105,13 @@ export class UsersComponent implements OnInit {
   }
   deleteUser(_id: string) {
     if (confirm('¿Estas seguro de eliminarlo?')) {
+      
       this.usersService.deleteUser(_id)
         .subscribe(res => {
           this.getUsers();
           this.delete.show();
         });
+        location.reload();
     }
 
   }

@@ -81,7 +81,7 @@ export class ProjectShowCaseComponent implements OnInit {
   }
 
 
-
+  message:string;
   // Crea los proyectos
   createProject(f: NgForm) {
     const data = f.value;
@@ -89,7 +89,14 @@ export class ProjectShowCaseComponent implements OnInit {
       this.projects = [];
       this.getProjects();
       $('#create-project').modal('hide');
+      console.log(response);
     });
+    this.message="¡Urgente! Proyectista, favor de completar la información general";
+    this.projectService.sendMessage(this.message).subscribe(res=>{
+      console.log(res);
+    });
+   
+    
   }
 
   goToProject(projectID: string,projectname:string) {

@@ -22,6 +22,7 @@ declare var $: any;
 export class GanttComponent implements OnInit {
   gantturl: any = '';
   @ViewChild('dateincorrect') private dateincorrect: SwalComponent;
+  @ViewChild('deleteAct') private deleteAct:SwalComponent;
   objectives: any[];
   deliverables: any[];
   activs: IActivityConfig[] = [];
@@ -181,13 +182,19 @@ export class GanttComponent implements OnInit {
         this.projectService.verifyObjectives(id).subscribe(res => {
           console.log(res);
         });
+        this.projectService.sendMessage(description).subscribe(res=>{
+          //Filtar
+        });
         break;
       case 'deliverables':
-        const description2 = 'Se han verificado los objetivos en la actividad: ' + name + ' del proyecto: ' + this.nameproject;
+        const description2 = 'Se han verificado los entregables en la actividad: ' + name + ' del proyecto: ' + this.nameproject;
         this.projectService.addAlert(this.current_project, description2).subscribe(res => {
         });
         this.projectService.verifyDeliverables(id).subscribe(res => {
           console.log(res);
+        });
+        this.projectService.sendMessage(description2).subscribe(res=>{
+          //Filtar
         });
         break;
       default:
@@ -195,7 +202,7 @@ export class GanttComponent implements OnInit {
     }
   }
 
-
+ 
   commentActivity(comment: string, id: string, name: string) {
     const alert_description = `Se comento: ${comment} en la actividad: ${name} del proyecto ${this.nameproject}`;
     const author = this.sess.getFromSession('UserName');
@@ -208,6 +215,10 @@ export class GanttComponent implements OnInit {
     setTimeout(() => {
       location.reload();
     }, 400);
+    this.projectService.sendMessage(alert_description).subscribe(res=>{
+      //Filtrar
+    });
+
   }
 
   setStarted(type: number, id: string, value: boolean, name: string) {
@@ -216,6 +227,9 @@ export class GanttComponent implements OnInit {
     });
     this.projectService.setActivityStatus(type, id, value).subscribe(response => {
       console.log(response);
+    });
+    this.projectService.sendMessage(description).subscribe(res=>{
+      //Filtrar
     });
     location.reload();
   }
@@ -227,8 +241,19 @@ export class GanttComponent implements OnInit {
     this.projectService.setActivityStatus(1, id, true).subscribe(response => {
       console.log(response);
     });
+    this.projectService.sendMessage(description).subscribe(resp=>{
+      //Filtrar
+    });
     location.reload();
   }
+
+  deleteActivity(_id:string){
+    this.projectService.delteActivity(_id).subscribe(res=>{
+      this.getActivities();
+      this.deleteAct.show();
+    });
+  }
+
   screenshot() {
     const btn = document.getElementById('download-gantt');
     const canvas = <HTMLCanvasElement>document.getElementById('gantt-interface');

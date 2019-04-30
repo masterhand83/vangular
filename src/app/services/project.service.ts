@@ -153,4 +153,15 @@ export class ProjectService {
       description: description,
     });
   }
+
+  delteActivity(_id:string){
+    return this.http.delete(`http://${this.IP}:3000/api/activities/activity/${_id}`);
+  }
+
+  sendMessage(message:string){
+    return this.http.post(`http://${this.IP}:3000/api/sendmessage/send`,{
+      message:message
+    });
+  }
+ 
 }

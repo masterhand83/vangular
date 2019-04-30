@@ -137,7 +137,7 @@
               </div>
               <div class="col-lg-11">
                 <div class="form-group">
-                  <input type="text" placeholder="Correo Electronico" class="form-control" [(ngModel)]="email" name="email" #emailref="ngModel"
+                  <input type="text" placeholder="Correo Electronico" class="form-control" [(ngModel)]="email" name="email" #email1ref="ngModel"
                     maxlength="100" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$">
                 </div>
               </div>
@@ -149,7 +149,7 @@
               </div>
               <div class="col-lg-11">
                 <div class="form-group">
-                  <input type="text" placeholder="movil" class="form-control" [(ngModel)]="mobile" name="mobile" #mobileref="ngModel" maxlength="100"
+                  <input type="text" placeholder="movil" class="form-control" [(ngModel)]="mobile" name="mobile" #mobile1ref="ngModel" maxlength="100"
                     required pattern="[0-9]{10,14}$">
                 </div>
               </div>
@@ -163,13 +163,13 @@
               <!--div class="col-lg-1"></div-->
               <div class="col-lg-6">
                 <div class="form-group">
-                  <input type="text" placeholder="Contraseña" class="form-control" [(ngModel)]="password" name="password" #passwordref="ngModel"
+                  <input type="text" placeholder="Contraseña" class="form-control" [(ngModel)]="password" name="password" #password1ref="ngModel"
                     required (keyup)="checkPasses()" pattern="[A-Za-z0-9|°¬!'#$%&/()=?\¡¿´¨+*~`^,;.:-_@áéíóúÁÉÍÓÚ]{8,30}">
                 </div>
               </div>
               <div class="col-lg-5">
                 <div class="form-group">
-                  <input type="text" placeholder="Repetir contraseña" class="form-control" [(ngModel)]="reppassword" name="reppassword" #reppaswordref="ngModel"
+                  <input type="text" placeholder="Repetir contraseña" class="form-control" [(ngModel)]="reppassword" name="reppassword" #reppassword1ref="ngModel"
                     required (keyup)="checkPasses()" pattern="[A-Za-z0-9|°¬!'#$%&/()=?\¡¿´¨+*~`^,;.:-_@áéíóúÁÉÍÓÚ]{8,30}">
                 </div>
               </div>
@@ -216,14 +216,17 @@
           <div [hidden]="!lastnameref.errors?.pattern">
             En los apellidos solo pueden haber letras.
           </div>
-          <div [hidden]="!emailref.errors?.pattern">
+          <div [hidden]="!email1ref.errors?.pattern">
             Correo Invalido.
           </div>
-          <div [hidden]="!mobileref.errors?.pattern">
+          <div [hidden]="!mobile1ref.errors?.pattern">
             El numero debe de tener minimo 10 y maximo 14 caracteres.
           </div>
-          <div [hidden]="!passwordref.errors?.pattern">
+          <div [hidden]="!password1ref.errors?.pattern">
             La contraseña debe de tener minimo 8 y maximo 30 caracteres, sin espacios.
+          </div>
+          <div [hidden]="!reppassword1ref.errors?.pattern">
+            La repeticion de la contraseña debe de tener minimo 8 y maximo 30 caracteres, sin espacios. 
           </div>
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
           <input [disabled]="boton || userForm.invalid"
@@ -279,7 +282,7 @@
               <div class="col-lg-11">
                 <div class="form-group">
                   <input type="text" placeholder="Correo Electronico" class="form-control" name="email2" [(ngModel)]="email2" maxlength="100"
-                    #emailref="ngModel" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$" required>
+                    #email2ref="ngModel" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$" required>
                 </div>
               </div>
             </div>
@@ -290,7 +293,7 @@
               </div>
               <div class="col-lg-11">
                 <div class="form-group">
-                  <input type="text" placeholder="movil" class="form-control" name="mobile2" [(ngModel)]="mobile2" maxlength="100" #mobileref="ngModel"
+                  <input type="text" placeholder="movil" class="form-control" name="mobile2" [(ngModel)]="mobile2" maxlength="100" #mobile2ref="ngModel"
                     pattern="[0-9]{10,14}$" required>
                 </div>
               </div>
@@ -305,7 +308,7 @@
               <div class="col-lg-11">
                 <div class="form-group">
                   <input type="text" placeholder="Contraseña" class="form-control" name="password2" [(ngModel)]="password2" maxlength="100"
-                    #passwordref="ngModel" pattern="[A-Za-z0-9|°¬!'#$%&/()=?\¡¿´¨+*~`^,;.:-_@áéíóúÁÉÍÓÚ]{8,30}" required>
+                    #password2ref="ngModel" pattern="[A-Za-z0-9|°¬!'#$%&/()=?\¡¿´¨+*~`^,;.:-_@áéíóúÁÉÍÓÚ]{8,30}" required>
                 </div>
               </div>
               <!--div class="col-lg-5">
@@ -345,13 +348,13 @@
           </div>
         </div>
         <div class="modal-footer">
-          <div [hidden]="!emailref.errors?.pattern">
+          <div [hidden]="!email2ref.errors?.pattern">
             Correo Invalido.
           </div>
-          <div [hidden]="!mobileref.errors?.pattern">
+          <div [hidden]="!mobile2ref.errors?.pattern">
             El numero debe de tener minimo 10 y maximo 14 caracteres.
           </div>
-          <div [hidden]="!passwordref.errors?.pattern">
+          <div [hidden]="!password2ref.errors?.pattern">
             La contraseña debe de tener minimo 8 y maximo 30 caracteres, sin espacios.
           </div>
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>

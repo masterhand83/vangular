@@ -23,4 +23,9 @@ export class FilesComponent implements OnInit {
   openOptions(id){
     $('#'+id).collapse('toggle');
   }
+  deleteFile(_id:string){
+    this.fileService.deleteFile(_id).subscribe(res=>{
+      location.reload();
+    });
+  }
 }

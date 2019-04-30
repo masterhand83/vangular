@@ -19,4 +19,7 @@ export class FileService{
     download_project(data: FormData, projectId: string): Observable<any>{
         return  this.http.post(`http://${this.IP}:3000/api/pdfs/pdf/${projectId}`, data,{responseType: 'blob'});
     }
+    deleteFile(_id:string){
+        return this.http.delete(`http://${this.IP}:3000/api/files/file/${_id}`);
+    } 
 }

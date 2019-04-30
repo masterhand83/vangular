@@ -24,7 +24,7 @@
           <div class="mx-4" >
             <div class="btn-grou">
               <a class="btn btn-success btn-block mb-3" href="http://{{dir}}/api/files/file/{{file._id}}">Descargar</a>
-              <button class="btn btn-danger btn-block">Eliminar</button>
+              <button (click)="deleteFile(file._id)" class="btn btn-danger btn-block">Eliminar</button>
             </div>
           </div>
         </div>
