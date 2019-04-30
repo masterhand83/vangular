@@ -25,10 +25,10 @@ export class MessagesModalComponent implements OnInit, OnDestroy {
     this.chatService.joinProject(this.currentProject);
     this.getMessages();
     this.chatService.streamMessages().subscribe((mess: any) => {
-      //console.log(mess);
+      console.log(mess);
       this.messages.push({
-        authorName: mess.message.authorName,
-        message: mess.message.msg
+        authorName: mess.msg.authorName,
+        message: mess.msg.msg
       });
     });
 
