@@ -93,6 +93,7 @@ export class UsersComponent implements OnInit {
       if (confirm('¿Estas seguro de actualizar?')) {
         this.usersService.putUser(form.value.id2, form.value.email2, form.value.mobile2, form.value.password2)
           .subscribe(res => {
+            location.reload();
             this.getUsers();
             this.updatecorrect.show();
           });

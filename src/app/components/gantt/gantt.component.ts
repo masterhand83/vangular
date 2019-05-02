@@ -182,9 +182,7 @@ export class GanttComponent implements OnInit {
         this.projectService.verifyObjectives(id).subscribe(res => {
           console.log(res);
         });
-        this.projectService.sendMessage(description).subscribe(res=>{
-          //Filtar
-        });
+        
         break;
       case 'deliverables':
         const description2 = 'Se han verificado los entregables en la actividad: ' + name + ' del proyecto: ' + this.nameproject;
@@ -193,9 +191,7 @@ export class GanttComponent implements OnInit {
         this.projectService.verifyDeliverables(id).subscribe(res => {
           console.log(res);
         });
-        this.projectService.sendMessage(description2).subscribe(res=>{
-          //Filtar
-        });
+       
         break;
       default:
         break;
@@ -204,7 +200,7 @@ export class GanttComponent implements OnInit {
 
  
   commentActivity(comment: string, id: string, name: string) {
-    const alert_description = `Se comento: ${comment} en la actividad: ${name} del proyecto ${this.nameproject}`;
+    const alert_description = `Se comento: ${comment} en la actividad: ${name} del proyecto: ${this.nameproject}`;
     const author = this.sess.getFromSession('UserName');
     this.projectService.addAlert(this.current_project, alert_description).subscribe(res => {
     });
