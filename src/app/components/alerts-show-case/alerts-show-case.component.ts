@@ -10,7 +10,7 @@ import { IAlerts } from '../../models/IAlerts';
 })
 export class AlertsShowCaseComponent implements OnInit {
 
-  constructor(private sess: SessionService, private usersService: UsersService, private router: Router) { }
+  constructor(private sess: SessionService, public usersService: UsersService, private router: Router) { }
 
   ngOnInit() {
     this.getUserType();

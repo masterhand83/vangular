@@ -10,7 +10,8 @@ declare var $:any;
   styleUrls: ['./files.component.css']
 })
 export class FilesComponent implements OnInit {
-
+  loading:string;
+  
   constructor(private sess:SessionService, private fileService: FileService) { }
   $files: Observable<IFile[]>;
   current_project: string;

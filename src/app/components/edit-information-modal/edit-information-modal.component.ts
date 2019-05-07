@@ -34,6 +34,7 @@ export class EditInformationModalComponent implements OnInit {
   residentes: IUser[] = [];
   proyectistas: IUser[] = [];
   resident: string;
+  designer:string;
   ngOnInit() {
     this.actual_project = this.actualProject;
     this.$project_info = this.projectService.getProject(this.actual_project);
