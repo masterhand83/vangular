@@ -47,7 +47,7 @@
             <div   class="card m-2 shadow ">
               <div (click)="goToProject(alerts.projectId._id)" class="card-header bg-info text-white clickable"> <i class="fas fa-building mr-2"></i>{{alerts.projectId.name}}</div>
               <div class="card-body" style="overflow-y: scroll">
-                <div *ngFor="let description of alerts.alert" class="alert alert-primary alert-dismissible">
+                <div *ngFor="let description of alerts.alert" class="alert alert-primary alert-dismissible" style="font-size:1.5vw">
     
                   {{description.description}}
                   <button (click)="deleteAlert(description._id)" class="close" data-dismiss="alert">

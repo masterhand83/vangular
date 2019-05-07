@@ -2,7 +2,7 @@
   <div class="row">
     <!--Aqui va la imagen del proyecto-->
     <div class="col-sm-12">
-      <img src="/assets/img/undraw_under_construction_46pa.svg" class="mx-auto d-block" alt="" width="300" heigth="500">
+      <img src="/assets/img/undraw_under_construction_46pa.svg" class="mx-auto d-block img-responsive" alt="" width="300" heigth="500">
     </div>
   </div>
   <!--Aqui va el contenido-->
@@ -11,49 +11,49 @@
     <div class="col-lg-6 col-md-10 col-sm-12">
       <!--Se define el proyecto como un observable-->
       <div class="card mt-3 shadow-sm" *ngIf="$project | async as project; else loading" id="edit-info-modal">
-        <div class="card-header text-center bg-primary text-white h2">{{project.name}}</div>
+        <div class="card-header text-center bg-primary text-white h2"  style="font-size:2vw">{{project.name}}</div>
 
         <div class="card-body" *ngIf="project.localReception; else missing">
-          <h4 class="mb-0 text-center text-primary">General</h4>
+          <h4 class="mb-0 text-center text-primary"  style="font-size:2vw">General</h4>
           <hr>
-          <p class="card-text h5 text-justify">
+          <p class="card-text h5 text-justify"  style="font-size:2vw">
 
-            <strong class="text-primary"><i class="fas fa-store fa-fw"></i> Descripcion del proyecto:</strong> <br>
+            <strong class="text-primary"><i class="fas fa-store fa-fw" ></i> Descripcion del proyecto:</strong> <br>
             <span class="">{{project.description}}</span>
           </p>
           
-          <h4 class="mb-0 text-center text-primary mt-2">Informacion</h4>
+          <h4 class="mb-0 text-center text-primary mt-2"  style="font-size:2vw">Informacion</h4>
           <hr>
           
-          <p class="card-text h5">
+          <p class="card-text h5"  style="font-size:2vw">
             <strong class="text-primary"><i class="fas fa-store fa-fw"></i> Nombre de la tienda:</strong>
             {{project.storeName}}
           </p>
 
-          <p class="card-text h5">
+          <p class="card-text h5"  style="font-size:2vw">
             <strong class="text-primary">No. Tienda: </strong> {{project.storeNumber}}
           </p>
 
-          <p class="card-text h5">
+          <p class="card-text h5"  style="font-size:2vw">
             <strong class="text-primary"><i class="fas fa-ruler-combined"></i>Metraje: </strong>
             {{project.m2}} <em>m<sup>2</sup></em>
           </p>
 
-          <p class="card-text h5">
+          <p class="card-text h5"  style="font-size:2vw">
             <strong class="text-primary"><i class="fas fa-compass"></i> Ubicacion: </strong>
             {{project.location}}
           </p>
 
           <br>
           <br>
-          <h4 class="mb-0 text-center text-primary">
+          <h4 class="mb-0 text-center text-primary"  style="font-size:2vw">
             <i class="fas fa-calendar"></i> Fechas
           </h4>
           <hr>
-          <div class="text-center" >
-            <p class="card-text h5"><strong>Recepcion local: </strong> {{project.localReception | date: 'dd/MM/yyyy'}}</p>
-            <p class="card-text h5"><strong>Pedido de muebles: </strong> {{project.furnitureDate | date: 'dd/MM/yyyy'}}</p>
-            <p class="card-text h5"><strong>Fecha de apertura: </strong> {{project.openingDate | date: 'dd/MM/yyyy'}}</p>
+          <div class="text-center"  >
+            <p class="card-text h5" style="font-size:2vw" ><strong>Recepcion local: </strong> {{project.localReception | date: 'dd/MM/yyyy'}}</p>
+            <p class="card-text h5" style="font-size:2vw"><strong>Pedido de muebles: </strong> {{project.furnitureDate | date: 'dd/MM/yyyy'}}</p>
+            <p class="card-text h5" style="font-size:2vw"><strong>Fecha de apertura: </strong> {{project.openingDate | date: 'dd/MM/yyyy'}}</p>
           </div>
         </div>
       </div>
@@ -62,11 +62,11 @@
       </ng-template>
       <!--Template para informacion faltante-->
       <ng-template #missing>
-        <div class="card-body">
-            <h1 class="text-center mt-4">Vaya!</h1>
+        <div class="card-body" >
+            <h1 class="text-center mt-4"  style="font-size:2vw">Vaya!</h1>
         
-            <h1 class="text-center mt-4 text-warning"><i class="fas fa-exclamation-triangle fa-3x"></i></h1>
-            <h3 class="card-text m-4 text-justify">Parece que todavia no existe la informacion general del proyecto. Contacte con un proyectista para que lo complete</h3>
+            <h1 class="text-center mt-4 text-warning"><i class="fas fa-exclamation-triangle fa-2x"></i></h1>
+            <h3 class="card-text m-4 text-justify" style="font-size:2vw" >Parece que todavia no existe la informacion general del proyecto. Contacte con un proyectista para que lo complete</h3>
         </div>
       </ng-template>
       <br>
