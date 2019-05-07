@@ -1,4 +1,4 @@
-<div class="container-fluid mb-3" *ngIf="$files | async as files; else loading">
+<div class="container-fluid mb-3" *ngIf="fileService.$files | async as files; else loading">
   <div class="row">
     <!--Aqui va la imagen del proyecto-->
     <div class="col-lg-4 col-md-6 col-sm-12 mb-5" *ngFor="let file of files; let i = index">

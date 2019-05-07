@@ -12,13 +12,16 @@ declare var $:any;
 export class FilesComponent implements OnInit {
   loading:string;
   
-  constructor(private sess:SessionService, private fileService: FileService) { }
-  $files: Observable<IFile[]>;
+  constructor(private sess:SessionService, public fileService: FileService) { 
+    
+  }
+  $files: any;
+  
   current_project: string;
   readonly dir: string = location.hostname+':3000';
   ngOnInit() {
     this.current_project = this.sess.getFromSession('ActualProject');
-    this.$files = this.fileService.getFilesInfo(this.current_project);
+    this.fileService.getFilesInfo(this.current_project);
   }
 
   openOptions(id){
@@ -26,7 +29,10 @@ export class FilesComponent implements OnInit {
   }
   deleteFile(_id:string){
     this.fileService.deleteFile(_id).subscribe(res=>{
-      location.reload();
+      
+      let current_project = this.sess.getFromSession('ActualProject');
+      this.fileService.getFilesInfo(current_project);
+
     });
   }
 }

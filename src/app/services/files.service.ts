@@ -8,10 +8,11 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class FileService{
+    $files: Observable<IFile[]>;
     constructor(private http: HttpClient) { }
     readonly IP = constants.IP;
-    getFilesInfo(idproject: string): Observable<IFile[]>{
-        return this.http.get<IFile[]>(`http://${this.IP}:3000/api/projects/file/${idproject}`);
+    getFilesInfo(idproject: string): void {
+        this.$files =  this.http.get<IFile[]>(`http://${this.IP}:3000/api/projects/file/${idproject}`);
     }
     uploadFiles(data: FormData, id: string): Observable<any> {
         return this.http.post(`http://${this.IP}:3000/api/projects/file/${id}`, data);

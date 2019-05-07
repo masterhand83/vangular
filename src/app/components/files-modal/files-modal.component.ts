@@ -23,8 +23,7 @@ export class FilesModalComponent implements OnInit {
     
   }
   upload(){
-
-    location.reload();
+    
     let formData = new FormData();
     
       formData.set('file', this.uploadedFiles[0]);
@@ -32,7 +31,8 @@ export class FilesModalComponent implements OnInit {
       this.files.uploadFiles(formData, this.sess.getFromSession('ActualProject'))
       .subscribe(res =>{
         console.log(res);
-        
+        let current_project = this.sess.getFromSession('ActualProject');
+        this.files.getFilesInfo(current_project);
       });
   }
 
