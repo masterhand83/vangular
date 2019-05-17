@@ -57,11 +57,10 @@ export class UsersComponent implements OnInit {
       && form.value.password != undefined && form.value.userType != undefined
 
     ) {
-      location.reload();
       this.usersService.postUser(form.value)
         .subscribe(res => {
           form.reset();
-          
+          location.reload(true);
         });
         this.usercorrect.show();
 
@@ -77,12 +76,12 @@ export class UsersComponent implements OnInit {
       .subscribe(res => {
         this.usersService.user=res as IUser[];
         console.log(res);
-        setTimeout( ()=>{
+        
             this.dataTable.DataTable({
               scrollY: 500,
               bDestroy:true
             });
-        },0)
+        
       });
 
   }
@@ -93,7 +92,7 @@ export class UsersComponent implements OnInit {
       if (confirm('¿Estas seguro de actualizar?')) {
         this.usersService.putUser(form.value.id2, form.value.email2, form.value.mobile2, form.value.password2)
           .subscribe(res => {
-            location.reload();
+            location.reload(true);
             this.getUsers();
             this.updatecorrect.show();
           });
@@ -111,8 +110,9 @@ export class UsersComponent implements OnInit {
         .subscribe(res => {
           this.getUsers();
           this.delete.show();
+          location.reload(true);
         });
-        location.reload();
+        
     }
 
   }

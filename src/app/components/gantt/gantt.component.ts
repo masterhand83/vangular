@@ -23,6 +23,12 @@ export class GanttComponent implements OnInit {
   gantturl: any = '';
   @ViewChild('dateincorrect') private dateincorrect: SwalComponent;
   @ViewChild('deleteAct') private deleteAct:SwalComponent;
+  @ViewChild('commentAct') private commentAct:SwalComponent;
+  @ViewChild('startedAct') private startedAct:SwalComponent;
+  @ViewChild('finishedAct') private finishedAct:SwalComponent;
+  @ViewChild('deliverablesAct') private deliverablesAct:SwalComponent;
+  @ViewChild('objectivesAct') private objectivesAct:SwalComponent;
+  @ViewChild('editAct') private editAct:SwalComponent;
   objectives: any[];
   deliverables: any[];
   activs: IActivityConfig[] = [];
@@ -81,10 +87,10 @@ export class GanttComponent implements OnInit {
         // this.parseDate(act.start);
         activs.push({
           name: act.name,
-          start: moment.utc(act.start).utc(false),
+          start: act.start,
           data: act.id,
           index: act.index,
-          end: moment.utc(act.end).utc(false),
+          end: act.end,
           color: act.color
         });
       }
@@ -128,11 +134,12 @@ export class GanttComponent implements OnInit {
     } else {
       // console.log(f);
       this.projectService.putActivity(this.selected_activity, form, this.objectives, this.deliverables).subscribe((response: any) => {
-        console.log(response);
+        this.getActivities();
+        $('#activity-info-modal').modal('hide');
+        this.editAct.show();
       });
-      // this.getActivities();
-      $('#activity-info-modal').modal('hide');
-      location.reload();
+     
+     
     }
 
     /*this.zone.runOutsideAngular(()=>{
@@ -181,6 +188,7 @@ export class GanttComponent implements OnInit {
         });
         this.projectService.verifyObjectives(id).subscribe(res => {
           console.log(res);
+          this.objectivesAct.show();
         });
         
         break;
@@ -190,6 +198,7 @@ export class GanttComponent implements OnInit {
         });
         this.projectService.verifyDeliverables(id).subscribe(res => {
           console.log(res);
+          this.deliverablesAct.show();
         });
        
         break;
@@ -206,45 +215,42 @@ export class GanttComponent implements OnInit {
     });
 
     this.projectService.commentActivity({ authorName: author, comment }, id).subscribe(res => {
-      console.log(res);
+      $('#activity-info-modal').modal('hide');
+      this.getActivities();
+      this.commentAct.show();
     });
-    setTimeout(() => {
-      location.reload();
-    }, 400);
-    this.projectService.sendMessage(alert_description).subscribe(res=>{
-      //Filtrar
-    });
+    
 
   }
 
   setStarted(type: number, id: string, value: boolean, name: string) {
     let description = 'Se inicio actividad: ' + name + ' del proyecto: ' + this.nameproject;
     this.projectService.addAlert(this.current_project, description).subscribe(res => {
+      
     });
     this.projectService.setActivityStatus(type, id, value).subscribe(response => {
-      console.log(response);
+      $('#activity-info-modal').modal('hide');
+      this.getActivities();
+      this.startedAct.show();
     });
-    this.projectService.sendMessage(description).subscribe(res=>{
-      //Filtrar
-    });
-    location.reload();
+    
   }
 
   endActivity(id: string, name: string) {
     let description = 'Se finalizo actividad: ' + name + ' del proyecto: ' + this.nameproject;
     this.projectService.addAlert(this.current_project, description).subscribe(res => {
+      
     });
     this.projectService.setActivityStatus(1, id, true).subscribe(response => {
-      console.log(response);
+      $('#activity-info-modal').modal('hide');
+      this.getActivities();
+      this.finishedAct.show();
     });
-    this.projectService.sendMessage(description).subscribe(resp=>{
-      //Filtrar
-    });
-    location.reload();
   }
 
   deleteActivity(_id:string){
     this.projectService.delteActivity(_id).subscribe(res=>{
+      $('#activity-info-modal').modal('hide');
       this.getActivities();
       this.deleteAct.show();
     });

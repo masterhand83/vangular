@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { ProjectService } from 'src/app/services/project.service';
 import { SessionService } from 'src/app/services/session.service';
 
+
 @Component({
   selector: 'app-create-activity-modal',
   templateUrl: './create-activity-modal.component.html',
@@ -62,9 +63,11 @@ export class CreateActivityModalComponent implements OnInit {
         objective: this.current_objectives,
         deliverable: this.current_entregable
       },this.current_id).subscribe(res =>{
-        console.log(res);
+        
+        location.reload(true);
+        
       })
-      location.reload();
+      
     }
     
   }
