@@ -87,10 +87,10 @@ export class GanttComponent implements OnInit {
         // this.parseDate(act.start);
         activs.push({
           name: act.name,
-          start: act.start,
+          start: moment(act.start).format('YYYY-MM-DD'),
           data: act.id,
           index: act.index,
-          end: act.end,
+          end: moment(act.end).format('YYYY-MM-DD'),
           color: act.color
         });
       }

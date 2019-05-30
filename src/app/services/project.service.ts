@@ -82,8 +82,8 @@ export class ProjectService {
     return this.http.put(`http://${this.IP}:3000/api/activities/activity/${id}`, {
       name: data.nombre,
       description: 'falta descripcion',
-      start: moment(data.inicio).add('days',1).format('YYYY-MM-DD'),
-      end: moment(data.final).add('days',1).format('YYYY-MM-DD'),
+      start: moment(data.inicio).format('YYYY-MM-DD'),
+      end: moment(data.final).format('YYYY-MM-DD'),
       priority: data.prioridad,
       objective: objectives,
       deliverable: deliverables

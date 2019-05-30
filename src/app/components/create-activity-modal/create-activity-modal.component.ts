@@ -4,7 +4,7 @@ import { SwalComponent } from '@toverux/ngx-sweetalert2';
 import * as moment from 'moment';
 import { ProjectService } from 'src/app/services/project.service';
 import { SessionService } from 'src/app/services/session.service';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-activity-modal',
@@ -19,7 +19,9 @@ export class CreateActivityModalComponent implements OnInit {
   current_id:string;
   constructor(
     private projectService: ProjectService,
-    private sess: SessionService
+    private sess: SessionService,
+    private router:Router
+    
   ) { 
     this.current_objectives = [];
     this.current_entregable = [];
@@ -40,6 +42,7 @@ export class CreateActivityModalComponent implements OnInit {
   getAhead(){
     return moment().add(1,'day').toDate();
   }
+
   createActivity(form: NgForm){
 
     var start=moment(form.value.start).format('YYYY-MM-DD');
@@ -63,10 +66,9 @@ export class CreateActivityModalComponent implements OnInit {
         objective: this.current_objectives,
         deliverable: this.current_entregable
       },this.current_id).subscribe(res =>{
-        
-        location.reload(true);
-        
-      })
+        location.reload();
+        this.router.navigateByUrl(`/dashboard/project/`+this.current_id+`/gantt`);
+      });
       
     }
     
